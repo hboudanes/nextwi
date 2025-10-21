@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+Route::redirect('/', '/users');
 Route::get('roles_permissions', function () {
     return view('roles_permissions.index');
 })->name('roles_permissions');
