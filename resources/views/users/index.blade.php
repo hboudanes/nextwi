@@ -57,9 +57,6 @@
                                     Businesses</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Max Businesses</th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Role</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -91,15 +88,12 @@
                                     <div class="text-sm text-gray-900">+1 234 567 8900</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">5</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">500</div>
+                                    <div class="text-sm font-semibold text-blue-600">5/500</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                                        Administrator
+                                        Admin
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -174,15 +168,12 @@
                                     <div class="text-sm text-gray-900">+1 234 567 8901</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">3</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">100</div>
+                                    <div class="text-sm font-semibold text-blue-600">3/100</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                        Moderator
+                                        Manager
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -257,15 +248,12 @@
                                     <div class="text-sm text-gray-900">+1 234 567 8902</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">1</div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-semibold text-blue-600">50</div>
+                                    <div class="text-sm font-semibold text-blue-600">1/50</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
                                         class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                        Guest
+                                        Operator
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">

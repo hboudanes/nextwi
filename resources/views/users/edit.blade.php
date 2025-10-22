@@ -173,12 +173,11 @@
                                 <select id="role" name="role" required
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('role') border-red-500 @enderror">
                                     <option value="">Select a role</option>
-                                    <option value="administrator"
-                                        {{ old('role') == 'administrator' ? 'selected' : '' }}>Administrator</option>
-                                    <option value="moderator" {{ old('role') == 'moderator' ? 'selected' : '' }}>
-                                        Moderator</option>
-                                    <option value="guest" {{ old('role') == 'guest' ? 'selected' : '' }}>Guest
-                                    </option>
+                                    <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                                    <option value="support_agent" {{ old('role') == 'support_agent' ? 'selected' : '' }}>Support Agent</option>
+                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+                                    <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
                                 </select>
                                 @error('role')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
