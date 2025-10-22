@@ -28,7 +28,6 @@
             </div>
         </div>
 
-        <!-- Form Content -->
         <div class="p-6">
             <form action="{{ route('businesses.store') }}" method="POST"
                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">

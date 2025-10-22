@@ -16,6 +16,7 @@ Route::get('users/create', function () {
 Route::get('users/edit', function () {
     return view('users.edit');
 })->name('users.edit');
+
 // Business Routes
 Route::get('businesses', function () {
     return view('businesses.index');
@@ -28,7 +29,9 @@ Route::get('businesses/create', function () {
 Route::get('businesses/{id}/edit', function ($id) {
     return view('businesses.edit', ['id' => $id]);
 })->name('businesses.edit');
-
+Route::get('businesses/{id}/show', function ($id) {
+    return view('businesses.show', ['id' => $id]);
+})->name('businesses.show');
 Route::post('businesses', function () {
     // Store logic here
 })->name('businesses.store');

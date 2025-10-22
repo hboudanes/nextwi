@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,10 @@
             transition: transform 0.3s ease-in-out;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+
 </head>
 
 <body class="bg-gray-100">
