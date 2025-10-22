@@ -29,22 +29,13 @@
     <!-- Main Content -->
     <main class="lg:ml-64 min-h-screen">
         <!-- Top Bar -->
-        <div class="bg-white border-b border-gray-200 px-6 py-4 mt-16 lg:mt-0">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Create New Business</h1>
-                    <p class="text-sm text-gray-500 mt-1">Add a new business to the system</p>
-                </div>
-                <a href="{{ route('businesses.index') }}"
-                    class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                    <span>Back to List</span>
-                </a>
-            </div>
-        </div>
+        <x-top-bar title="Create New Business" subtitle="Add a new business to the system" routeName="businesses.index" class="bg-gray-600 text-white" buttonName="Back to List">
+            <x-slot name="buttonSvg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </x-slot>
+        </x-top-bar>
 
         <div class="p-6">
             <form action="{{ route('businesses.store') }}" method="POST"

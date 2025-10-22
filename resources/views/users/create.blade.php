@@ -7,23 +7,17 @@
 
     <!-- Main Content -->
     <main class="lg:ml-64 min-h-screen">
-        <!-- Top Bar -->
-        <div class="bg-white border-b border-gray-200 px-6 py-4 mt-16 lg:mt-0">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Create New User</h1>
-                    <p class="text-sm text-gray-500 mt-1">Add a new user to the system</p>
-                </div>
-                <a href="{{ route('users') }}"
-                    class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                    <span>Back to List</span>
-                </a>
-            </div>
-        </div>
+        <x-top-bar title="Create New User" subtitle="Add a new user to the system" routeName="users"
+            class="bg-gray-600 text-white" buttonName="Back to List">
+            <x-slot name="buttonSvg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </x-slot>
+        </x-top-bar>
+
+
 
         <!-- Form Content -->
         <div class="p-6">
@@ -126,8 +120,7 @@
                     <!-- Role & Status -->
                     <div>
                         <h4 class="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
                                 </path>
@@ -142,24 +135,31 @@
                                 <select id="role" name="role" required
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('role') border-red-500 @enderror">
                                     <option value="">Select a role</option>
-                                    <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-                                    <option value="support_agent" {{ old('role') == 'support_agent' ? 'selected' : '' }}>Support Agent</option>
-                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                    <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
+                                    <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>
+                                        Super Admin</option>
+                                    <option value="support_agent"
+                                        {{ old('role') == 'support_agent' ? 'selected' : '' }}>Support Agent
+                                    </option>
+                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin
+                                    </option>
+                                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>
+                                        Manager</option>
+                                    <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>
+                                        Operator</option>
                                 </select>
                                 @error('role')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- Account Status moved to bottom -->
-                          </div>
+                        </div>
                     </div>
 
                     <!-- Config Section -->
                     <div id="config-section" class="{{ old('role') === 'admin' ? '' : 'hidden' }}">
                         <h4 class="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
                                 </path>
@@ -178,7 +178,8 @@
                                     value="{{ old('number_of_businesses', 0) }}" min="0" step="1"
                                     required placeholder="0"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors appearance-none @error('number_of_businesses') border-red-500 @enderror">
-                                <p class="mt-1 text-xs text-gray-500">Enter the number of businesses assigned to this
+                                <p class="mt-1 text-xs text-gray-500">Enter the number of businesses assigned to
+                                    this
                                     user</p>
                                 @error('number_of_businesses')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -209,8 +210,8 @@
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
- 
-                  <!-- Form Actions -->
+
+                <!-- Form Actions -->
                 <div class="flex items-center justify-end gap-3 p-6 border-t border-gray-200 bg-gray-50">
                     <a href="{{ route('users') }}"
                         class="px-5 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
@@ -231,7 +232,7 @@
 
     <x-slot name="script">
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const roleSelect = document.getElementById('role');
                 const configSection = document.getElementById('config-section');
                 const toggleConfigVisibility = () => {
