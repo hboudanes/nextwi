@@ -105,10 +105,97 @@
                             <select id="timezone" name="timezone" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                 <option value="">Select timezone</option>
+
+                                <!-- UTC -->
                                 <option value="UTC">UTC</option>
-                                <option value="America/New_York">America/New York</option>
-                                <option value="Europe/London">Europe/London</option>
-                                <option value="Asia/Tokyo">Asia/Tokyo</option>
+
+                                <!-- North America -->
+                                <optgroup label="North America">
+                                    <option value="America/New_York">Eastern Time (New York)</option>
+                                    <option value="America/Chicago">Central Time (Chicago)</option>
+                                    <option value="America/Denver">Mountain Time (Denver)</option>
+                                    <option value="America/Phoenix">Mountain Time - Arizona (Phoenix)</option>
+                                    <option value="America/Los_Angeles">Pacific Time (Los Angeles)</option>
+                                    <option value="America/Anchorage">Alaska Time (Anchorage)</option>
+                                    <option value="America/Adak">Hawaii-Aleutian Time (Adak)</option>
+                                    <option value="Pacific/Honolulu">Hawaii Time (Honolulu)</option>
+                                    <option value="America/Toronto">Eastern Time (Toronto)</option>
+                                    <option value="America/Vancouver">Pacific Time (Vancouver)</option>
+                                    <option value="America/Mexico_City">Central Time (Mexico City)</option>
+                                </optgroup>
+
+                                <!-- South America -->
+                                <optgroup label="South America">
+                                    <option value="America/Sao_Paulo">Brasília Time (São Paulo)</option>
+                                    <option value="America/Buenos_Aires">Argentina Time (Buenos Aires)</option>
+                                    <option value="America/Santiago">Chile Time (Santiago)</option>
+                                    <option value="America/Bogota">Colombia Time (Bogotá)</option>
+                                    <option value="America/Lima">Peru Time (Lima)</option>
+                                    <option value="America/Caracas">Venezuela Time (Caracas)</option>
+                                </optgroup>
+
+                                <!-- Europe -->
+                                <optgroup label="Europe">
+                                    <option value="Europe/London">GMT/BST (London)</option>
+                                    <option value="Europe/Dublin">GMT/IST (Dublin)</option>
+                                    <option value="Europe/Lisbon">WET/WEST (Lisbon)</option>
+                                    <option value="Europe/Paris">CET/CEST (Paris)</option>
+                                    <option value="Europe/Berlin">CET/CEST (Berlin)</option>
+                                    <option value="Europe/Rome">CET/CEST (Rome)</option>
+                                    <option value="Europe/Madrid">CET/CEST (Madrid)</option>
+                                    <option value="Europe/Amsterdam">CET/CEST (Amsterdam)</option>
+                                    <option value="Europe/Brussels">CET/CEST (Brussels)</option>
+                                    <option value="Europe/Vienna">CET/CEST (Vienna)</option>
+                                    <option value="Europe/Zurich">CET/CEST (Zurich)</option>
+                                    <option value="Europe/Athens">EET/EEST (Athens)</option>
+                                    <option value="Europe/Istanbul">TRT (Istanbul)</option>
+                                    <option value="Europe/Moscow">MSK (Moscow)</option>
+                                    <option value="Europe/Warsaw">CET/CEST (Warsaw)</option>
+                                    <option value="Europe/Stockholm">CET/CEST (Stockholm)</option>
+                                    <option value="Europe/Oslo">CET/CEST (Oslo)</option>
+                                </optgroup>
+
+                                <!-- Africa -->
+                                <optgroup label="Africa">
+                                    <option value="Africa/Cairo">EET (Cairo)</option>
+                                    <option value="Africa/Johannesburg">SAST (Johannesburg)</option>
+                                    <option value="Africa/Lagos">WAT (Lagos)</option>
+                                    <option value="Africa/Nairobi">EAT (Nairobi)</option>
+                                    <option value="Africa/Casablanca">WET (Casablanca)</option>
+                                    <option value="Africa/Algiers">CET (Algiers)</option>
+                                </optgroup>
+
+                                <!-- Asia -->
+                                <optgroup label="Asia">
+                                    <option value="Asia/Dubai">GST (Dubai)</option>
+                                    <option value="Asia/Karachi">PKT (Karachi)</option>
+                                    <option value="Asia/Kolkata">IST (Kolkata)</option>
+                                    <option value="Asia/Dhaka">BST (Dhaka)</option>
+                                    <option value="Asia/Bangkok">ICT (Bangkok)</option>
+                                    <option value="Asia/Singapore">SGT (Singapore)</option>
+                                    <option value="Asia/Hong_Kong">HKT (Hong Kong)</option>
+                                    <option value="Asia/Shanghai">CST (Shanghai)</option>
+                                    <option value="Asia/Tokyo">JST (Tokyo)</option>
+                                    <option value="Asia/Seoul">KST (Seoul)</option>
+                                    <option value="Asia/Manila">PST (Manila)</option>
+                                    <option value="Asia/Jakarta">WIB (Jakarta)</option>
+                                    <option value="Asia/Taipei">CST (Taipei)</option>
+                                    <option value="Asia/Kuala_Lumpur">MYT (Kuala Lumpur)</option>
+                                    <option value="Asia/Jerusalem">IST (Jerusalem)</option>
+                                    <option value="Asia/Riyadh">AST (Riyadh)</option>
+                                </optgroup>
+
+                                <!-- Australia & Pacific -->
+                                <optgroup label="Australia & Pacific">
+                                    <option value="Australia/Sydney">AEST/AEDT (Sydney)</option>
+                                    <option value="Australia/Melbourne">AEST/AEDT (Melbourne)</option>
+                                    <option value="Australia/Brisbane">AEST (Brisbane)</option>
+                                    <option value="Australia/Perth">AWST (Perth)</option>
+                                    <option value="Australia/Adelaide">ACST/ACDT (Adelaide)</option>
+                                    <option value="Pacific/Auckland">NZST/NZDT (Auckland)</option>
+                                    <option value="Pacific/Fiji">FJT (Fiji)</option>
+                                    <option value="Pacific/Guam">ChST (Guam)</option>
+                                </optgroup>
                             </select>
                         </div>
 
@@ -670,14 +757,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                                                        <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                                                            </svg>
-                                                                                                        </button>
-                                                                                                    ` : ''}
+                                                                                                                        <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                                                                            </svg>
+                                                                                                                        </button>
+                                                                                                                    ` : ''}
                         </div>
 
                         <!-- Profile Name -->
