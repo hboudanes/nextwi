@@ -97,33 +97,47 @@
                             </p>
                         </div>
 
-                        <!-- Timezone & Gateway -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Timezone <span class="text-red-500">*</span>
-                                </label>
-                                <select id="timezone" name="timezone" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    <option value="">Select timezone</option>
-                                    <option value="UTC">UTC</option>
-                                    <option value="America/New_York">America/New York</option>
-                                    <option value="Europe/London">Europe/London</option>
-                                    <option value="Asia/Tokyo">Asia/Tokyo</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="gateway" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Gateway <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" id="gateway" name="gateway" required
-                                    placeholder="e.g., 192.168.1.1"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                        <!-- Timezone -->
+                        <div>
+                            <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
+                                Timezone <span class="text-red-500">*</span>
+                            </label>
+                            <select id="timezone" name="timezone" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                <option value="">Select timezone</option>
+                                <option value="UTC">UTC</option>
+                                <option value="America/New_York">America/New York</option>
+                                <option value="Europe/London">Europe/London</option>
+                                <option value="Asia/Tokyo">Asia/Tokyo</option>
+                            </select>
                         </div>
 
-                        <!-- Username, Password, Type -->
+                        <!-- Gateway fields moved to their own card below -->
+                    </div>
+                </div>
+
+                <!-- Gateway Card -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Gateway Settings
+                        </h3>
+                    </div>
+
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label for="gateway" class="block text-sm font-medium text-gray-700 mb-2">
+                                Gateway <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" id="gateway" name="gateway" required
+                                placeholder="e.g., 192.168.1.1"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                        </div>
+
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
@@ -156,7 +170,6 @@
                             </div>
                         </div>
 
-                        <!-- Post URL -->
                         <div>
                             <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
                                 Post URL
@@ -166,12 +179,11 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                         </div>
 
-                        <!-- Note -->
                         <div>
                             <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
                                 Note
                             </label>
-                            <textarea id="note" name="note" rows="3" placeholder="Add notes about this location..."
+                            <textarea id="note" name="note" rows="3" placeholder="Add notes..."
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
                         </div>
                     </div>
@@ -355,7 +367,8 @@
                             <div class="flex items-center justify-between mb-4">
                                 <h5 class="text-sm font-semibold text-gray-700">Languages</h5>
                                 <div class="flex items-center gap-2">
-                                    <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <select id="language-selector"
+                                        class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                         <option value="en" selected>English (Default)</option>
                                         <option value="fr">French</option>
                                         <option value="es">Spanish</option>
@@ -369,12 +382,14 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <!-- Language tabs -->
                             <div class="mb-4 border-b border-gray-200">
                                 <ul id="language-tabs" class="flex flex-wrap -mb-px text-sm font-medium text-center">
                                     <li class="mr-2">
-                                        <a href="#" class="language-tab active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600" data-lang="en">English</a>
+                                        <a href="#"
+                                            class="language-tab active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600"
+                                            data-lang="en">English</a>
                                     </li>
                                 </ul>
                             </div>
@@ -385,126 +400,134 @@
                             <!-- English (default) content -->
                             <div id="lang-content-en" class="language-content active">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Headline -->
-                            <div>
-                                <label for="text-headline" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Headline
-                                </label>
-                                <input type="text" id="text-headline" name="text_headline"
-                                    placeholder="e.g., Welcome!"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Headline -->
+                                    <div>
+                                        <label for="text-headline"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Headline
+                                        </label>
+                                        <input type="text" id="text-headline" name="text_headline"
+                                            placeholder="e.g., Welcome!"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Subheading -->
-                            <div>
-                                <label for="text-subheading" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Subheading
-                                </label>
-                                <input type="text" id="text-subheading" name="text_subheading"
-                                    placeholder="e.g., Connect to WiFi"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Subheading -->
+                                    <div>
+                                        <label for="text-subheading"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Subheading
+                                        </label>
+                                        <input type="text" id="text-subheading" name="text_subheading"
+                                            placeholder="e.g., Connect to WiFi"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- First Name -->
-                            <div>
-                                <label for="text-first-name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    First Name
-                                </label>
-                                <input type="text" id="text-first-name" name="text_first_name"
-                                    placeholder="e.g., First Name"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- First Name -->
+                                    <div>
+                                        <label for="text-first-name"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            First Name
+                                        </label>
+                                        <input type="text" id="text-first-name" name="text_first_name"
+                                            placeholder="e.g., First Name"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- First Name Placeholder -->
-                            <div>
-                                <label for="text-first-name-placeholder"
-                                    class="block text-sm font-medium text-gray-700 mb-2">
-                                    First Name Placeholder
-                                </label>
-                                <input type="text" id="text-first-name-placeholder"
-                                    name="text_first_name_placeholder" placeholder="e.g., Enter first name"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- First Name Placeholder -->
+                                    <div>
+                                        <label for="text-first-name-placeholder"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            First Name Placeholder
+                                        </label>
+                                        <input type="text" id="text-first-name-placeholder"
+                                            name="text_first_name_placeholder" placeholder="e.g., Enter first name"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Last Name -->
-                            <div>
-                                <label for="text-last-name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Last Name
-                                </label>
-                                <input type="text" id="text-last-name" name="text_last_name"
-                                    placeholder="e.g., Last Name"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Last Name -->
+                                    <div>
+                                        <label for="text-last-name"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Last Name
+                                        </label>
+                                        <input type="text" id="text-last-name" name="text_last_name"
+                                            placeholder="e.g., Last Name"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Last Name Placeholder -->
-                            <div>
-                                <label for="text-last-name-placeholder"
-                                    class="block text-sm font-medium text-gray-700 mb-2">
-                                    Last Name Placeholder
-                                </label>
-                                <input type="text" id="text-last-name-placeholder"
-                                    name="text_last_name_placeholder" placeholder="e.g., Enter last name"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Last Name Placeholder -->
+                                    <div>
+                                        <label for="text-last-name-placeholder"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Last Name Placeholder
+                                        </label>
+                                        <input type="text" id="text-last-name-placeholder"
+                                            name="text_last_name_placeholder" placeholder="e.g., Enter last name"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Gender -->
-                            <div>
-                                <label for="text-gender" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Gender
-                                </label>
-                                <input type="text" id="text-gender" name="text_gender" placeholder="e.g., Gender"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Gender -->
+                                    <div>
+                                        <label for="text-gender" class="block text-sm font-medium text-gray-700 mb-2">
+                                            Gender
+                                        </label>
+                                        <input type="text" id="text-gender" name="text_gender"
+                                            placeholder="e.g., Gender"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Email -->
-                            <div>
-                                <label for="text-email" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email
-                                </label>
-                                <input type="text" id="text-email" name="text_email" placeholder="e.g., Email"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Email -->
+                                    <div>
+                                        <label for="text-email" class="block text-sm font-medium text-gray-700 mb-2">
+                                            Email
+                                        </label>
+                                        <input type="text" id="text-email" name="text_email"
+                                            placeholder="e.g., Email"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Email Placeholder -->
-                            <div>
-                                <label for="text-email-placeholder"
-                                    class="block text-sm font-medium text-gray-700 mb-2">
-                                    Email Placeholder
-                                </label>
-                                <input type="text" id="text-email-placeholder" name="text_email_placeholder"
-                                    placeholder="e.g., Enter email"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Email Placeholder -->
+                                    <div>
+                                        <label for="text-email-placeholder"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Email Placeholder
+                                        </label>
+                                        <input type="text" id="text-email-placeholder"
+                                            name="text_email_placeholder" placeholder="e.g., Enter email"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Mobile -->
-                            <div>
-                                <label for="text-mobile" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Mobile
-                                </label>
-                                <input type="text" id="text-mobile" name="text_mobile" placeholder="e.g., Mobile"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Mobile -->
+                                    <div>
+                                        <label for="text-mobile" class="block text-sm font-medium text-gray-700 mb-2">
+                                            Mobile
+                                        </label>
+                                        <input type="text" id="text-mobile" name="text_mobile"
+                                            placeholder="e.g., Mobile"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
-                            <!-- Mobile Placeholder -->
-                            <div>
-                                <label for="text-mobile-placeholder"
-                                    class="block text-sm font-medium text-gray-700 mb-2">
-                                    Mobile Placeholder
-                                </label>
-                                <input type="text" id="text-mobile-placeholder" name="text_mobile_placeholder"
-                                    placeholder="e.g., Enter mobile number"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
-                            
-                            <!-- Connect Button -->
-                            <div>
-                                <label for="text-connect-button" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Connect Button
-                                </label>
-                                <input type="text" id="text-connect-button" name="text_connect_button"
-                                    placeholder="e.g., Connect"
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
+                                    <!-- Mobile Placeholder -->
+                                    <div>
+                                        <label for="text-mobile-placeholder"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Mobile Placeholder
+                                        </label>
+                                        <input type="text" id="text-mobile-placeholder"
+                                            name="text_mobile_placeholder" placeholder="e.g., Enter mobile number"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
+
+                                    <!-- Connect Button -->
+                                    <div>
+                                        <label for="text-connect-button"
+                                            class="block text-sm font-medium text-gray-700 mb-2">
+                                            Connect Button
+                                        </label>
+                                        <input type="text" id="text-connect-button" name="text_connect_button"
+                                            placeholder="e.g., Connect"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    </div>
 
                                 </div>
                             </div>
@@ -600,7 +623,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 addProfile();
                 addTabEventListeners();
-                
+
                 // Add CSS for language content panels
                 const style = document.createElement('style');
                 style.textContent = `
@@ -647,14 +670,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                                                    </svg>
-                                                                                                </button>
-                                                                                            ` : ''}
+                                                                                                        <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                                                            </svg>
+                                                                                                        </button>
+                                                                                                    ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -956,28 +979,28 @@
                     }
                 }
             }
-            
+
             // Language management
             let languages = {
                 'en': 'English (Default)'
             };
             let currentLanguage = 'en';
-            
+
             // Add language functionality
             function addLanguage() {
                 const languageSelector = document.getElementById('language-selector');
                 const selectedLang = languageSelector.value;
                 const selectedLangText = languageSelector.options[languageSelector.selectedIndex].text;
-                
+
                 // Check if language already exists
                 if (document.querySelector(`[data-lang="${selectedLang}"]`)) {
                     alert(`${selectedLangText} is already added.`);
                     return;
                 }
-                
+
                 // Add to languages object
                 languages[selectedLang] = selectedLangText;
-                
+
                 // Create new tab
                 const langTabs = document.getElementById('language-tabs');
                 const newTab = document.createElement('li');
@@ -986,31 +1009,31 @@
                     <a href="#" class="language-tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" data-lang="${selectedLang}">${selectedLangText}</a>
                 `;
                 langTabs.appendChild(newTab);
-                
+
                 // Create content panel by cloning English panel
                 const englishContent = document.getElementById('lang-content-en');
                 const newContent = englishContent.cloneNode(true);
                 newContent.id = `lang-content-${selectedLang}`;
                 newContent.classList.remove('active');
-                
+
                 // Update all input names and IDs to include language code
                 const inputs = newContent.querySelectorAll('input, textarea');
                 inputs.forEach(input => {
                     const originalName = input.getAttribute('name');
                     const originalId = input.getAttribute('id');
-                    
+
                     if (originalName) {
                         input.setAttribute('name', `${originalName}_${selectedLang}`);
                     }
-                    
+
                     if (originalId) {
                         input.setAttribute('id', `${originalId}_${selectedLang}`);
                     }
-                    
+
                     // Clear values
                     input.value = '';
                 });
-                
+
                 // Update all labels to point to new IDs
                 const labels = newContent.querySelectorAll('label');
                 labels.forEach(label => {
@@ -1019,37 +1042,38 @@
                         label.setAttribute('for', `${forAttr}_${selectedLang}`);
                     }
                 });
-                
+
                 // Add to DOM
                 document.getElementById('language-contents').appendChild(newContent);
-                
+
                 // Add event listeners to tabs
                 addTabEventListeners();
             }
-            
+
             // Switch between language tabs
             function switchLanguage(langCode) {
                 // Hide all content panels
                 document.querySelectorAll('.language-content').forEach(panel => {
                     panel.classList.remove('active');
                 });
-                
+
                 // Show selected panel
                 document.getElementById(`lang-content-${langCode}`).classList.add('active');
-                
+
                 // Update tabs
                 document.querySelectorAll('.language-tab').forEach(tab => {
                     tab.classList.remove('active', 'text-blue-600', 'border-blue-600');
                     tab.classList.add('border-transparent');
                 });
-                
+
                 // Highlight active tab
-                document.querySelector(`.language-tab[data-lang="${langCode}"]`).classList.add('active', 'text-blue-600', 'border-blue-600');
+                document.querySelector(`.language-tab[data-lang="${langCode}"]`).classList.add('active', 'text-blue-600',
+                    'border-blue-600');
                 document.querySelector(`.language-tab[data-lang="${langCode}"]`).classList.remove('border-transparent');
-                
+
                 currentLanguage = langCode;
             }
-            
+
             // Add event listeners to language tabs
             function addTabEventListeners() {
                 document.querySelectorAll('.language-tab').forEach(tab => {
@@ -1060,6 +1084,6 @@
                     });
                 });
             }
-          </script>
-      </x-slot>
+        </script>
+    </x-slot>
 </x-main-layout>
