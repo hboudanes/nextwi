@@ -246,7 +246,7 @@
                                 <input type="color" id="background-color" name="background_color" value="#FFFFFF"
                                     class="w-full h-10 border border-gray-300 rounded cursor-pointer">
                             </div>
-                            
+
                             <div>
                                 <label for="text-color" class="block text-sm font-medium text-gray-700 mb-2">
                                     Text Color
@@ -307,6 +307,16 @@
                                     <option value="Roboto Condensed">Roboto Condensed</option>
                                     <option value="Roboto Slab">Roboto Slab</option>
                                     <option value="Noto Sans">Noto Sans</option>
+                                    <option value="Oswald">Oswald</option>
+                                    <option value="PT Sans">PT Sans</option>
+                                    <option value="Quicksand">Quicksand</option>
+                                    <option value="Work Sans">Work Sans</option>
+                                    <option value="Fira Sans">Fira Sans</option>
+                                    <option value="Mulish">Mulish</option>
+                                    <option value="Rubik">Rubik</option>
+                                    <option value="Barlow">Barlow</option>
+                                    <option value="Karla">Karla</option>
+                                    <option value="Josefin Sans">Josefin Sans</option>
                                 </select>
                             </div>
                         </div>
@@ -500,6 +510,18 @@
 
                         <!-- Profiles List -->
                         <div id="profiles-list" class="space-y-4"></div>
+
+                        <!-- Add Profile Button (Bottom) -->
+                        <div class="mt-6 flex justify-center">
+                            <button type="button" onclick="addProfile()"
+                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add Profile
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -569,14 +591,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                                    </svg>
-                                                                                </button>
-                                                                            ` : ''}
+                                                                                                <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                                                    </svg>
+                                                                                                </button>
+                                                                                            ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -598,7 +620,94 @@
                                 placeholder="e.g., Connect to Free WiFi"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                         </div>
+                        <!-- Login Fields Configuration -->
+                        <div class="border-t border-gray-300 pt-4">
+                            <h5 class="text-sm font-semibold text-gray-700 mb-4">Login Fields</h5>
+                            
+                            <!-- First Name & Last Name -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">First Name</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][first_name_required]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                        </label>
+                                    </label>
+                                </div>
 
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">Last Name</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][last_name_required]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                        </label>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-4">
+                                <label class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Email</span>
+                                    <div class="flex items-center gap-3">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][email_required]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                        </label>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][email_verification]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Verification</span>
+                                        </label>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- WhatsApp -->
+                            <div class="mb-4">
+                                <label class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">WhatsApp</span>
+                                    <div class="flex items-center gap-3">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][whatsapp_required]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                        </label>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][whatsapp_verification]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Verification</span>
+                                        </label>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender (Enable)</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" name="profiles[${profileCount}][gender_enabled]" 
+                                        value="1" class="sr-only peer">
+                                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                    <span class="ml-2 text-xs text-gray-600">Show Gender Field</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+
+                        <!-- Checkboxes Configuration (Profile Level) -->
+                        ${generateCheckboxFields(profileCount)}
                         <!-- Access Policy Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-3">
@@ -691,78 +800,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Login Fields Configuration -->
-                        <div class="border-t border-gray-300 pt-4">
-                            <h5 class="text-sm font-semibold text-gray-700 mb-4">Login Fields</h5>
-                            
-                            <!-- First Name & Last Name -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label class="flex items-center justify-between mb-2">
-                                        <span class="text-sm font-medium text-gray-700">First Name</span>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][first_name_required]" 
-                                                value="1" class="sr-only peer">
-                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
-                                        </label>
-                                    </label>
-                                </div>
-
-                                <div>
-                                    <label class="flex items-center justify-between mb-2">
-                                        <span class="text-sm font-medium text-gray-700">Last Name</span>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][last_name_required]" 
-                                                value="1" class="sr-only peer">
-                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
-                                        </label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="mb-4">
-                                <label class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-700">Email</span>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="profiles[${profileCount}][email_verification]" 
-                                            value="1" class="sr-only peer">
-                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                        <span class="ml-2 text-xs text-gray-600">Verification</span>
-                                    </label>
-                                </label>
-                            </div>
-
-                            <!-- WhatsApp -->
-                            <div class="mb-4">
-                                <label class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-700">WhatsApp</span>
-                                    <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="profiles[${profileCount}][whatsapp_verification]" 
-                                            value="1" class="sr-only peer">
-                                        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                        <span class="ml-2 text-xs text-gray-600">Verification</span>
-                                    </label>
-                                </label>
-                            </div>
-
-                            <!-- Gender -->
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender (Enable)</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" name="profiles[${profileCount}][gender_enabled]" 
-                                        value="1" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                    <span class="ml-2 text-xs text-gray-600">Show Gender Field</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Checkboxes Configuration (Profile Level) -->
-                        ${generateCheckboxFields(profileCount)}
                     </div>
                 `;
 
