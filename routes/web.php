@@ -47,7 +47,9 @@ Route::get('locations', function () {
 Route::get('locations/create', function () {
     return view('locations.create');
 })->name('locations.create');
-
+Route::get('locations/show', function () {
+    return view('locations.show');
+})->name('locations.show');
 Route::get('locations/{id}/edit', function ($id) {
     return view('locations.edit', ['id' => $id]);
 })->name('locations.edit');
