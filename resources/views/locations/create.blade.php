@@ -326,21 +326,65 @@
                 <!-- Text & Translation Card (Location Level) -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
-                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
-                                </path>
-                            </svg>
-                            Text & Translation
-                        </h3>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                    </path>
+                                </svg>
+                                Text & Translation
+                            </h3>
+                            <button type="button" onclick="addLanguage()"
+                                class="px-4 py-2 bg-white text-orange-600 rounded-lg hover:bg-orange-50 transition-colors flex items-center gap-2 text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add Language
+                            </button>
+                        </div>
                     </div>
 
                     <div class="p-6 space-y-4">
                         <p class="text-sm text-gray-500 mb-4">Configure default text labels and translations for all
                             forms at this location</p>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Language Selection -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-sm font-semibold text-gray-700">Languages</h5>
+                                <div class="flex items-center gap-2">
+                                    <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="en" selected>English (Default)</option>
+                                        <option value="fr">French</option>
+                                        <option value="es">Spanish</option>
+                                        <option value="de">German</option>
+                                        <option value="it">Italian</option>
+                                        <option value="pt">Portuguese</option>
+                                        <option value="ar">Arabic</option>
+                                        <option value="zh">Chinese</option>
+                                        <option value="ja">Japanese</option>
+                                        <option value="ru">Russian</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Language tabs -->
+                            <div class="mb-4 border-b border-gray-200">
+                                <ul id="language-tabs" class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                                    <li class="mr-2">
+                                        <a href="#" class="language-tab active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600" data-lang="en">English</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Language content panels -->
+                        <div id="language-contents">
+                            <!-- English (default) content -->
+                            <div id="lang-content-en" class="language-content active">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Headline -->
                             <div>
                                 <label for="text-headline" class="block text-sm font-medium text-gray-700 mb-2">
@@ -451,7 +495,7 @@
                                     placeholder="e.g., Enter mobile number"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                             </div>
-
+                            
                             <!-- Connect Button -->
                             <div>
                                 <label for="text-connect-button" class="block text-sm font-medium text-gray-700 mb-2">
@@ -460,6 +504,9 @@
                                 <input type="text" id="text-connect-button" name="text_connect_button"
                                     placeholder="e.g., Connect"
                                     class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            </div>
+
+                                </div>
                             </div>
                         </div>
 
@@ -552,6 +599,15 @@
             // Auto-add first profile on load
             document.addEventListener('DOMContentLoaded', function() {
                 addProfile();
+                addTabEventListeners();
+                
+                // Add CSS for language content panels
+                const style = document.createElement('style');
+                style.textContent = `
+                    .language-content { display: none; }
+                    .language-content.active { display: block; }
+                `;
+                document.head.appendChild(style);
             });
 
             // Toggle checkbox content visibility
@@ -900,6 +956,110 @@
                     }
                 }
             }
-        </script>
-    </x-slot>
+            
+            // Language management
+            let languages = {
+                'en': 'English (Default)'
+            };
+            let currentLanguage = 'en';
+            
+            // Add language functionality
+            function addLanguage() {
+                const languageSelector = document.getElementById('language-selector');
+                const selectedLang = languageSelector.value;
+                const selectedLangText = languageSelector.options[languageSelector.selectedIndex].text;
+                
+                // Check if language already exists
+                if (document.querySelector(`[data-lang="${selectedLang}"]`)) {
+                    alert(`${selectedLangText} is already added.`);
+                    return;
+                }
+                
+                // Add to languages object
+                languages[selectedLang] = selectedLangText;
+                
+                // Create new tab
+                const langTabs = document.getElementById('language-tabs');
+                const newTab = document.createElement('li');
+                newTab.className = 'mr-2';
+                newTab.innerHTML = `
+                    <a href="#" class="language-tab inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" data-lang="${selectedLang}">${selectedLangText}</a>
+                `;
+                langTabs.appendChild(newTab);
+                
+                // Create content panel by cloning English panel
+                const englishContent = document.getElementById('lang-content-en');
+                const newContent = englishContent.cloneNode(true);
+                newContent.id = `lang-content-${selectedLang}`;
+                newContent.classList.remove('active');
+                
+                // Update all input names and IDs to include language code
+                const inputs = newContent.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    const originalName = input.getAttribute('name');
+                    const originalId = input.getAttribute('id');
+                    
+                    if (originalName) {
+                        input.setAttribute('name', `${originalName}_${selectedLang}`);
+                    }
+                    
+                    if (originalId) {
+                        input.setAttribute('id', `${originalId}_${selectedLang}`);
+                    }
+                    
+                    // Clear values
+                    input.value = '';
+                });
+                
+                // Update all labels to point to new IDs
+                const labels = newContent.querySelectorAll('label');
+                labels.forEach(label => {
+                    const forAttr = label.getAttribute('for');
+                    if (forAttr) {
+                        label.setAttribute('for', `${forAttr}_${selectedLang}`);
+                    }
+                });
+                
+                // Add to DOM
+                document.getElementById('language-contents').appendChild(newContent);
+                
+                // Add event listeners to tabs
+                addTabEventListeners();
+            }
+            
+            // Switch between language tabs
+            function switchLanguage(langCode) {
+                // Hide all content panels
+                document.querySelectorAll('.language-content').forEach(panel => {
+                    panel.classList.remove('active');
+                });
+                
+                // Show selected panel
+                document.getElementById(`lang-content-${langCode}`).classList.add('active');
+                
+                // Update tabs
+                document.querySelectorAll('.language-tab').forEach(tab => {
+                    tab.classList.remove('active', 'text-blue-600', 'border-blue-600');
+                    tab.classList.add('border-transparent');
+                });
+                
+                // Highlight active tab
+                document.querySelector(`.language-tab[data-lang="${langCode}"]`).classList.add('active', 'text-blue-600', 'border-blue-600');
+                document.querySelector(`.language-tab[data-lang="${langCode}"]`).classList.remove('border-transparent');
+                
+                currentLanguage = langCode;
+            }
+            
+            // Add event listeners to language tabs
+            function addTabEventListeners() {
+                document.querySelectorAll('.language-tab').forEach(tab => {
+                    tab.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const langCode = this.getAttribute('data-lang');
+                        switchLanguage(langCode);
+                    });
+                });
+            }
+          </script>
+      </x-slot>
 </x-main-layout>
