@@ -246,6 +246,14 @@
                                 <input type="color" id="background-color" name="background_color" value="#FFFFFF"
                                     class="w-full h-10 border border-gray-300 rounded cursor-pointer">
                             </div>
+                            
+                            <div>
+                                <label for="text-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Text Color
+                                </label>
+                                <input type="color" id="text-color" name="text_color" value="#111827"
+                                    class="w-full h-10 border border-gray-300 rounded cursor-pointer">
+                            </div>
                         </div>
 
                         <!-- Background Image & Favicon -->
@@ -289,6 +297,16 @@
                                     <option value="Open Sans">Open Sans</option>
                                     <option value="Lato">Lato</option>
                                     <option value="Poppins">Poppins</option>
+                                    <option value="Montserrat">Montserrat</option>
+                                    <option value="Raleway">Raleway</option>
+                                    <option value="Nunito">Nunito</option>
+                                    <option value="Playfair Display">Playfair Display</option>
+                                    <option value="Source Sans Pro">Source Sans Pro</option>
+                                    <option value="Ubuntu">Ubuntu</option>
+                                    <option value="Merriweather">Merriweather</option>
+                                    <option value="Roboto Condensed">Roboto Condensed</option>
+                                    <option value="Roboto Slab">Roboto Slab</option>
+                                    <option value="Noto Sans">Noto Sans</option>
                                 </select>
                             </div>
                         </div>
