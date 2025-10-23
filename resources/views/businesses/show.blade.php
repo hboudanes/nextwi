@@ -140,12 +140,12 @@
                 <!-- Location Card 1 -->
                 <x-location-card name="Downtown Office" address="123 Main St, New York, NY 10001"
                     phone="+1 (555) 123-4567" googleMapsLink="https://maps.google.com" status="active" :operators="['John Smith', 'Sarah Johnson']"
-                    :management="['Mike Williams', 'Emily Brown', 'David Lee']" :vouchers="15" :viewRoute="route('locations.show')" editRoute="#" deleteRoute="#" />
+                    :management="['Mike Williams', 'Emily Brown', 'David Lee']" :vouchers="15" :viewRoute="route('locations.show', 1)" editRoute="#" deleteRoute="#" />
 
                 <!-- Location Card 2 -->
                 <x-location-card name="Airport Terminal" address="456 Airport Rd, Los Angeles, CA 90045"
                     phone="+1 (555) 234-5678" googleMapsLink="https://maps.google.com" status="active"
-                    :operators="['Robert Taylor']" :management="['Jennifer Davis']" :vouchers="22" :viewRoute="route('locations.show')" editRoute="#"
+                    :operators="['Robert Taylor']" :management="['Jennifer Davis']" :vouchers="22" :viewRoute="route('locations.show', 2)" editRoute="#"
                     deleteRoute="#" />
 
                 <!-- Location Card 3 -->
