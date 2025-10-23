@@ -29,10 +29,12 @@
     <!-- Main Content -->
     <main class="lg:ml-64 min-h-screen">
         <!-- Top Bar -->
-        <x-top-bar title="Create New Business" subtitle="Add a new business to the system" routeName="businesses.index" class="bg-gray-600 text-white" buttonName="Back to List">
+        <x-top-bar title="Create New Business" subtitle="Add a new business to the system" routeName="businesses.index"
+            class="bg-gray-600 text-white" buttonName="Back to List">
             <x-slot name="buttonSvg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
             </x-slot>
         </x-top-bar>
@@ -459,13 +461,13 @@
 
                             <div>
                                 <label for="advance_value" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Advance Credit Value
+                                    OpenAI credit
                                 </label>
                                 <input type="number" id="advance_value" name="advance_value"
                                     value="{{ old('advance_value', 0) }}" min="0" step="1"
                                     placeholder="0"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('advance_value') border-red-500 @enderror">
-                                <p class="mt-1 text-xs text-gray-500">Initial advance credit amount</p>
+                                <p class="mt-1 text-xs text-gray-500">Initial OpenAI credit</p>
                                 @error('advance_value')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
