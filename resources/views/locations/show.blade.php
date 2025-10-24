@@ -223,7 +223,7 @@
                 <button
                     class="tab-btn px-4 py-3 font-medium text-sm cursor-pointer hover:text-gray-700 transition-colors text-gray-500"
                     data-tab="vouchers">
-                    Vouchers (15)
+                    Profiles (3)
                 </button>
                 <button
                     class="tab-btn px-4 py-3 font-medium text-sm cursor-pointer hover:text-gray-700 transition-colors text-gray-500"
@@ -347,47 +347,138 @@
             </div>
         </div>
 
-        <!-- Vouchers Tab -->
+        <!-- Profiles Tab (formerly Vouchers) -->
         <div id="vouchers-tab" class="tab-content hidden">
             <div class="px-8 py-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <x-voucher-card code="WIFI2025" location="Downtown Office" validUntil="Dec 31, 2025"
-                        :used="45" :total="100" status="active" editRoute="#" deleteRoute="#" />
+                <!-- Header with Add Profile (non-functional for now) -->
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Profiles</h3>
+                    <button type="button"
+                        class="inline-flex items-center px-3 py-2 bg-blue-600 text-white text-xs font-medium rounded-md opacity-70 cursor-not-allowed"
+                        title="Coming soon">
+                        Add Profile
+                    </button>
+                </div>
 
-                    <x-voucher-card code="OFFICE50" location="Downtown Office" validUntil="Nov 15, 2025"
-                        :used="12" :total="50" status="active" editRoute="#" deleteRoute="#" />
+                <!-- Profiles grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Example Profile Card 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900">Guest Access</h4>
+                                <p class="text-xs text-gray-600">Open Access profile</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="/locations/1/profile/1/vouchers/create"
+                                    class="text-purple-600 hover:text-purple-700 text-sm">Add Vouchers</a>
+                                <button class="p-2 rounded-md hover:bg-gray-100" aria-label="Edit" title="Edit">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 4h2m-1 0v2m-6.586 9.414a2 2 0 010-2.828l7.172-7.172a2 2 0 012.828 0l2.828 2.828a2 2 0 010 2.828l-7.172 7.172a2 2 0 01-2.828 0z" />
+                                    </svg>
+                                </button>
+                                <button class="p-2 rounded-md hover:bg-red-50" aria-label="Delete" title="Delete">
+                                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6l1-2H8l1 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Example Profile Card 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900">Staff</h4>
+                                <p class="text-xs text-gray-600">Voucher Based profile</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="/locations/1/profile/2/vouchers/create"
+                                    class="text-purple-600 hover:text-purple-700 text-sm">Add Vouchers</a>
+                                <button class="p-2 rounded-md hover:bg-gray-100" aria-label="Edit" title="Edit">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 4h2m-1 0v2m-6.586 9.414a2 2 0 010-2.828l7.172-7.172a2 2 0 012.828 0l2.828 2.828a2 2 0 010 2.828l-7.172 7.172a2 2 0 01-2.828 0z" />
+                                    </svg>
+                                </button>
+                                <button class="p-2 rounded-md hover:bg-red-50" aria-label="Delete" title="Delete">
+                                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6l1-2H8l1 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Example Profile Card 3 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-900">VIP</h4>
+                                <p class="text-xs text-gray-600">Voucher Based profile</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="/locations/1/profile/3/vouchers/create"
+                                    class="text-purple-600 hover:text-purple-700 text-sm">Add Vouchers</a>
+                                <button class="p-2 rounded-md hover:bg-gray-100" aria-label="Edit" title="Edit">
+                                    <svg class="w-4 h-4 text-gray-700" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 4h2m-1 0v2m-6.586 9.414a2 2 0 010-2.828l7.172-7.172a2 2 0 012.828 0l2.828 2.828a2 2 0 010 2.828l-7.172 7.172a2 2 0 01-2.828 0z" />
+                                    </svg>
+                                </button>
+                                <button class="p-2 rounded-md hover:bg-red-50" aria-label="Delete" title="Delete">
+                                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6l1-2H8l1 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Other tabs -->
-        <div id="devices-tab" class="tab-content hidden">
-            <div class="px-8 py-6">
-                <div class="text-center text-gray-500 py-20">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 640 512">
-                        <path
-                            d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z">
-                        </path>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Connected Devices</h3>
-                    <p>Real-time device monitoring coming soon</p>
+            <!-- Other tabs -->
+            <div id="devices-tab" class="tab-content hidden">
+                <div class="px-8 py-6">
+                    <div class="text-center text-gray-500 py-20">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 640 512">
+                            <path
+                                d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z">
+                            </path>
+                        </svg>
+                        <h3 class="text-lg font-semibold mb-2">Connected Devices</h3>
+                        <p>Real-time device monitoring coming soon</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="activity-tab" class="tab-content hidden">
-            <div class="px-8 py-6">
-                <div class="text-center text-gray-500 py-20">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 512 512">
-                        <path
-                            d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z">
-                        </path>
-                    </svg>
-                    <h3 class="text-lg font-semibold mb-2">Activity Log</h3>
-                    <p>Recent activity and changes will be displayed here</p>
+            <div id="activity-tab" class="tab-content hidden">
+                <div class="px-8 py-6">
+                    <div class="text-center text-gray-500 py-20">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 512 512">
+                            <path
+                                d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z">
+                            </path>
+                        </svg>
+                        <h3 class="text-lg font-semibold mb-2">Activity Log</h3>
+                        <p>Recent activity and changes will be displayed here</p>
+                    </div>
                 </div>
             </div>
-        </div>
     </main>
 
     <x-slot name="script">
