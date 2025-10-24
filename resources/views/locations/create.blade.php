@@ -216,15 +216,6 @@
                     </div>
 
                     <div class="p-6 space-y-4">
-                        <div>
-                            <label for="gateway" class="block text-sm font-medium text-gray-700 mb-2">
-                                Gateway <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" id="gateway" name="gateway" required
-                                placeholder="e.g., 192.168.1.1"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                        </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div>
                                 <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
@@ -371,6 +362,40 @@
                                 </label>
                                 <input type="file" id="favicon" name="favicon" accept="image/x-icon,image/png"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            </div>
+                        </div>
+
+                        <!-- Background Effects -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="background-blur" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Background Blur (0–100%)
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="background-blur" name="background_blur" min="0" max="100" value="0" class="flex-1">
+                                    <input type="number" id="background-blur-value" min="0" max="100" value="0" class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Applies blur to the background image.</p>
+                            </div>
+                            <div>
+                                <label for="background-opacity" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Background Opacity (0–100%)
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="background-opacity" name="background_opacity" min="0" max="100" value="100" class="flex-1">
+                                    <input type="number" id="background-opacity-value" min="0" max="100" value="100" class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Controls the opacity of the background overlay.</p>
+                            </div>
+                            <div>
+                                <label for="background-contrast" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Background Contrast (0–100%)
+                                </label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="background-contrast" name="background_contrast" min="0" max="100" value="100" class="flex-1">
+                                    <input type="number" id="background-contrast-value" min="0" max="100" value="100" class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Adjusts the contrast applied to the background.</p>
                             </div>
                         </div>
 
@@ -757,14 +782,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                                                                                                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                                                                                                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                                                                                                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                                                                                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                                                                                                                                                    </svg>
-                                                                                                                                                                                                </button>
-                                                                                                                                                                                            ` : ''}
+                                                                                                                                                                                                        <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                                                                                                                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                                                                                                                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                                                                                                                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                                                                                                                                                            </svg>
+                                                                                                                                                                                                        </button>
+                                                                                                                                                                                                    ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -1188,6 +1213,25 @@
                     });
                 });
             }
+            // Sync sliders and number inputs for background effects
+            function bindSliderToNumber(sliderId, numberId, defaultValue) {
+                const slider = document.getElementById(sliderId);
+                const number = document.getElementById(numberId);
+                if (!slider || !number) return;
+                if (defaultValue !== undefined && !number.value) number.value = defaultValue;
+                slider.addEventListener('input', () => number.value = slider.value);
+                number.addEventListener('input', () => {
+                    let v = Math.max(0, Math.min(100, parseInt(number.value || 0)));
+                    number.value = v;
+                    slider.value = v;
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                bindSliderToNumber('background-blur', 'background-blur-value', 0);
+                bindSliderToNumber('background-opacity', 'background-opacity-value', 100);
+                bindSliderToNumber('background-contrast', 'background-contrast-value', 100);
+            });
         </script>
     </x-slot>
 </x-main-layout>
