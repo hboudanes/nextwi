@@ -105,7 +105,6 @@
                             <select id="timezone" name="timezone" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                 <option value="">Select timezone</option>
-
                                 <!-- UTC -->
                                 <option value="UTC">UTC</option>
 
@@ -124,82 +123,33 @@
                                     <option value="America/Mexico_City">Central Time (Mexico City)</option>
                                 </optgroup>
 
-                                <!-- South America -->
-                                <optgroup label="South America">
-                                    <option value="America/Sao_Paulo">Brasília Time (São Paulo)</option>
-                                    <option value="America/Buenos_Aires">Argentina Time (Buenos Aires)</option>
-                                    <option value="America/Santiago">Chile Time (Santiago)</option>
-                                    <option value="America/Bogota">Colombia Time (Bogotá)</option>
-                                    <option value="America/Lima">Peru Time (Lima)</option>
-                                    <option value="America/Caracas">Venezuela Time (Caracas)</option>
-                                </optgroup>
-
                                 <!-- Europe -->
                                 <optgroup label="Europe">
                                     <option value="Europe/London">GMT/BST (London)</option>
-                                    <option value="Europe/Dublin">GMT/IST (Dublin)</option>
-                                    <option value="Europe/Lisbon">WET/WEST (Lisbon)</option>
                                     <option value="Europe/Paris">CET/CEST (Paris)</option>
                                     <option value="Europe/Berlin">CET/CEST (Berlin)</option>
                                     <option value="Europe/Rome">CET/CEST (Rome)</option>
                                     <option value="Europe/Madrid">CET/CEST (Madrid)</option>
                                     <option value="Europe/Amsterdam">CET/CEST (Amsterdam)</option>
-                                    <option value="Europe/Brussels">CET/CEST (Brussels)</option>
-                                    <option value="Europe/Vienna">CET/CEST (Vienna)</option>
-                                    <option value="Europe/Zurich">CET/CEST (Zurich)</option>
-                                    <option value="Europe/Athens">EET/EEST (Athens)</option>
-                                    <option value="Europe/Istanbul">TRT (Istanbul)</option>
-                                    <option value="Europe/Moscow">MSK (Moscow)</option>
-                                    <option value="Europe/Warsaw">CET/CEST (Warsaw)</option>
-                                    <option value="Europe/Stockholm">CET/CEST (Stockholm)</option>
-                                    <option value="Europe/Oslo">CET/CEST (Oslo)</option>
-                                </optgroup>
-
-                                <!-- Africa -->
-                                <optgroup label="Africa">
-                                    <option value="Africa/Cairo">EET (Cairo)</option>
-                                    <option value="Africa/Johannesburg">SAST (Johannesburg)</option>
-                                    <option value="Africa/Lagos">WAT (Lagos)</option>
-                                    <option value="Africa/Nairobi">EAT (Nairobi)</option>
-                                    <option value="Africa/Casablanca">WET (Casablanca)</option>
-                                    <option value="Africa/Algiers">CET (Algiers)</option>
                                 </optgroup>
 
                                 <!-- Asia -->
                                 <optgroup label="Asia">
                                     <option value="Asia/Dubai">GST (Dubai)</option>
-                                    <option value="Asia/Karachi">PKT (Karachi)</option>
-                                    <option value="Asia/Kolkata">IST (Kolkata)</option>
-                                    <option value="Asia/Dhaka">BST (Dhaka)</option>
-                                    <option value="Asia/Bangkok">ICT (Bangkok)</option>
+                                    <option value="Asia/Tokyo">JST (Tokyo)</option>
                                     <option value="Asia/Singapore">SGT (Singapore)</option>
                                     <option value="Asia/Hong_Kong">HKT (Hong Kong)</option>
                                     <option value="Asia/Shanghai">CST (Shanghai)</option>
-                                    <option value="Asia/Tokyo">JST (Tokyo)</option>
-                                    <option value="Asia/Seoul">KST (Seoul)</option>
-                                    <option value="Asia/Manila">PST (Manila)</option>
-                                    <option value="Asia/Jakarta">WIB (Jakarta)</option>
-                                    <option value="Asia/Taipei">CST (Taipei)</option>
-                                    <option value="Asia/Kuala_Lumpur">MYT (Kuala Lumpur)</option>
-                                    <option value="Asia/Jerusalem">IST (Jerusalem)</option>
-                                    <option value="Asia/Riyadh">AST (Riyadh)</option>
                                 </optgroup>
 
                                 <!-- Australia & Pacific -->
                                 <optgroup label="Australia & Pacific">
                                     <option value="Australia/Sydney">AEST/AEDT (Sydney)</option>
                                     <option value="Australia/Melbourne">AEST/AEDT (Melbourne)</option>
-                                    <option value="Australia/Brisbane">AEST (Brisbane)</option>
-                                    <option value="Australia/Perth">AWST (Perth)</option>
-                                    <option value="Australia/Adelaide">ACST/ACDT (Adelaide)</option>
                                     <option value="Pacific/Auckland">NZST/NZDT (Auckland)</option>
-                                    <option value="Pacific/Fiji">FJT (Fiji)</option>
-                                    <option value="Pacific/Guam">ChST (Guam)</option>
                                 </optgroup>
                             </select>
                         </div>
-
-                        <!-- Gateway fields moved to their own card below -->
                     </div>
                 </div>
 
@@ -216,7 +166,16 @@
                     </div>
 
                     <div class="p-6 space-y-4">
+                        <div>
+                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                Post URL
+                            </label>
+                            <input type="url" id="post-url" name="post_url"
+                                placeholder="https://example.com/api/auth"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                        </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
                             <div>
                                 <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
                                     Username
@@ -248,14 +207,7 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
-                                Post URL
-                            </label>
-                            <input type="url" id="post-url" name="post_url"
-                                placeholder="https://example.com/api/auth"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                        </div>
+
 
                         <div>
                             <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
@@ -312,7 +264,7 @@
                         </div>
 
                         <!-- Color Pickers -->
-                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div>
                                 <label for="primary-color" class="block text-sm font-medium text-gray-700 mb-2">
                                     Primary Brand Color
@@ -432,26 +384,6 @@
                                     <option value="Open Sans">Open Sans</option>
                                     <option value="Lato">Lato</option>
                                     <option value="Poppins">Poppins</option>
-                                    <option value="Montserrat">Montserrat</option>
-                                    <option value="Raleway">Raleway</option>
-                                    <option value="Nunito">Nunito</option>
-                                    <option value="Playfair Display">Playfair Display</option>
-                                    <option value="Source Sans Pro">Source Sans Pro</option>
-                                    <option value="Ubuntu">Ubuntu</option>
-                                    <option value="Merriweather">Merriweather</option>
-                                    <option value="Roboto Condensed">Roboto Condensed</option>
-                                    <option value="Roboto Slab">Roboto Slab</option>
-                                    <option value="Noto Sans">Noto Sans</option>
-                                    <option value="Oswald">Oswald</option>
-                                    <option value="PT Sans">PT Sans</option>
-                                    <option value="Quicksand">Quicksand</option>
-                                    <option value="Work Sans">Work Sans</option>
-                                    <option value="Fira Sans">Fira Sans</option>
-                                    <option value="Mulish">Mulish</option>
-                                    <option value="Rubik">Rubik</option>
-                                    <option value="Barlow">Barlow</option>
-                                    <option value="Karla">Karla</option>
-                                    <option value="Josefin Sans">Josefin Sans</option>
                                 </select>
                             </div>
                         </div>
@@ -470,7 +402,6 @@
                                 </svg>
                                 Text & Translation
                             </h3>
-
                         </div>
                     </div>
 
@@ -482,7 +413,6 @@
                         <div class="mb-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h5 class="text-sm font-semibold text-gray-700">Languages</h5>
-
                                 <div class="flex items-center gap-2">
                                     <select id="language-selector"
                                         class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -654,7 +584,6 @@
                                             placeholder="e.g., Connect"
                                             class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -700,7 +629,7 @@
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <span><strong>At least one profile is required.</strong> Each profile can use either
-                                    Open Access or Voucher-based authentication.</span>
+                                    Open Access or Account-based authentication.</span>
                             </p>
                         </div>
 
@@ -757,6 +686,10 @@
                     .language-content.active { display: block; }
                 `;
                 document.head.appendChild(style);
+
+                bindSliderToNumber('background-blur', 'background-blur-value', 0);
+                bindSliderToNumber('background-opacity', 'background-opacity-value', 100);
+                bindSliderToNumber('background-contrast', 'background-contrast-value', 100);
             });
 
             // Toggle checkbox content visibility
@@ -796,14 +729,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                                                                                                                                                                                                                        <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                                                                                                                                                                                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                                                                                                                                                                                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                                                                                                                                                                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                                                                                                                                                                                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                                                                                                                                                                                                                            </svg>
-                                                                                                                                                                                                                                                                        </button>
-                                                                                                                                                                                                                                                                    ` : ''}
+                                                                <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                    </svg>
+                                                                </button>
+                                                            ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -825,97 +758,119 @@
                                 placeholder="e.g., Connect to Free WiFi"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                         </div>
+
                         <!-- Login Fields Configuration -->
                         <div class="border-t border-gray-300 pt-4">
                             <h5 class="text-sm font-semibold text-gray-700 mb-4">Login Fields</h5>
                             
-                            <!-- First Name & Last Name -->
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <!-- First Name -->
                                 <div>
                                     <label class="flex items-center justify-between mb-2">
                                         <span class="text-sm font-medium text-gray-700">First Name</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][first_name_required]" 
+                                            <input type="checkbox" name="profiles[${profileCount}][first_name_enabled]" 
                                                 value="1" class="sr-only peer">
                                             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
                                         </label>
                                     </label>
                                 </div>
 
+                                <!-- Last Name -->
                                 <div>
                                     <label class="flex items-center justify-between mb-2">
                                         <span class="text-sm font-medium text-gray-700">Last Name</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][last_name_required]" 
+                                            <input type="checkbox" name="profiles[${profileCount}][last_name_enabled]" 
                                                 value="1" class="sr-only peer">
                                             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
+                                        </label>
+                                    </label>
+                                </div>
+
+                                <!-- Gender -->
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">Gender</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][gender_enabled]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
+                                        </label>
+                                    </label>
+                                </div>
+
+                                <!-- Birthday -->
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">Birthday</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][birthday_enabled]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
+                                        </label>
+                                    </label>
+                                </div>
+
+                                <!-- Mobile -->
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">Mobile</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" name="profiles[${profileCount}][mobile_enabled]" 
+                                                value="1" class="sr-only peer">
+                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
                                         </label>
                                     </label>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Email -->
-                            <div class="mb-4">
-                                <label class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-700">Email</span>
-                                    <div class="flex items-center gap-3">
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][email_required]" 
-                                                value="1" class="sr-only peer">
-                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
-                                        </label>
+                        <!-- Advanced Verification -->
+                        <div class="border-t border-gray-300 pt-4">
+                            <h5 class="text-sm font-semibold text-gray-700 mb-4">Advanced Verification</h5>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Email Verification -->
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">Email Verification</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
                                             <input type="checkbox" name="profiles[${profileCount}][email_verification]" 
                                                 value="1" class="sr-only peer">
                                             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Verification</span>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
                                         </label>
-                                    </div>
-                                </label>
-                            </div>
+                                    </label>
+                                    <p class="text-xs text-gray-500">Require email verification via OTP</p>
+                                </div>
 
-                            <!-- WhatsApp -->
-                            <div class="mb-4">
-                                <label class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-700">WhatsApp</span>
-                                    <div class="flex items-center gap-3">
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][whatsapp_required]" 
-                                                value="1" class="sr-only peer">
-                                            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Required</span>
-                                        </label>
+                                <!-- WhatsApp Verification -->
+                                <div>
+                                    <label class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700">WhatsApp Verification</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
                                             <input type="checkbox" name="profiles[${profileCount}][whatsapp_verification]" 
                                                 value="1" class="sr-only peer">
                                             <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-2 text-xs text-gray-600">Verification</span>
+                                            <span class="ml-2 text-xs text-gray-600">Enable</span>
                                         </label>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <!-- Gender -->
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Gender (Enable)</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" name="profiles[${profileCount}][gender_enabled]" 
-                                        value="1" class="sr-only peer">
-                                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600"></div>
-                                    <span class="ml-2 text-xs text-gray-600">Show Gender Field</span>
-                                </label>
+                                    </label>
+                                    <p class="text-xs text-gray-500">Require WhatsApp verification via OTP</p>
+                                </div>
                             </div>
                         </div>
-                        
 
                         <!-- Checkboxes Configuration (Profile Level) -->
                         ${generateCheckboxFields(profileCount)}
-                        <div class="border-t border-gray-300 pt-4">
+
                         <!-- Access Policy Selection -->
-                        <div>
+                        <div class="border-t border-gray-300 pt-4">
                             <label class="block text-sm font-medium text-gray-700 mb-3">
                                 Access Policy <span class="text-red-500">*</span>
                             </label>
@@ -937,18 +892,18 @@
                                 </div>
 
                                 <div class="access-type-option border-2 border-gray-300 rounded-lg p-4 hover:border-blue-400" 
-                                    onclick="selectAccessType(${profileCount}, 'voucher')">
+                                    onclick="selectAccessType(${profileCount}, 'account')">
                                     <input type="radio" name="profiles[${profileCount}][access_policy]" 
-                                        value="voucher" id="profile-${profileCount}-voucher" required class="hidden">
-                                    <label for="profile-${profileCount}-voucher" class="cursor-pointer flex flex-col items-center text-center">
+                                        value="account" id="profile-${profileCount}-account" required class="hidden">
+                                    <label for="profile-${profileCount}-account" class="cursor-pointer flex flex-col items-center text-center">
                                         <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-3">
                                             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                             </svg>
                                         </div>
-                                        <h5 class="font-semibold text-gray-900 mb-1">Voucher Based</h5>
-                                        <p class="text-xs text-gray-600">Requires valid voucher code</p>
+                                        <h5 class="font-semibold text-gray-900 mb-1">Account Access</h5>
+                                        <p class="text-xs text-gray-600">Requires voucher or password</p>
                                     </label>
                                 </div>
                                 <div class="access-type-option border-2 border-gray-200 rounded-lg p-4 bg-gray-50 opacity-60 cursor-not-allowed">
@@ -967,57 +922,97 @@
                                 </div>
                             </div>
 
-                         
-                        </div>
-
-                        <!-- Access Policy Settings (Only for Open Access) -->
-                        <div id="access-policy-${profileCount}" class="hidden">
-                            <div class="p-4 bg-green-50 border border-green-200 rounded-lg space-y-4">
-                                <h5 class="text-sm font-semibold text-green-800 mb-3">Open Access Settings</h5>
-                                
-                                <!-- Daily Limit -->
-                                <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <label class="text-sm font-medium text-gray-700">Daily Limit</label>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][daily_limit_enabled]" 
-                                                value="1" onchange="toggleDailyLimit(${profileCount})" class="sr-only peer">
-                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-3 text-sm font-medium text-gray-700">
-                                                <span class="peer-checked:hidden">No</span>
-                                                <span class="hidden peer-checked:inline">Yes</span>
-                                            </span>
-                                        </label>
-                                    </div>
+                            <!-- Open Access Settings -->
+                            <div id="access-policy-open-${profileCount}" class="hidden mt-4">
+                                <div class="p-4 bg-green-50 border border-green-200 rounded-lg space-y-4">
+                                    <h5 class="text-sm font-semibold text-green-800 mb-3">Open Access Settings</h5>
                                     
-                                    <div id="daily-limit-input-${profileCount}" class="hidden">
-                                        <label class="block text-xs font-medium text-gray-600 mb-2">Session Limit (minutes)</label>
-                                        <input type="number" name="profiles[${profileCount}][session_limit]" min="0" 
-                                            placeholder="e.g., 60"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    <!-- Daily Limit -->
+                                    <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <label class="text-sm font-medium text-gray-700">Daily Limit</label>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" name="profiles[${profileCount}][daily_limit_enabled]" 
+                                                    value="1" onchange="toggleDailyLimit(${profileCount})" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                                <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div id="daily-limit-input-${profileCount}" class="hidden">
+                                            <label class="block text-xs font-medium text-gray-600 mb-2">Session Limit (minutes)</label>
+                                            <input type="number" name="profiles[${profileCount}][session_limit]" min="0" 
+                                                placeholder="e.g., 60"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
+                                    </div>
+
+                                    <!-- Speed Limit -->
+                                    <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <label class="text-sm font-medium text-gray-700">Speed Limit</label>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" name="profiles[${profileCount}][speed_limit_enabled]" 
+                                                    value="1" onchange="toggleSpeedLimit(${profileCount})" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                                <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div id="speed-limit-input-${profileCount}" class="hidden">
+                                            <label class="block text-xs font-medium text-gray-600 mb-2">Bandwidth Limit (Mbps)</label>
+                                            <input type="number" name="profiles[${profileCount}][bandwidth_limit]" min="0" step="0.1"
+                                                placeholder="e.g., 10"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Speed Limit -->
-                                <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
-                                    <div class="flex items-center justify-between mb-3">
-                                        <label class="text-sm font-medium text-gray-700">Speed Limit</label>
-                                        <label class="relative inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" name="profiles[${profileCount}][speed_limit_enabled]" 
-                                                value="1" onchange="toggleSpeedLimit(${profileCount})" class="sr-only peer">
-                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                            <span class="ml-3 text-sm font-medium text-gray-700">
-                                                <span class="peer-checked:hidden">No</span>
-                                                <span class="hidden peer-checked:inline">Yes</span>
-                                            </span>
-                                        </label>
-                                    </div>
+                            <!-- Account Access Settings -->
+                            <div id="access-policy-account-${profileCount}" class="hidden mt-4">
+                                <div class="p-4 bg-purple-50 border border-purple-200 rounded-lg space-y-4">
+                                    <h5 class="text-sm font-semibold text-purple-800 mb-3">Account Access Settings</h5>
                                     
-                                    <div id="speed-limit-input-${profileCount}" class="hidden">
-                                        <label class="block text-xs font-medium text-gray-600 mb-2">Bandwidth Limit (Mbps)</label>
-                                        <input type="number" name="profiles[${profileCount}][bandwidth_limit]" min="0" step="0.1"
-                                            placeholder="e.g., 10"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    <!-- Enable Voucher -->
+                                    <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between">
+                                            <div>
+                                                <label class="text-sm font-medium text-gray-700">Enable Voucher</label>
+                                                <p class="text-xs text-gray-500 mt-1">Allow users to login with voucher codes</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" name="profiles[${profileCount}][voucher_enabled]" 
+                                                    value="1" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                                <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Enable Password -->
+                                    <div class="config-option bg-white p-4 rounded-lg border border-gray-200">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <div>
+                                                <label class="text-sm font-medium text-gray-700">Enable Password</label>
+                                                <p class="text-xs text-gray-500 mt-1">Allow users to login with a password</p>
+                                            </div>
+                                            <label class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" id="profile-${profileCount}-password-enabled" 
+                                                    name="profiles[${profileCount}][password_enabled]" 
+                                                    value="1" onchange="togglePasswordInput(${profileCount})" class="sr-only peer">
+                                                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                                <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div id="password-input-${profileCount}" class="hidden mt-3">
+                                            <label class="block text-xs font-medium text-gray-600 mb-2">Password</label>
+                                            <input type="password" name="profiles[${profileCount}][access_password]" 
+                                                placeholder="Enter access password"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <p class="text-xs text-gray-500 mt-1">Users will need to enter this password to access the network</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1061,7 +1056,6 @@
                                         placeholder="Enter ${checkboxLabels[i-1].toLowerCase()} content here..."
                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
                                 </div>
-                                
                             </div>
                         </div>
                     `;
@@ -1071,24 +1065,43 @@
             }
 
             function selectAccessType(profileId, type) {
-                // Update UI
-                const parent = event.currentTarget.closest('.access-type-selector');
-                parent.querySelectorAll('.access-type-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                event.currentTarget.classList.add('selected');
+                const radio = document.getElementById(`profile-${profileId}-${type}`);
+                if (radio) {
+                    radio.checked = true;
+                }
 
-                // Check radio
-                document.getElementById(`profile-${profileId}-${type}`).checked = true;
+                // Update visual selection
+                const container = radio.closest('.access-type-selector');
+                if (container) {
+                    container.querySelectorAll('.access-type-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    radio.closest('.access-type-option').classList.add('selected');
+                }
 
-                // Show/hide policy sections
-                const accessPolicyContainer = document.getElementById(`access-policy-${profileId}`);
+                // Show/hide policy sections based on type
+                const openPolicyContainer = document.getElementById(`access-policy-open-${profileId}`);
+                const accountPolicyContainer = document.getElementById(`access-policy-account-${profileId}`);
 
-                if (type === 'open') {
-                    accessPolicyContainer.classList.remove('hidden');
+                if (openPolicyContainer && accountPolicyContainer) {
+                    if (type === 'open') {
+                        openPolicyContainer.classList.remove('hidden');
+                        accountPolicyContainer.classList.add('hidden');
+                    } else if (type === 'account') {
+                        openPolicyContainer.classList.add('hidden');
+                        accountPolicyContainer.classList.remove('hidden');
+                    }
+                }
+            }
+
+            function togglePasswordInput(profileId) {
+                const passwordInput = document.getElementById(`password-input-${profileId}`);
+                const checkbox = document.getElementById(`profile-${profileId}-password-enabled`);
+
+                if (checkbox.checked) {
+                    passwordInput.classList.remove('hidden');
                 } else {
-                    // Voucher - hide policy section completely
-                    accessPolicyContainer.classList.add('hidden');
+                    passwordInput.classList.add('hidden');
                 }
             }
 
@@ -1227,6 +1240,7 @@
                     });
                 });
             }
+
             // Sync sliders and number inputs for background effects
             function bindSliderToNumber(sliderId, numberId, defaultValue) {
                 const slider = document.getElementById(sliderId);
@@ -1240,12 +1254,6 @@
                     slider.value = v;
                 });
             }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                bindSliderToNumber('background-blur', 'background-blur-value', 0);
-                bindSliderToNumber('background-opacity', 'background-opacity-value', 100);
-                bindSliderToNumber('background-contrast', 'background-contrast-value', 100);
-            });
         </script>
     </x-slot>
 </x-main-layout>
