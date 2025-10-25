@@ -17,4 +17,20 @@ class VoucherController extends Controller
             'profileId' => $profile,
         ]);
     }
+
+    /**
+     * Standalone vouchers index. For now, redirects to create form.
+     */
+    public function index()
+    {
+        return redirect()->route('vouchers.create');
+    }
+
+    /**
+     * Standalone create form not tied to location/profile.
+     */
+    public function createStandalone()
+    {
+        return view('vouchers.create');
+    }
 }

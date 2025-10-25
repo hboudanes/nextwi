@@ -59,7 +59,7 @@
                 <span class="font-medium">Locations</span>
             </a>
 
-            <a href=""
+            <a href="{{ route('vouchers.index') }}"
                 class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute(['vouchers.index', 'vouchers.*']) }} rounded-lg hover:bg-gray-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

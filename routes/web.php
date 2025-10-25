@@ -34,4 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
+Route::get('/vouchers/create', [VoucherController::class, 'createStandalone'])->name('vouchers.create');
+
 require __DIR__ . '/auth.php';
