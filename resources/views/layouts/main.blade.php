@@ -39,6 +39,25 @@
             color: #f3f4f6;
         }
         
+        /* Fix table styling in dark mode */
+        .dark table {
+            background-color: #1e1e1e;
+            color: #f3f4f6;
+        }
+        
+        .dark table th {
+            background-color: #2d2d2d;
+            color: #f3f4f6;
+        }
+        
+        .dark table td {
+            border-color: #3e3e3e;
+        }
+        
+        .dark table tr:hover {
+            background-color: #2d2d2d;
+        }
+        
         .dark .bg-white {
             background-color: #1e1e1e;
         }
@@ -91,6 +110,75 @@
         
         .dark .hover\:bg-gray-100:hover {
             background-color: #2e2e2e;
+        }
+        
+        .dark .hover\:bg-gray-50:hover {
+            background-color: #2d2d2d;
+        }
+        
+        .dark .hover\:bg-white:hover {
+            background-color: #2d2d2d;
+        }
+        
+        .dark .hover\:bg-blue-50:hover {
+            background-color: #1a365d;
+        }
+        
+        /* Fix profile card styling in dark mode */
+        .dark .profile-card {
+            background-color: #1e1e1e;
+            border-color: #3e3e3e;
+        }
+        
+        .dark .profile-card.cannot-remove {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        /* Fix specific elements in roles_permissions view */
+        .dark .bg-gray-50 {
+            background-color: #1e1e1e;
+        }
+        
+        .dark .bg-blue-50 {
+            background-color: #1a365d;
+        }
+        
+        .dark .bg-blue-50:hover {
+            background-color: #1e429f;
+        }
+        
+        .dark .bg-blue-100 {
+            background-color: #1e429f;
+        }
+        
+        /* Fix access policy cards in dark mode */
+        .dark .access-type-option {
+            background-color: #1e1e1e;
+            border-color: #3e3e3e;
+        }
+        
+        .dark .access-type-option.selected {
+            border-color: #3B82F6;
+            background-color: #1a365d;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .dark .access-type-option h5 {
+            color: #f3f4f6;
+        }
+        
+        .dark .access-type-option p {
+            color: #9ca3af;
+        }
+        
+        .dark .config-option {
+            background-color: #1e1e1e;
+            border-color: #3e3e3e;
+        }
+        
+        .dark .config-option.selected {
+            border-color: #3B82F6;
+            background-color: #1a365d;
         }
         
         .dark .text-gray-600,
