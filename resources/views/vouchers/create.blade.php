@@ -26,8 +26,8 @@
                     <form action="#" method="post" class="space-y-6">
                         @csrf
 
-                        <!-- Business, Location, Profile Selection -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Business, Location -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="relative">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Business</label>
                                 <input type="hidden" id="business_id" name="business_id">
@@ -40,7 +40,6 @@
                                 <p id="business_selected_hint" class="mt-1 text-xs text-gray-500 hidden">Selected: <span
                                         class="font-medium" id="business_selected_name"></span></p>
                             </div>
-
                             <div class="relative">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
                                 <input type="hidden" id="location_id" name="location_id">
@@ -52,18 +51,6 @@
                                 </ul>
                                 <p id="location_selected_hint" class="mt-1 text-xs text-gray-500 hidden">Selected: <span
                                         class="font-medium" id="location_selected_name"></span></p>
-                            </div>
-
-                            <div>
-                                <label for="profile"
-                                    class="block text-sm font-medium text-gray-700 mb-2">Profile</label>
-                                <select id="profile" name="profile_id"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    <option value="">Select Profile</option>
-                                    <option value="1">Profile One</option>
-                                    <option value="2">Profile Two</option>
-                                    <option value="3">Profile Three</option>
-                                </select>
                             </div>
                         </div>
 
@@ -131,6 +118,39 @@
                                 <input type="number" id="custom_speed" name="custom_speed"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
                                     placeholder="Enter custom speed in Mbps">
+                            </div>
+                        </div>
+                        <!-- Max Quota -->
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <label for="quota" class="block text-sm font-medium text-gray-700">Max Quota
+                                    (GB)</label>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-500 mr-2">Enable quota limit</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="quotatoggle" class="sr-only peer" disabled>
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 opacity-50 cursor-not-allowed">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <select id="quota" name="quota"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                disabled>
+                                <option value="">No limit</option>
+                                <option value="1">1 GB</option>
+                                <option value="5">5 GB</option>
+                                <option value="10">10 GB</option>
+                                <option value="20">20 GB</option>
+                                <option value="50">50 GB</option>
+                                <option value="100">100 GB</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            <div id="customquotacontainer" class="mt-2 hidden">
+                                <input type="number" id="customquota" name="customquota"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                                    placeholder="Enter custom quota in GB" disabled>
                             </div>
                         </div>
 

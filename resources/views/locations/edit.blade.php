@@ -46,7 +46,7 @@
     <!-- Main Content -->
     <main class="lg:ml-64 min-h-screen">
         <!-- Top Bar -->
-        <x-top-bar title="Create New Location" subtitle="Add a new location to your business" routeName="locations.index"
+        <x-top-bar title="Edit Location" subtitle="Update location settings and configuration" routeName="locations.index"
             class="bg-gray-600 text-white" buttonName="Back to List">
             <x-slot name="buttonSvg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,11 +58,11 @@
 
         <!-- Form Content -->
         <div class="p-6">
-            <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data"
-                class="space-y-6">
+            <form action="#" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
+                @method('PUT')
 
-                <!-- Basic Details Card -->
+                <!-- 1. Basic Details Card -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
                         <h3 class="text-lg font-semibold text-white flex items-center gap-2">
@@ -153,71 +153,7 @@
                     </div>
                 </div>
 
-                <!-- Gateway Card -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
-                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Gateway Settings
-                        </h3>
-                    </div>
-
-                    <div class="p-6 space-y-4">
-                        <div>
-                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
-                                Post URL
-                            </label>
-                            <input type="url" id="post-url" name="post_url"
-                                placeholder="https://example.com/api/auth"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Username
-                                </label>
-                                <input type="text" id="username" name="username" placeholder="Gateway username"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
-
-                            <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Password
-                                </label>
-                                <input type="password" id="password" name="password" placeholder="Gateway password"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                            </div>
-
-                            <div>
-                                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Type <span class="text-red-500">*</span>
-                                </label>
-                                <select id="type" name="type" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    <option value="">Select type</option>
-                                    <option value="mikrotik">MikroTik</option>
-                                    <option value="unifi">Ubiquiti UniFi</option>
-                                    <option value="cisco">Cisco</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
-                                Note
-                            </label>
-                            <textarea id="note" name="note" rows="3" placeholder="Add notes..."
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Brand Configuration Card -->
+                <!-- 2. Brand Configuration Card -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-4">
                         <h3 class="text-lg font-semibold text-white flex items-center gap-2">
@@ -390,7 +326,47 @@
                     </div>
                 </div>
 
-                <!-- Text & Translation Card (Location Level) -->
+                <!-- 3. Authentication Profiles Card -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                Authentication Profiles
+                            </h3>
+                            <button type="button" onclick="addProfile()"
+                                class="px-4 py-2 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-colors flex items-center gap-2 text-sm font-semibold">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Add Profile
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <p class="text-sm text-blue-800 flex items-start gap-2">
+                                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span><strong>At least one profile is required.</strong> Each profile can use either
+                                    Open Access or Account-based authentication.</span>
+                            </p>
+                        </div>
+
+                        <!-- Profiles List -->
+                        <div id="profiles-list" class="space-y-4"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Text & Translation Card -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                     <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
                         <div class="flex items-center justify-between">
@@ -598,43 +574,67 @@
                     </div>
                 </div>
 
-                <!-- Authentication Profiles Card -->
+                <!-- 5. Gateway Card -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                Authentication Profiles
-                            </h3>
-                            <button type="button" onclick="addProfile()"
-                                class="px-4 py-2 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Add Profile
-                            </button>
-                        </div>
+                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
+                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Gateway Settings
+                        </h3>
                     </div>
 
-                    <div class="p-6">
-                        <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p class="text-sm text-blue-800 flex items-start gap-2">
-                                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <span><strong>At least one profile is required.</strong> Each profile can use either
-                                    Open Access or Account-based authentication.</span>
-                            </p>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                Post URL
+                            </label>
+                            <input type="url" id="post-url" name="post_url"
+                                placeholder="https://example.com/api/auth"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                         </div>
 
-                        <!-- Profiles List -->
-                        <div id="profiles-list" class="space-y-4"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Username
+                                </label>
+                                <input type="text" id="username" name="username" placeholder="Gateway username"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Password
+                                </label>
+                                <input type="password" id="password" name="password" placeholder="Gateway password"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Type <span class="text-red-500">*</span>
+                                </label>
+                                <select id="type" name="type" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                    <option value="">Select type</option>
+                                    <option value="mikrotik">MikroTik</option>
+                                    <option value="unifi">Ubiquiti UniFi</option>
+                                    <option value="cisco">Cisco</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
+                                Note
+                            </label>
+                            <textarea id="note" name="note" rows="3" placeholder="Add notes..."
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                        </div>
                     </div>
                 </div>
 
@@ -651,7 +651,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
-                        <span>Create Location</span>
+                        <span>Update Location</span>
                     </button>
                 </div>
             </form>
@@ -717,14 +717,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            ` : ''}
+                                                        <button type="button" onclick="removeProfile(${profileCount})" 
+                                                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                            </svg>
+                                                        </button>
+                                                    ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -920,7 +920,7 @@
                                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                             </svg>
                                         </div>
-                                        <h5 class="font-semibold text-gray-900 mb-1">Controlled Access</h5>
+                                        <h5 class="font-semibold text-gray-900 mb-1">Account Access</h5>
                                         <p class="text-xs text-gray-600">Requires voucher or password</p>
                                     </label>
                                 </div>

@@ -29,22 +29,27 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="https://maps.google.com" target="_blank"
-                        class="border border-gray-300 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 576 512">
+                    <!-- Pause Button (Orange) -->
+                    <button
+                        class="border border-orange-300 bg-orange-50 px-4 py-2 rounded-lg text-orange-700 hover:bg-orange-100 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 320 512">
                             <path
-                                d="M384 476.1L192 421.2V35.9L384 90.8V476.1zm32-1.2V88.4L543.1 37.5c15.8-6.3 32.9 5.3 32.9 22.3V394.6c0 9.8-6 18.6-15.1 22.3L416 474.8zM15.1 95.1L160 37.2V423.6L32.9 474.5C17.1 480.8 0 469.2 0 452.2V117.4c0-9.8 6-18.6 15.1-22.3z">
+                                d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z">
                             </path>
                         </svg>
-                        View on Map
-                    </a>
-                    <a href="#"
-                        class="border border-gray-300 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                        Pause
+                    </button>
+
+                    <!-- Edit Button -->
+                    <a href="{{ route('locations.edit', 1) }}"
+                        class="border border-gray-300 bg-white px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 512 512">
+                            <path
+                                d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z">
+                            </path>
+                        </svg>
                         Edit Location
                     </a>
-                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
-                        Delete Location
-                    </button>
                 </div>
             </div>
             <div class="flex items-center gap-6 mt-3 text-sm">
@@ -61,6 +66,7 @@
                 <span class="text-gray-600">Created: <span class="font-medium text-gray-900">Jan 15, 2025</span></span>
             </div>
         </header>
+
 
         <!-- Date Filter -->
         <section class="px-8 py-4 bg-white border-b border-gray-200">
@@ -83,27 +89,33 @@
             </div>
         </section>
 
+
         <!-- Analytics Cards -->
         <section class="px-8 py-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
 
                 <!-- Total Guests -->
                 <x-stats-card :icon="'<svg class=\'w-6 h-6\' fill=\'currentColor\' viewBox=\'0 0 640 512\'><path d=\'M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z\'/></svg>'" icon-bg="bg-blue-100" icon-color="text-blue-600" value="1,847"
                     label="Total Guests" badge="+243 this period" badge-color="text-green-600" />
 
+
                 <!-- Active Guests -->
                 <x-stats-card :icon="'<svg class=\'w-6 h-6\' fill=\'currentColor\' viewBox=\'0 0 448 512\'><path d=\'M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z\'/></svg>'" icon-bg="bg-green-100" icon-color="text-green-600" value="327"
                     label="Active Now" badge="Online guests" badge-color="text-gray-500" />
 
+
                 <!-- Active Vouchers -->
                 <x-stats-card :icon="'<svg class=\'w-6 h-6\' fill=\'currentColor\' viewBox=\'0 0 576 512\'><path d=\'M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z\'/></svg>'" icon-bg="bg-purple-100" icon-color="text-purple-600" value="15"
                     label="Active Vouchers" badge="42 redeemed" badge-color="text-gray-500" />
+
 
                 <!-- Connection Time -->
                 <x-stats-card :icon="'<svg class=\'w-6 h-6\' fill=\'currentColor\' viewBox=\'0 0 512 512\'><path d=\'M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z\'/></svg>'" icon-bg="bg-orange-100" icon-color="text-orange-600" value="2.4h"
                     label="Avg Connection Time" badge="Per guest" badge-color="text-gray-500" />
             </div>
         </section>
+
 
         <!-- Guest Activity Chart -->
         <section class="px-8 py-6">
@@ -117,6 +129,7 @@
                 ['label' => 'Sun', 'count' => 289],
             ]" />
         </section>
+
 
         <!-- Team Section -->
         <section class="px-8 py-6">
@@ -171,6 +184,7 @@
                     </div>
                 </div>
 
+
                 <!-- Operators Card -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -212,6 +226,7 @@
             </div>
         </section>
 
+
         <!-- Tabs Section -->
         <nav class="bg-white border-b border-gray-200 px-8 mt-6">
             <div class="flex gap-6">
@@ -237,6 +252,7 @@
                 </button>
             </div>
         </nav>
+
 
         <!-- Guests Tab -->
         <div id="guests-tab" class="tab-content">
@@ -347,6 +363,7 @@
             </div>
         </div>
 
+
         <!-- Profiles Tab (formerly Vouchers) -->
         <div id="vouchers-tab" class="tab-content hidden">
             <div class="px-8 py-6">
@@ -359,6 +376,7 @@
                         Add Profile
                     </button>
                 </div>
+
 
                 <!-- Profiles grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -388,8 +406,8 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
+
 
                     <!-- Example Profile Card 2 -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
@@ -417,8 +435,8 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
+
 
                     <!-- Example Profile Card 3 -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
@@ -446,40 +464,43 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Other tabs -->
-            <div id="devices-tab" class="tab-content hidden">
-                <div class="px-8 py-6">
-                    <div class="text-center text-gray-500 py-20">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 640 512">
-                            <path
-                                d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z">
-                            </path>
-                        </svg>
-                        <h3 class="text-lg font-semibold mb-2">Connected Devices</h3>
-                        <p>Real-time device monitoring coming soon</p>
-                    </div>
+
+        <!-- Other tabs -->
+        <div id="devices-tab" class="tab-content hidden">
+            <div class="px-8 py-6">
+                <div class="text-center text-gray-500 py-20">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 640 512">
+                        <path
+                            d="M64 96c0-35.3 28.7-64 64-64H512c35.3 0 64 28.7 64 64V352H512V96H128V352H64V96zM0 403.2C0 392.6 8.6 384 19.2 384H620.8c10.6 0 19.2 8.6 19.2 19.2c0 42.4-34.4 76.8-76.8 76.8H76.8C34.4 480 0 445.6 0 403.2zM281 209l-31 31 31 31c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-48-48c-9.4-9.4-9.4-24.6 0-33.9l48-48c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9zM393 175l48 48c9.4 9.4 9.4 24.6 0 33.9l-48 48c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l31-31-31-31c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0z">
+                        </path>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Connected Devices</h3>
+                    <p>Real-time device monitoring coming soon</p>
                 </div>
             </div>
+        </div>
 
-            <div id="activity-tab" class="tab-content hidden">
-                <div class="px-8 py-6">
-                    <div class="text-center text-gray-500 py-20">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 512 512">
-                            <path
-                                d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z">
-                            </path>
-                        </svg>
-                        <h3 class="text-lg font-semibold mb-2">Activity Log</h3>
-                        <p>Recent activity and changes will be displayed here</p>
-                    </div>
+
+        <div id="activity-tab" class="tab-content hidden">
+            <div class="px-8 py-6">
+                <div class="text-center text-gray-500 py-20">
+                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="currentColor" viewBox="0 0 512 512">
+                        <path
+                            d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z">
+                        </path>
+                    </svg>
+                    <h3 class="text-lg font-semibold mb-2">Activity Log</h3>
+                    <p>Recent activity and changes will be displayed here</p>
                 </div>
             </div>
+        </div>
     </main>
+
 
     <x-slot name="script">
         <script>
@@ -487,6 +508,7 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const tabButtons = document.querySelectorAll('.tab-btn');
                 const tabContents = document.querySelectorAll('.tab-content');
+
 
                 tabButtons.forEach(button => {
                     button.addEventListener('click', function() {
@@ -496,16 +518,20 @@
                             btn.classList.add('text-gray-500');
                         });
 
+
                         this.classList.remove('text-gray-500');
                         this.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
 
+
                         tabContents.forEach(content => content.classList.add('hidden'));
+
 
                         const targetTab = this.getAttribute('data-tab');
                         document.getElementById(targetTab + '-tab').classList.remove('hidden');
                     });
                 });
             });
+
 
             function clearDateFilter() {
                 document.getElementById('date-from').value = '';
