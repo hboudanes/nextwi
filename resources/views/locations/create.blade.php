@@ -636,17 +636,7 @@
                         <!-- Profiles List -->
                         <div id="profiles-list" class="space-y-4"></div>
 
-                        <!-- Add Profile Button (Bottom) -->
-                        <div class="mt-6 flex justify-center">
-                            <button type="button" onclick="addProfile()"
-                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Add Profile
-                            </button>
-                        </div>
+
                     </div>
                 </div>
 
@@ -729,14 +719,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            ` : ''}
+                                                                                                                <button type="button" onclick="removeProfile(${profileCount})" 
+                                                                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                                                                                    </svg>
+                                                                                                                </button>
+                                                                                                            ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -1023,46 +1013,78 @@
                 profilesList.appendChild(profileCard);
             }
 
-            function generateCheckboxFields(profileId) {
-                let html =
-                    '<div class="border-t border-gray-300 pt-4"><h5 class="text-sm font-semibold text-gray-700 mb-4">Checkboxes Configuration</h5>';
 
-                const checkboxLabels = ['Terms & Conditions', 'Data Privacy'];
+            function generateCheckboxFields(profileId) {
+                let html = `
+        <div class="border-t border-gray-300 pt-4">
+            <h5 class="text-sm font-semibold text-gray-700 mb-4">Checkboxes Configuration</h5>
+            <p class="text-xs text-gray-500 mb-4">Configure optional checkboxes with individual requirement settings</p>
+    `;
+
+                const checkboxLabels = ['Terms & Conditions', 'Data Privacy', 'optional'];
 
                 for (let i = 1; i <= checkboxLabels.length; i++) {
                     html += `
-                        <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                            <div class="flex items-center justify-between mb-3">
-                                <label class="text-sm font-medium text-gray-700">Checkbox ${i} - ${checkboxLabels[i-1]}</label>
-                                <label class="relative inline-flex items-center cursor-pointer">
-                                    <input type="checkbox" id="profile-${profileId}-checkbox-${i}-enabled" 
-                                        name="profiles[${profileId}][checkbox_${i}_enabled]" 
-                                        value="1" onchange="toggleCheckboxContent(${profileId}, ${i})" class="sr-only peer">
-                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                                    <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
-                                </label>
-                            </div>
-                            
-                            <div id="profile-${profileId}-checkbox-${i}-content" class="hidden space-y-3">
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-600 mb-1">Checkbox Label</label>
-                                    <input type="text" name="profiles[${profileId}][checkbox_${i}_label]" 
-                                        placeholder="e.g., I agree to ${checkboxLabels[i-1].toLowerCase()}"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-600 mb-1">${checkboxLabels[i-1]} Content</label>
-                                    <textarea name="profiles[${profileId}][checkbox_${i}_content]" rows="4" 
-                                        placeholder="Enter ${checkboxLabels[i-1].toLowerCase()} content here..."
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
-                                </div>
-                            </div>
+            <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-medium text-gray-700">Checkbox ${i} - ${checkboxLabels[i-1]}</label>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" 
+                               id="profile-${profileId}-checkbox-${i}-enabled" 
+                               name="profiles[${profileId}][checkbox${i}][enabled]" 
+                               value="1"
+                               onchange="toggleCheckboxContent(${profileId}, ${i})" 
+                               class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <span class="ml-3 text-sm font-medium text-gray-700">Enable</span>
+                    </label>
+                </div>
+                
+                <div id="profile-${profileId}-checkbox-${i}-content" class="hidden space-y-3">
+                    <!-- Checkbox Label -->
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">Checkbox Label</label>
+                        <input type="text" 
+                               name="profiles[${profileId}][checkbox${i}][label]" 
+                               placeholder="e.g., I agree to ${checkboxLabels[i-1].toLowerCase()}" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                    </div>
+                    
+                    <!-- Checkbox Content -->
+                    <div>
+                        <label class="block text-xs font-medium text-gray-600 mb-1">${checkboxLabels[i-1]} Content</label>
+                        <textarea name="profiles[${profileId}][checkbox${i}][content]" 
+                                  rows="4" 
+                                  placeholder="Enter ${checkboxLabels[i-1].toLowerCase()} content here..." 
+                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                    </div>
+                    
+                    <!-- Require Toggle -->
+                    <div class="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div>
+                            <label class="text-sm font-medium text-gray-700">Required Field</label>
+                            <p class="text-xs text-gray-500 mt-1">Make this checkbox mandatory for users</p>
                         </div>
-                    `;
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" 
+                                   id="profile-${profileId}-checkbox-${i}-required" 
+                                   name="profiles[${profileId}][checkbox${i}][required]" 
+                                   value="1"
+                                   class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <span class="ml-3 text-sm font-medium text-gray-700">Require</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        `;
                 }
-                html += '</div>';
+
+                html += `</div>`;
                 return html;
             }
+
+
 
             function selectAccessType(profileId, type) {
                 const radio = document.getElementById(`profile-${profileId}-${type}`);
