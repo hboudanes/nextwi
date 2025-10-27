@@ -48,6 +48,25 @@
             background-color: #121212;
         }
         
+        /* Fix input fields in dark mode */
+        .dark input[type="text"],
+        .dark input[type="email"],
+        .dark input[type="password"],
+        .dark input[type="number"],
+        .dark input[type="search"],
+        .dark input[type="tel"],
+        .dark input[type="url"],
+        .dark input[type="date"],
+        .dark select,
+        .dark textarea {
+            background-color: #2d2d2d;
+            color: #f3f4f6;
+            border-color: #3e3e3e;
+        }
+        
+        .dark input::placeholder {
+            color: #a1a1aa;
+        }
         .dark .text-gray-700 {
             color: #d1d5db;
         }
