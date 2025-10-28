@@ -63,18 +63,8 @@
                 @csrf
 
                 <!-- Basic Details Card -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
-                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Basic Details
-                        </h3>
-                    </div>
-
-                    <div class="p-6 space-y-4">
+                <x-section-header title="Basic Details" fromColor="from-blue-500" toColor="to-blue-600" icon="info">
+                    <div class="space-y-4">
                         <!-- Name -->
                         <div>
                             <label for="location-name" class="block text-sm font-medium text-gray-700 mb-2">
@@ -105,10 +95,7 @@
                             <select id="timezone" name="timezone" required
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                 <option value="">Select timezone</option>
-                                <!-- UTC -->
                                 <option value="UTC">UTC</option>
-
-                                <!-- North America -->
                                 <optgroup label="North America">
                                     <option value="America/New_York">Eastern Time (New York)</option>
                                     <option value="America/Chicago">Central Time (Chicago)</option>
@@ -122,8 +109,6 @@
                                     <option value="America/Vancouver">Pacific Time (Vancouver)</option>
                                     <option value="America/Mexico_City">Central Time (Mexico City)</option>
                                 </optgroup>
-
-                                <!-- Europe -->
                                 <optgroup label="Europe">
                                     <option value="Europe/London">GMT/BST (London)</option>
                                     <option value="Europe/Paris">CET/CEST (Paris)</option>
@@ -132,8 +117,6 @@
                                     <option value="Europe/Madrid">CET/CEST (Madrid)</option>
                                     <option value="Europe/Amsterdam">CET/CEST (Amsterdam)</option>
                                 </optgroup>
-
-                                <!-- Asia -->
                                 <optgroup label="Asia">
                                     <option value="Asia/Dubai">GST (Dubai)</option>
                                     <option value="Asia/Tokyo">JST (Tokyo)</option>
@@ -141,8 +124,6 @@
                                     <option value="Asia/Hong_Kong">HKT (Hong Kong)</option>
                                     <option value="Asia/Shanghai">CST (Shanghai)</option>
                                 </optgroup>
-
-                                <!-- Australia & Pacific -->
                                 <optgroup label="Australia & Pacific">
                                     <option value="Australia/Sydney">AEST/AEDT (Sydney)</option>
                                     <option value="Australia/Melbourne">AEST/AEDT (Melbourne)</option>
@@ -151,21 +132,12 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </x-section-header>
 
                 <!-- Gateway Card -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
-                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Gateway Settings
-                        </h3>
-                    </div>
-
-                    <div class="p-6 space-y-4">
+                <x-section-header title="Gateway Settings" fromColor="from-indigo-500" toColor="to-indigo-600"
+                    icon="gateway">
+                    <div class="space-y-4">
                         <div>
                             <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
                                 Post URL
@@ -215,22 +187,12 @@
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
                         </div>
                     </div>
-                </div>
+                </x-section-header>
 
                 <!-- Brand Configuration Card -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-4">
-                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
-                                </path>
-                            </svg>
-                            Brand Configuration
-                        </h3>
-                    </div>
-
-                    <div class="p-6 space-y-6">
+                <x-section-header title="Brand Configuration" fromColor="from-purple-500" toColor="to-purple-600"
+                    icon="brand">
+                    <div class="space-y-6">
                         <!-- Logo -->
                         <div>
                             <label for="logo" class="block text-sm font-medium text-gray-700 mb-2">
@@ -388,24 +350,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-section-header>
 
-                <!-- Text & Translation Card (Location Level) -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
-                                    </path>
-                                </svg>
-                                Text & Translation
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="p-6 space-y-4">
+                <!-- Text & Translation Card -->
+                <x-section-header title="Text & Translation" fromColor="from-orange-500" toColor="to-orange-600"
+                    icon="translation">
+                    <div class="space-y-4">
                         <p class="text-sm text-gray-500 mb-4">Configure default text labels and translations for all
                             forms at this location</p>
 
@@ -596,47 +546,38 @@
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
                         </div>
                     </div>
-                </div>
+                </x-section-header>
 
                 <!-- Authentication Profiles Card -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
-                        <div class="flex items-center justify-between">
-                            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                Authentication Profiles
-                            </h3>
-                            <button type="button" onclick="addProfile()"
-                                class="px-4 py-2 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Add Profile
-                            </button>
-                        </div>
+ <x-section-header title="Authentication Profiles" fromColor="from-green-500" toColor="to-green-600" 
+                    icon="profile" buttonClick="addProfile()" buttonName="Add Profile">
+                    <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p class="text-sm text-blue-800 flex items-start gap-2">
+                            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span><strong>At least one profile is required.</strong> Each profile can use either
+                                Open Access or Account-based authentication.</span>
+                        </p>
                     </div>
 
-                    <div class="p-6">
-                        <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                            <p class="text-sm text-blue-800 flex items-start gap-2">
-                                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <span><strong>At least one profile is required.</strong> Each profile can use either
-                                    Open Access or Account-based authentication.</span>
-                            </p>
-                        </div>
-
-                        <!-- Profiles List -->
-                        <div id="profiles-list" class="space-y-4"></div>
+                    <!-- Add Profile Button -->
+                    <div class="mb-4 flex justify-end">
+                        <button type="button" onclick="addProfile()"
+                            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Add Profile
+                        </button>
                     </div>
-                </div>
+
+                    <!-- Profiles List -->
+                    <div id="profiles-list" class="space-y-4"></div>
+                </x-section-header>
 
                 <!-- Form Actions -->
                 <div
@@ -717,14 +658,14 @@
                                 ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                             </h4>
                             ${!isFirst ? `
-                                                                <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            ` : ''}
+                                                <button type="button" onclick="removeProfile(${profileCount})" 
+                                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                    </svg>
+                                                </button>
+                                            ` : ''}
                         </div>
 
                         <!-- Profile Name -->
@@ -922,34 +863,6 @@
                                         </div>
                                         <h5 class="font-semibold text-gray-900 mb-1">Controlled Access</h5>
                                         <p class="text-xs text-gray-600">Requires voucher or password</p>
-                                    </label>
-                                </div>
-                                <div class="access-type-option border-2 border-gray-200 rounded-lg p-4 bg-gray-50 opacity-60 cursor-not-allowed">
-                                    <input type="radio" name="profiles[${profileCount}][access_policy]"
-                                    value="external_authentication" id="profile-${profileCount}-external_authentication" required class="hidden" disabled>
-                                    <label for="profile-${profileCount}-external_authentication" class="cursor-not-allowed flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                                    </svg>
-                                    </div>
-                                    <h5 class="font-semibold text-gray-400 mb-1">External authentication</h5>
-                                    <p class="text-xs text-gray-400">External authentication</p>
-                                    </label>
-                                </div>
-                                <div class="access-type-option border-2 border-gray-200 rounded-lg p-4 bg-gray-50 opacity-60 cursor-not-allowed">
-                                    <input type="radio" name="profiles[${profileCount}][access_policy]"
-                                    value="external_authentication" id="profile-${profileCount}-external_authentication" required class="hidden" disabled>
-                                    <label for="profile-${profileCount}-external_authentication" class="cursor-not-allowed flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                                    </svg>
-                                    </div>
-                                    <h5 class="font-semibold text-gray-400 mb-1">Api</h5>
-                                    <p class="text-xs text-gray-400">Custom Api</p>
                                     </label>
                                 </div>
                             </div>
