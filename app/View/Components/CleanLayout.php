@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class MainLayout extends Component
+class CleanLayout extends Component
 {
     public ?string $title;
     public ?string $bodyClass;
@@ -24,7 +24,7 @@ class MainLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.main', [
+        return view('layouts.clean', [
             'title' => $this->title,
             'bodyClass' => $this->bodyClass,
         ]);
