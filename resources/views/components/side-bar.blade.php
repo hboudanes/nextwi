@@ -138,23 +138,36 @@
     </nav>
 
     <!-- User Profile Footer -->
+    @auth
     <div class="border-t border-gray-200 p-4">
         <div class="flex items-center gap-3 mb-3">
+            @php
+                $user = Auth::user();
+                $name = trim($user->name ?? '');
+                $parts = preg_split('/\s+/', $name);
+                $first = isset($parts[0]) ? mb_substr($parts[0], 0, 1) : '';
+                $second = isset($parts[1]) ? mb_substr($parts[1], 0, 1) : '';
+                $initials = strtoupper($first . $second);
+                if ($initials === '') { $initials = 'U'; }
+            @endphp
             <div
                 class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
-                AD
+                {{ $initials }}
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
-                <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+                <p class="text-sm font-medium text-gray-900 truncate">{{ $user->name }}</p>
+                <p class="text-xs text-gray-500 truncate">{{ $user->email }}</p>
             </div>
-            <button class="p-2 rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                    </path>
-                </svg>
-            </button>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="p-2 rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600" title="Logout">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
+    @endauth
 </aside>
