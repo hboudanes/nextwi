@@ -38,13 +38,13 @@
             <div class="flex items-center gap-3">
                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                    </path>
                 </svg>
                 <span class="font-medium">Dark Mode</span>
             </div>
             <div class="p-1.5 rounded-md text-gray-600">
-                <svg id="sidebar-theme-toggle-dark-icon" class="hidden w-4 h-4" fill="currentColor"
-                    viewBox="0 0 20 20">
+                <svg id="sidebar-theme-toggle-dark-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                 </svg>
                 <svg id="sidebar-theme-toggle-light-icon" class="hidden w-4 h-4" fill="currentColor"
@@ -59,7 +59,7 @@
         <div class="pt-4">
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Business Management</h3>
 
-           
+
 
             <a href="{{ route('businesses.index') }}"
                 class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute(['businesses.index', 'businesses.*']) }} rounded-lg hover:bg-gray-100 transition-colors">
@@ -108,7 +108,7 @@
                 <span class="font-medium">Users</span>
             </a>
 
-            <a href="{{ route('roles_permissions') }}"
+            <a href="{{ route('roles-permissions.index') }}"
                 class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute('roles_permissions') }} rounded-lg hover:bg-gray-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -139,35 +139,40 @@
 
     <!-- User Profile Footer -->
     @auth
-    <div class="border-t border-gray-200 p-4">
-        <div class="flex items-center gap-3 mb-3">
-            @php
-                $user = Auth::user();
-                $name = trim($user->name ?? '');
-                $parts = preg_split('/\s+/', $name);
-                $first = isset($parts[0]) ? mb_substr($parts[0], 0, 1) : '';
-                $second = isset($parts[1]) ? mb_substr($parts[1], 0, 1) : '';
-                $initials = strtoupper($first . $second);
-                if ($initials === '') { $initials = 'U'; }
-            @endphp
-            <div
-                class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
-                {{ $initials }}
+        <div class="border-t border-gray-200 p-4">
+            <div class="flex items-center gap-3 mb-3">
+                @php
+                    $user = Auth::user();
+                    $name = trim($user->name ?? '');
+                    $parts = preg_split('/\s+/', $name);
+                    $first = isset($parts[0]) ? mb_substr($parts[0], 0, 1) : '';
+                    $second = isset($parts[1]) ? mb_substr($parts[1], 0, 1) : '';
+                    $initials = strtoupper($first . $second);
+                    if ($initials === '') {
+                        $initials = 'U';
+                    }
+                @endphp
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
+                    {{ $initials }}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900 truncate">{{ $user->name }}</p>
+                    <p class="text-xs text-gray-500 truncate">{{ $user->email }}</p>
+                </div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="p-2 rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                        title="Logout">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                            </path>
+                        </svg>
+                    </button>
+                </form>
             </div>
-            <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate">{{ $user->name }}</p>
-                <p class="text-xs text-gray-500 truncate">{{ $user->email }}</p>
-            </div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="p-2 rounded-md text-gray-400 hover:bg-gray-100 hover:text-gray-600" title="Logout">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                </button>
-            </form>
         </div>
-    </div>
     @endauth
 </aside>
