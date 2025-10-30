@@ -131,6 +131,55 @@
             .language-content.active {
                 display: block;
             }
+
+            /* Live Preview Styles */
+            .sticky {
+                position: sticky;
+            }
+
+            #phone-screen::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            #phone-screen::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+
+            #phone-screen::-webkit-scrollbar-thumb {
+                background: #888;
+                border-radius: 10px;
+            }
+
+            #phone-screen::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+            #preview-fields > div,
+            #preview-checkboxes > div {
+                animation: slideIn 0.3s ease-in-out;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateX(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            /* Right panel transition */
+            .right-panel-content {
+                display: none;
+                animation: fadeIn 0.3s ease-in;
+            }
+
+            .right-panel-content.active {
+                display: block;
+            }
         </style>
     </x-slot>
 
@@ -173,586 +222,652 @@
                 </div>
             </div>
 
-            <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data"
-                class="space-y-6">
-                @csrf
-
-                <!-- Tab Navigation -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <div class="flex border-b border-gray-200">
-                        <div class="tab-item active flex-1 px-6 py-4 text-center font-semibold" data-tab="basic-info">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Basic Info
-                        </div>
-                        <div class="tab-item flex-1 px-6 py-4 text-center font-semibold" data-tab="brand">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
-                                </path>
-                            </svg>
-                            Brand
-                        </div>
-                        <div class="tab-item flex-1 px-6 py-4 text-center font-semibold" data-tab="auth-profiles">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
-                            </svg>
-                            Auth Profiles
-                        </div>
-                        <div class="tab-item flex-1 px-6 py-4 text-center font-semibold" data-tab="translation">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
-                                </path>
-                            </svg>
-                            Translation
-                        </div>
-                        <div class="tab-item flex-1 px-6 py-4 text-center font-semibold" data-tab="gateway">
-                            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
-                                </path>
-                            </svg>
-                            Gateway
-                        </div>
-                    </div>
-
-                    <!-- Tab Content Sections -->
-                    <div class="p-6">
-
-                        <!-- TAB 1: Basic Info -->
-                        <div class="tab-content active" id="basic-info">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Basic Information</h3>
-                            <div class="space-y-4">
-                                <!-- Name -->
-                                <div>
-                                    <label for="location-name" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Location Name <span class="text-red-500">*</span>
-                                    </label>
-                                    <input type="text" id="location-name" name="name" required
-                                        placeholder="Enter location name"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                </div>
-
-                                <!-- Position (Google Maps) -->
-                                <div>
-                                    <label for="position" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Position (Google Maps) <span class="text-red-500">*</span>
-                                    </label>
-                                    <input type="text" id="position" name="position" required
-                                        placeholder="Search or paste coordinates/address"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    <p class="text-xs text-gray-500 mt-1">Example: 40.7128, -74.0060 or "Times Square,
-                                        New York"</p>
-                                </div>
-
-                                <!-- Timezone -->
-                                <div>
-                                    <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Timezone <span class="text-red-500">*</span>
-                                    </label>
-                                    <select id="timezone" name="timezone" required
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                        <option value="">Select timezone</option>
-                                        <option value="UTC">UTC</option>
-                                        <optgroup label="North America">
-                                            <option value="America/New_York">Eastern Time (New York)</option>
-                                            <option value="America/Chicago">Central Time (Chicago)</option>
-                                            <option value="America/Denver">Mountain Time (Denver)</option>
-                                            <option value="America/Los_Angeles">Pacific Time (Los Angeles)</option>
-                                        </optgroup>
-                                        <optgroup label="Europe">
-                                            <option value="Europe/London">GMT/BST (London)</option>
-                                            <option value="Europe/Paris">CET/CEST (Paris)</option>
-                                            <option value="Europe/Berlin">CET/CEST (Berlin)</option>
-                                        </optgroup>
-                                        <optgroup label="Asia">
-                                            <option value="Asia/Dubai">GST (Dubai)</option>
-                                            <option value="Asia/Tokyo">JST (Tokyo)</option>
-                                            <option value="Asia/Singapore">SGT (Singapore)</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-
-                                <!-- Note -->
-                                <div>
-                                    <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Note
-                                    </label>
-                                    <textarea id="note" name="note" rows="3" placeholder="Add notes..."
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TAB 2: Brand Configuration -->
-                        <div class="tab-content" id="brand">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Brand Configuration</h3>
-                            <div class="space-y-6">
-                                <!-- Logo -->
-                                <div>
-                                    <label for="logo" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Logo
-                                    </label>
-                                    <input type="file" id="logo" name="logo" accept="image/*"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                </div>
-
-                                <!-- Headline & Subheading -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="headline" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Headline
-                                        </label>
-                                        <input type="text" id="headline" name="headline"
-                                            placeholder="Welcome to our WiFi"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-
-                                    <div>
-                                        <label for="subheading" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Subheading
-                                        </label>
-                                        <input type="text" id="subheading" name="subheading"
-                                            placeholder="Connect and enjoy"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-                                </div>
-
-                                <!-- Color Pickers -->
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div>
-                                        <label for="primary-color"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Primary Color
-                                        </label>
-                                        <input type="color" id="primary-color" name="primary_color"
-                                            value="#3B82F6"
-                                            class="w-full h-10 border border-gray-300 rounded cursor-pointer">
-                                    </div>
-
-                                    <div>
-                                        <label for="secondary-color"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Secondary Color
-                                        </label>
-                                        <input type="color" id="secondary-color" name="secondary_color"
-                                            value="#8B5CF6"
-                                            class="w-full h-10 border border-gray-300 rounded cursor-pointer">
-                                    </div>
-
-                                    <div>
-                                        <label for="background-color"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Background Color
-                                        </label>
-                                        <input type="color" id="background-color" name="background_color"
-                                            value="#FFFFFF"
-                                            class="w-full h-10 border border-gray-300 rounded cursor-pointer">
-                                    </div>
-
-                                    <div>
-                                        <label for="text-color" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Text Color
-                                        </label>
-                                        <input type="color" id="text-color" name="text_color" value="#111827"
-                                            class="w-full h-10 border border-gray-300 rounded cursor-pointer">
-                                    </div>
-                                </div>
-
-                                <!-- Background Image & Favicon -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="background-image"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Background Image
-                                        </label>
-                                        <input type="file" id="background-image" name="background_image"
-                                            accept="image/*"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-
-                                    <div>
-                                        <label for="favicon" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Favicon
-                                        </label>
-                                        <input type="file" id="favicon" name="favicon"
-                                            accept="image/x-icon,image/png"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-                                </div>
-
-                                <!-- Background Effects -->
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <label for="background-blur"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Background Blur (0–100%)
-                                        </label>
-                                        <div class="flex items-center gap-3">
-                                            <input type="range" id="background-blur" name="background_blur"
-                                                min="0" max="100" value="0" class="flex-1">
-                                            <input type="number" id="background-blur-value" min="0"
-                                                max="100" value="0"
-                                                class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label for="background-opacity"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Background Opacity (0–100%)
-                                        </label>
-                                        <div class="flex items-center gap-3">
-                                            <input type="range" id="background-opacity" name="background_opacity"
-                                                min="0" max="100" value="100" class="flex-1">
-                                            <input type="number" id="background-opacity-value" min="0"
-                                                max="100" value="100"
-                                                class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label for="background-contrast"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Background Contrast (0–100%)
-                                        </label>
-                                        <div class="flex items-center gap-3">
-                                            <input type="range" id="background-contrast" name="background_contrast"
-                                                min="0" max="100" value="100" class="flex-1">
-                                            <input type="number" id="background-contrast-value" min="0"
-                                                max="100" value="100"
-                                                class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Redirection URL & Font Family -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="redirection-url"
-                                            class="block text-sm font-medium text-gray-700 mb-2">
-                                            Redirection URL
-                                        </label>
-                                        <input type="url" id="redirection-url" name="redirection_url"
-                                            placeholder="https://example.com"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-
-                                    <div>
-                                        <label for="font-family" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Font Family
-                                        </label>
-                                        <select id="font-family" name="font_family"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                            <option value="Inter">Inter</option>
-                                            <option value="Roboto">Roboto</option>
-                                            <option value="Open Sans">Open Sans</option>
-                                            <option value="Lato">Lato</option>
-                                            <option value="Poppins">Poppins</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TAB 3: Authentication Profiles -->
-                        <div class="tab-content" id="auth-profiles">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Authentication Profiles</h3>
-
-                            <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                                <p class="text-sm text-blue-800 flex items-start gap-2">
-                                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+            <!-- Two Column Layout: Form + Preview/Review -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                
+                <!-- Left Column: Form (2/3 width) -->
+                <div class="xl:col-span-2">
+                    <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                        @csrf
+                        
+                        <!-- Tab Navigation -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="flex border-b border-gray-200 overflow-x-auto">
+                                <div class="tab-item active flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="basic-info">
+                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    <span><strong>At least one profile is required.</strong> Each profile can use either
-                                        Open Access or Account-based authentication.</span>
-                                </p>
-                            </div>
-
-                            <!-- Add Profile Button -->
-                            <div class="mb-4 flex justify-end">
-                                <button type="button" onclick="addProfile()"
-                                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    Basic Info
+                                </div>
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="brand">
+                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                                        </path>
                                     </svg>
-                                    Add Profile
-                                </button>
-                            </div>
-
-                            <!-- Profiles List -->
-                            <div id="profiles-list" class="space-y-4"></div>
-
-                            <!-- Review Section (Step 3.2) -->
-                            <div id="profile-review-section" class="mt-6 hidden">
-                                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                                    <h4 class="text-lg font-semibold text-green-900 mb-4">Review All Profiles</h4>
-                                    <div id="profile-review-list" class="space-y-3"></div>
+                                    Brand
+                                </div>
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="auth-profiles">
+                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
+                                    </svg>
+                                    Auth Profiles
+                                </div>
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="translation">
+                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                        </path>
+                                    </svg>
+                                    Translation
+                                </div>
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="gateway">
+                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
+                                        </path>
+                                    </svg>
+                                    Gateway
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- TAB 4: Translation -->
-                        <div class="tab-content" id="translation">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Text & Translation</h3>
-                            <p class="text-sm text-gray-500 mb-4">Configure default text labels and translations for
-                                all forms at this location</p>
+                            <!-- Tab Content Sections -->
+                            <div class="p-6">
 
-                            <!-- Language Selection -->
-                            <div class="mb-6">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h5 class="text-sm font-semibold text-gray-700">Languages</h5>
-                                    <div class="flex items-center gap-2">
-                                        <select id="language-selector"
-                                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                            <option value="en" selected>English (Default)</option>
-                                            <option value="fr">French</option>
-                                            <option value="es">Spanish</option>
-                                            <option value="de">German</option>
-                                            <option value="it">Italian</option>
-                                            <option value="pt">Portuguese</option>
-                                            <option value="ar">Arabic</option>
-                                            <option value="zh">Chinese</option>
-                                            <option value="ja">Japanese</option>
-                                            <option value="ru">Russian</option>
-                                        </select>
-                                        <button type="button" onclick="addLanguage()"
-                                            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                            </svg>
-                                            Add Language
-                                        </button>
+                                <!-- TAB 1: Basic Info -->
+                                <div class="tab-content active" id="basic-info">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Basic Information</h3>
+                                    <div class="space-y-4">
+                                        <!-- Name -->
+                                        <div>
+                                            <label for="location-name" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Location Name <span class="text-red-500">*</span>
+                                            </label>
+                                            <input type="text" id="location-name" name="name" required
+                                                placeholder="Enter location name"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
+
+                                        <!-- Position (Google Maps) -->
+                                        <div>
+                                            <label for="position" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Position (Google Maps) <span class="text-red-500">*</span>
+                                            </label>
+                                            <input type="text" id="position" name="position" required
+                                                placeholder="Search or paste coordinates/address"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <p class="text-xs text-gray-500 mt-1">Example: 40.7128, -74.0060 or "Times Square,
+                                                New York"</p>
+                                        </div>
+
+                                        <!-- Timezone -->
+                                        <div>
+                                            <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Timezone <span class="text-red-500">*</span>
+                                            </label>
+                                            <select id="timezone" name="timezone" required
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                <option value="">Select timezone</option>
+                                                <option value="UTC">UTC</option>
+                                                <optgroup label="North America">
+                                                    <option value="America/New_York">Eastern Time (New York)</option>
+                                                    <option value="America/Chicago">Central Time (Chicago)</option>
+                                                    <option value="America/Denver">Mountain Time (Denver)</option>
+                                                    <option value="America/Los_Angeles">Pacific Time (Los Angeles)</option>
+                                                </optgroup>
+                                                <optgroup label="Europe">
+                                                    <option value="Europe/London">GMT/BST (London)</option>
+                                                    <option value="Europe/Paris">CET/CEST (Paris)</option>
+                                                    <option value="Europe/Berlin">CET/CEST (Berlin)</option>
+                                                </optgroup>
+                                                <optgroup label="Asia">
+                                                    <option value="Asia/Dubai">GST (Dubai)</option>
+                                                    <option value="Asia/Tokyo">JST (Tokyo)</option>
+                                                    <option value="Asia/Singapore">SGT (Singapore)</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+                                        <!-- Note -->
+                                        <div>
+                                            <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Note
+                                            </label>
+                                            <textarea id="note" name="note" rows="3" placeholder="Add notes..."
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- Language tabs -->
-                                <div class="mb-4 border-b border-gray-200">
-                                    <ul id="language-tabs"
-                                        class="flex flex-wrap -mb-px text-sm font-medium text-center">
-                                        <li class="mr-2">
-                                            <a href="#"
-                                                class="language-tab active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600"
-                                                data-lang="en">English</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                <!-- TAB 2: Brand Configuration (Each input in line) -->
+                                <div class="tab-content" id="brand">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Brand Configuration</h3>
+                                    <div class="space-y-4">
+                                        <!-- Logo -->
+                                        <div>
+                                            <label for="logo" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Logo
+                                            </label>
+                                            <input type="file" id="logo" name="logo" accept="image/*"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
 
-                            <!-- Language content panels -->
-                            <div id="language-contents">
-                                <!-- English (default) content -->
-                                <div id="lang-content-en" class="language-content active">
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <!-- Headline -->
                                         <div>
-                                            <label for="text-headline"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="headline" class="block text-sm font-medium text-gray-700 mb-2">
                                                 Headline
                                             </label>
-                                            <input type="text" id="text-headline" name="text_headline"
-                                                placeholder="e.g., Welcome!"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="text" id="headline" name="headline"
+                                                placeholder="Welcome to our WiFi"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                         </div>
 
                                         <!-- Subheading -->
                                         <div>
-                                            <label for="text-subheading"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="subheading" class="block text-sm font-medium text-gray-700 mb-2">
                                                 Subheading
                                             </label>
-                                            <input type="text" id="text-subheading" name="text_subheading"
-                                                placeholder="e.g., Connect to WiFi"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="text" id="subheading" name="subheading"
+                                                placeholder="Connect and enjoy"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                         </div>
 
-                                        <!-- First Name -->
+                                        <!-- Primary Color -->
                                         <div>
-                                            <label for="text-first-name"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                First Name
+                                            <label for="primary-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Primary Color
                                             </label>
-                                            <input type="text" id="text-first-name" name="text_first_name"
-                                                placeholder="e.g., First Name"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="color" id="primary-color" name="primary_color"
+                                                value="#3B82F6"
+                                                class="w-full h-12 border border-gray-300 rounded-lg cursor-pointer">
                                         </div>
 
-                                        <!-- First Name Placeholder -->
+                                        <!-- Secondary Color -->
                                         <div>
-                                            <label for="text-first-name-placeholder"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                First Name Placeholder
+                                            <label for="secondary-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Secondary Color
                                             </label>
-                                            <input type="text" id="text-first-name-placeholder"
-                                                name="text_first_name_placeholder"
-                                                placeholder="e.g., Enter first name"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="color" id="secondary-color" name="secondary_color"
+                                                value="#8B5CF6"
+                                                class="w-full h-12 border border-gray-300 rounded-lg cursor-pointer">
                                         </div>
 
-                                        <!-- Email -->
+                                        <!-- Background Color -->
                                         <div>
-                                            <label for="text-email"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                Email
+                                            <label for="background-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Background Color
                                             </label>
-                                            <input type="text" id="text-email" name="text_email"
-                                                placeholder="e.g., Email"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="color" id="background-color" name="background_color"
+                                                value="#FFFFFF"
+                                                class="w-full h-12 border border-gray-300 rounded-lg cursor-pointer">
                                         </div>
 
-                                        <!-- Email Placeholder -->
+                                        <!-- Text Color -->
                                         <div>
-                                            <label for="text-email-placeholder"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                Email Placeholder
+                                            <label for="text-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Text Color
                                             </label>
-                                            <input type="text" id="text-email-placeholder"
-                                                name="text_email_placeholder" placeholder="e.g., Enter email"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="color" id="text-color" name="text_color" value="#111827"
+                                                class="w-full h-12 border border-gray-300 rounded-lg cursor-pointer">
                                         </div>
 
-                                        <!-- Mobile -->
+                                        <!-- Background Image -->
                                         <div>
-                                            <label for="text-mobile"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                Mobile
+                                            <label for="background-image" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Background Image
                                             </label>
-                                            <input type="text" id="text-mobile" name="text_mobile"
-                                                placeholder="e.g., Mobile"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="file" id="background-image" name="background_image"
+                                                accept="image/*"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                         </div>
 
-                                        <!-- Connect Button -->
+                                        <!-- Favicon -->
                                         <div>
-                                            <label for="text-connect-button"
-                                                class="block text-sm font-medium text-gray-700 mb-2">
-                                                Connect Button
+                                            <label for="favicon" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Favicon
                                             </label>
-                                            <input type="text" id="text-connect-button" name="text_connect_button"
-                                                placeholder="e.g., Connect"
-                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <input type="file" id="favicon" name="favicon"
+                                                accept="image/x-icon,image/png"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
+
+                                        <!-- Background Blur -->
+                                        <div>
+                                            <label for="background-blur" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Background Blur (0–100%)
+                                            </label>
+                                            <div class="flex items-center gap-3">
+                                                <input type="range" id="background-blur" name="background_blur"
+                                                    min="0" max="100" value="0" class="flex-1">
+                                                <input type="number" id="background-blur-value" min="0"
+                                                    max="100" value="0"
+                                                    class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                            </div>
+                                        </div>
+
+                                        <!-- Background Opacity -->
+                                        <div>
+                                            <label for="background-opacity" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Background Opacity (0–100%)
+                                            </label>
+                                            <div class="flex items-center gap-3">
+                                                <input type="range" id="background-opacity" name="background_opacity"
+                                                    min="0" max="100" value="100" class="flex-1">
+                                                <input type="number" id="background-opacity-value" min="0"
+                                                    max="100" value="100"
+                                                    class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                            </div>
+                                        </div>
+
+                                        <!-- Background Contrast -->
+                                        <div>
+                                            <label for="background-contrast" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Background Contrast (0–100%)
+                                            </label>
+                                            <div class="flex items-center gap-3">
+                                                <input type="range" id="background-contrast" name="background_contrast"
+                                                    min="0" max="100" value="100" class="flex-1">
+                                                <input type="number" id="background-contrast-value" min="0"
+                                                    max="100" value="100"
+                                                    class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                            </div>
+                                        </div>
+
+                                        <!-- Redirection URL -->
+                                        <div>
+                                            <label for="redirection-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Redirection URL
+                                            </label>
+                                            <input type="url" id="redirection-url" name="redirection_url"
+                                                placeholder="https://example.com"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
+
+                                        <!-- Font Family -->
+                                        <div>
+                                            <label for="font-family" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Font Family
+                                            </label>
+                                            <select id="font-family" name="font_family"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                <option value="Inter">Inter</option>
+                                                <option value="Roboto">Roboto</option>
+                                                <option value="Open Sans">Open Sans</option>
+                                                <option value="Lato">Lato</option>
+                                                <option value="Poppins">Poppins</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Validation Messages -->
-                            <div class="border-t border-gray-200 pt-4 mt-4">
-                                <h5 class="text-sm font-semibold text-gray-700 mb-3">Validation Messages</h5>
-                                <textarea name="validation_messages" rows="5"
-                                    placeholder="Enter validation error messages (JSON format or plain text)..."
-                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                                <!-- TAB 3: Authentication Profiles -->
+                                <div class="tab-content" id="auth-profiles">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Authentication Profiles</h3>
+
+                                    <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                        <p class="text-sm text-blue-800 flex items-start gap-2">
+                                            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <span><strong>At least one profile is required.</strong> Each profile can use either
+                                                Open Access or Account-based authentication.</span>
+                                        </p>
+                                    </div>
+
+                                    <!-- Add Profile Button -->
+                                    <div class="mb-4 flex justify-end">
+                                        <button type="button" onclick="addProfile()"
+                                            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            </svg>
+                                            Add Profile
+                                        </button>
+                                    </div>
+
+                                    <!-- Profiles List -->
+                                    <div id="profiles-list" class="space-y-4"></div>
+                                </div>
+
+                                <!-- TAB 4: Translation -->
+                                <div class="tab-content" id="translation">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Text & Translation</h3>
+                                    <p class="text-sm text-gray-500 mb-4">Configure default text labels and translations for
+                                        all forms at this location</p>
+
+                                    <!-- Language Selection -->
+                                    <div class="mb-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <h5 class="text-sm font-semibold text-gray-700">Languages</h5>
+                                            <div class="flex items-center gap-2">
+                                                <select id="language-selector"
+                                                    class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                                    <option value="en" selected>English (Default)</option>
+                                                    <option value="fr">French</option>
+                                                    <option value="es">Spanish</option>
+                                                    <option value="de">German</option>
+                                                    <option value="it">Italian</option>
+                                                    <option value="pt">Portuguese</option>
+                                                    <option value="ar">Arabic</option>
+                                                    <option value="zh">Chinese</option>
+                                                    <option value="ja">Japanese</option>
+                                                    <option value="ru">Russian</option>
+                                                </select>
+                                                <button type="button" onclick="addLanguage()"
+                                                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2 text-sm font-semibold">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                                    </svg>
+                                                    Add Language
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Language tabs -->
+                                        <div class="mb-4 border-b border-gray-200">
+                                            <ul id="language-tabs"
+                                                class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                                                <li class="mr-2">
+                                                    <a href="#"
+                                                        class="language-tab active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600"
+                                                        data-lang="en">English</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Language content panels -->
+                                    <div id="language-contents">
+                                        <!-- English (default) content -->
+                                        <div id="lang-content-en" class="language-content active">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <!-- Headline -->
+                                                <div>
+                                                    <label for="text-headline"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Headline
+                                                    </label>
+                                                    <input type="text" id="text-headline" name="text_headline"
+                                                        placeholder="e.g., Welcome!"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- Subheading -->
+                                                <div>
+                                                    <label for="text-subheading"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Subheading
+                                                    </label>
+                                                    <input type="text" id="text-subheading" name="text_subheading"
+                                                        placeholder="e.g., Connect to WiFi"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- First Name -->
+                                                <div>
+                                                    <label for="text-first-name"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        First Name
+                                                    </label>
+                                                    <input type="text" id="text-first-name" name="text_first_name"
+                                                        placeholder="e.g., First Name"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- First Name Placeholder -->
+                                                <div>
+                                                    <label for="text-first-name-placeholder"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        First Name Placeholder
+                                                    </label>
+                                                    <input type="text" id="text-first-name-placeholder"
+                                                        name="text_first_name_placeholder"
+                                                        placeholder="e.g., Enter first name"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- Email -->
+                                                <div>
+                                                    <label for="text-email"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Email
+                                                    </label>
+                                                    <input type="text" id="text-email" name="text_email"
+                                                        placeholder="e.g., Email"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- Email Placeholder -->
+                                                <div>
+                                                    <label for="text-email-placeholder"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Email Placeholder
+                                                    </label>
+                                                    <input type="text" id="text-email-placeholder"
+                                                        name="text_email_placeholder" placeholder="e.g., Enter email"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- Mobile -->
+                                                <div>
+                                                    <label for="text-mobile"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Mobile
+                                                    </label>
+                                                    <input type="text" id="text-mobile" name="text_mobile"
+                                                        placeholder="e.g., Mobile"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+
+                                                <!-- Connect Button -->
+                                                <div>
+                                                    <label for="text-connect-button"
+                                                        class="block text-sm font-medium text-gray-700 mb-2">
+                                                        Connect Button
+                                                    </label>
+                                                    <input type="text" id="text-connect-button" name="text_connect_button"
+                                                        placeholder="e.g., Connect"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Validation Messages -->
+                                    <div class="border-t border-gray-200 pt-4 mt-4">
+                                        <h5 class="text-sm font-semibold text-gray-700 mb-3">Validation Messages</h5>
+                                        <textarea name="validation_messages" rows="5"
+                                            placeholder="Enter validation error messages (JSON format or plain text)..."
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm font-mono focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- TAB 5: Gateway -->
+                                <div class="tab-content" id="gateway">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-4">Gateway Settings</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Post URL
+                                            </label>
+                                            <input type="url" id="post-url" name="post_url"
+                                                placeholder="https://example.com/api/auth"
+                                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                        </div>
+
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div>
+                                                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                                                    Username
+                                                </label>
+                                                <input type="text" id="username" name="username"
+                                                    placeholder="Gateway username"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            </div>
+
+                                            <div>
+                                                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                                    Password
+                                                </label>
+                                                <input type="password" id="password" name="password"
+                                                    placeholder="Gateway password"
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            </div>
+
+                                            <div>
+                                                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                                                    Type <span class="text-red-500">*</span>
+                                                </label>
+                                                <select id="type" name="type" required
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                                    <option value="">Select type</option>
+                                                    <option value="mikrotik">MikroTik</option>
+                                                    <option value="unifi">Ubiquiti UniFi</option>
+                                                    <option value="cisco">Cisco</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
-                        <!-- TAB 5: Gateway -->
-                        <div class="tab-content" id="gateway">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Gateway Settings</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Post URL
-                                    </label>
-                                    <input type="url" id="post-url" name="post_url"
-                                        placeholder="https://example.com/api/auth"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                        <!-- Navigation Buttons -->
+                        <div
+                            class="flex items-center justify-between bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <button type="button" id="prev-btn" onclick="previousTab()"
+                                class="px-5 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled>
+                                <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                                Previous
+                            </button>
+
+                            <div class="flex gap-3">
+                                <a href="{{ route('locations.index') }}"
+                                    class="px-5 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                    Cancel
+                                </a>
+
+                                <button type="button" id="next-btn" onclick="nextTab()"
+                                    class="px-5 py-2.5 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                                    Next
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+
+                                <button type="submit" id="submit-btn" style="display: none;"
+                                    class="px-5 py-2.5 text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7">
+                                        </path>
+                                    </svg>
+                                    <span>Create Location</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Right Column: Dynamic Panel (Live Preview OR Profile Review) -->
+                <div class="xl:col-span-1">
+                    <div class="sticky top-6">
+                        
+                        <!-- Live Preview Panel (Show when on Brand tab) -->
+                        <div id="live-preview-panel" class="right-panel-content">
+                            <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
+                                <h3 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Live Preview
+                                </h3>
+                                
+                                <!-- Mobile Phone Frame -->
+                                <div class="mx-auto" style="width: 320px;">
+                                    <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] shadow-xl">
+                                        <!-- Phone notch -->
+                                        <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                                        <!-- Phone buttons -->
+                                        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+                                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                                        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                                        
+                                        <!-- Phone screen -->
+                                        <div id="phone-screen" class="rounded-[2rem] overflow-y-auto h-full w-full bg-white">
+                                            <div id="preview-content" class="p-6 space-y-4">
+                                                <!-- Dynamic Preview Content -->
+                                                <div class="text-center mb-6">
+                                                    <img id="preview-logo" src="" alt="Logo" class="mx-auto mb-4 h-16 w-auto hidden">
+                                                    <h1 id="preview-headline" class="text-2xl font-bold text-gray-900 mb-2">Welcome!</h1>
+                                                    <p id="preview-subheading" class="text-sm text-gray-600">Connect to WiFi</p>
+                                                </div>
+                                                
+                                                <!-- Preview Form Fields -->
+                                                <div id="preview-fields" class="space-y-3">
+                                                    <!-- Fields will be dynamically added here -->
+                                                </div>
+                                                
+                                                <!-- Preview Checkboxes -->
+                                                <div id="preview-checkboxes" class="space-y-2">
+                                                    <!-- Checkboxes will be dynamically added here -->
+                                                </div>
+                                                
+                                                <!-- Connect Button -->
+                                                <button type="button" id="preview-button" class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-semibold text-sm">
+                                                    Connect
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div>
-                                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Username
-                                        </label>
-                                        <input type="text" id="username" name="username"
-                                            placeholder="Gateway username"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-
-                                    <div>
-                                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Password
-                                        </label>
-                                        <input type="password" id="password" name="password"
-                                            placeholder="Gateway password"
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                    </div>
-
-                                    <div>
-                                        <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
-                                            Type <span class="text-red-500">*</span>
-                                        </label>
-                                        <select id="type" name="type" required
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                            <option value="">Select type</option>
-                                            <option value="mikrotik">MikroTik</option>
-                                            <option value="unifi">Ubiquiti UniFi</option>
-                                            <option value="cisco">Cisco</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
+                                <p class="text-xs text-gray-500 text-center mt-4">Preview updates as you type</p>
                             </div>
                         </div>
 
+                        <!-- Profile Review Panel (Show when on Auth Profiles tab) -->
+                        <div id="profile-review-panel" class="right-panel-content">
+                            <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
+                                <h3 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    Review All Profiles
+                                </h3>
+                                
+                                <div id="profile-review-list" class="space-y-3 max-h-[700px] overflow-y-auto">
+                                    <!-- Profile review cards will be added here dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
-
-                <!-- Navigation Buttons -->
-                <div
-                    class="flex items-center justify-between bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                    <button type="button" id="prev-btn" onclick="previousTab()"
-                        class="px-5 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled>
-                        <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                        Previous
-                    </button>
-
-                    <div class="flex gap-3">
-                        <a href="{{ route('locations.index') }}"
-                            class="px-5 py-2.5 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                            Cancel
-                        </a>
-
-                        <button type="button" id="next-btn" onclick="nextTab()"
-                            class="px-5 py-2.5 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-                            Next
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-
-                        <button type="submit" id="submit-btn" style="display: none;"
-                            class="px-5 py-2.5 text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7">
-                                </path>
-                            </svg>
-                            <span>Create Location</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
+                
+            </div>
         </div>
     </main>
 
@@ -767,6 +882,8 @@
                 addProfile(); // Auto-add first profile
                 showTab(currentTab);
                 addTabEventListeners();
+                initializePreviewUpdates();
+                updateRightPanel(); // Initialize right panel
 
                 bindSliderToNumber('background-blur', 'background-blur-value', 0);
                 bindSliderToNumber('background-opacity', 'background-opacity-value', 100);
@@ -783,6 +900,7 @@
                 document.addEventListener('input', function(e) {
                     if (e.target.closest('#profiles-list')) {
                         updateProfileReview();
+                        updatePreviewFields();
                     }
                 });
 
@@ -790,9 +908,145 @@
                 document.addEventListener('change', function(e) {
                     if (e.target.closest('#profiles-list')) {
                         updateProfileReview();
+                        updatePreviewFields();
                     }
                 });
             });
+
+            // Update right panel based on current tab
+            function updateRightPanel() {
+                const livePreview = document.getElementById('live-preview-panel');
+                const profileReview = document.getElementById('profile-review-panel');
+                
+                // Hide all panels first
+                livePreview.classList.remove('active');
+                profileReview.classList.remove('active');
+                
+                // Show appropriate panel based on current tab
+                if (currentTab === 1) { // Brand tab
+                    livePreview.classList.add('active');
+                } else if (currentTab === 2) { // Auth Profiles tab
+                    profileReview.classList.add('active');
+                    updateProfileReview();
+                }
+            }
+
+            // Live Preview Update Functions
+            function initializePreviewUpdates() {
+                // Brand Configuration Updates
+                document.getElementById('headline')?.addEventListener('input', function() {
+                    document.getElementById('preview-headline').textContent = this.value || 'Welcome!';
+                });
+                
+                document.getElementById('subheading')?.addEventListener('input', function() {
+                    document.getElementById('preview-subheading').textContent = this.value || 'Connect to WiFi';
+                });
+                
+                document.getElementById('logo')?.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const logo = document.getElementById('preview-logo');
+                            logo.src = e.target.result;
+                            logo.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                
+                // Color Updates
+                document.getElementById('primary-color')?.addEventListener('input', function() {
+                    document.getElementById('preview-button').style.backgroundColor = this.value;
+                });
+                
+                document.getElementById('background-color')?.addEventListener('input', function() {
+                    document.getElementById('phone-screen').style.backgroundColor = this.value;
+                });
+                
+                document.getElementById('text-color')?.addEventListener('input', function() {
+                    document.getElementById('preview-content').style.color = this.value;
+                });
+                
+                // Background Image
+                document.getElementById('background-image')?.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.getElementById('phone-screen').style.backgroundImage = `url(${e.target.result})`;
+                            document.getElementById('phone-screen').style.backgroundSize = 'cover';
+                            document.getElementById('phone-screen').style.backgroundPosition = 'center';
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+                
+                // Translation Updates
+                document.getElementById('text-connect-button')?.addEventListener('input', function() {
+                    document.getElementById('preview-button').textContent = this.value || 'Connect';
+                });
+            }
+
+            function updatePreviewFields() {
+                const previewFields = document.getElementById('preview-fields');
+                const previewCheckboxes = document.getElementById('preview-checkboxes');
+                
+                if (!previewFields || !previewCheckboxes) return;
+                
+                // Clear existing preview fields
+                previewFields.innerHTML = '';
+                previewCheckboxes.innerHTML = '';
+                
+                // Get the first active profile
+                for (let i = 1; i <= profileCount; i++) {
+                    const profile = document.getElementById(`profile-${i}`);
+                    if (!profile) continue;
+                    
+                    // Get enabled fields
+                    const fields = ['firstname', 'lastname', 'gender', 'birthday', 'email', 'mobile'];
+                    const fieldLabels = {
+                        'firstname': 'First Name',
+                        'lastname': 'Last Name',
+                        'gender': 'Gender',
+                        'birthday': 'Birthday',
+                        'email': 'Email',
+                        'mobile': 'Mobile'
+                    };
+                    
+                    fields.forEach(field => {
+                        const checkbox = profile.querySelector(`input[name="profiles[${i}][${field}][enabled]"]`);
+                        if (checkbox && checkbox.checked) {
+                            const fieldDiv = document.createElement('div');
+                            fieldDiv.innerHTML = `
+                                <label class="block text-xs font-medium text-gray-700 mb-1">${fieldLabels[field]}</label>
+                                <input type="text" placeholder="Enter ${fieldLabels[field].toLowerCase()}" 
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            `;
+                            previewFields.appendChild(fieldDiv);
+                        }
+                    });
+                    
+                    // Get enabled checkboxes
+                    for (let j = 1; j <= 3; j++) {
+                        const checkboxEnabled = profile.querySelector(`input[name="profiles[${i}][checkbox${j}][enabled]"]`);
+                        if (checkboxEnabled && checkboxEnabled.checked) {
+                            const checkboxLabel = profile.querySelector(`input[name="profiles[${i}][checkbox${j}][label]"]`)?.value;
+                            const checkboxNames = ['Terms & Conditions', 'Data Privacy', 'Marketing Consent'];
+                            
+                            const checkboxDiv = document.createElement('div');
+                            checkboxDiv.className = 'flex items-start gap-2';
+                            checkboxDiv.innerHTML = `
+                                <input type="checkbox" class="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label class="text-xs text-gray-700">${checkboxLabel || checkboxNames[j-1]}</label>
+                            `;
+                            previewCheckboxes.appendChild(checkboxDiv);
+                        }
+                    }
+                    
+                    break; // Only show first profile in preview
+                }
+            }
 
             // Tab navigation functions
             function showTab(n) {
@@ -839,10 +1093,8 @@
                     document.getElementById('submit-btn').style.display = 'none';
                 }
 
-                // ALWAYS update profile review when entering Auth Profiles tab
-                if (n === 2) {
-                    updateProfileReview();
-                }
+                // Update right panel based on current tab
+                updateRightPanel();
             }
 
             function nextTab() {
@@ -859,10 +1111,9 @@
 
             // Enhanced profile review with more details
             function updateProfileReview() {
-                const reviewSection = document.getElementById('profile-review-section');
                 const reviewList = document.getElementById('profile-review-list');
 
-                if (!reviewSection || !reviewList) return;
+                if (!reviewList) return;
 
                 // Count active profiles
                 let activeProfileCount = 0;
@@ -874,11 +1125,10 @@
                 }
 
                 if (activeProfileCount === 0) {
-                    reviewSection.classList.add('hidden');
+                    reviewList.innerHTML = '<p class="text-sm text-gray-500 text-center py-8">No profiles added yet. Add a profile to see the review.</p>';
                     return;
                 }
 
-                reviewSection.classList.remove('hidden');
                 reviewList.innerHTML = '';
 
                 for (let i = 1; i <= profileCount; i++) {
@@ -959,95 +1209,67 @@
 
                     // Create review card
                     const reviewItem = document.createElement('div');
-                    reviewItem.className =
-                        'bg-white p-5 rounded-lg border-2 border-gray-200 hover:border-blue-300 transition-all';
+                    reviewItem.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all';
                     reviewItem.innerHTML = `
-                    <div class="space-y-4">
+                    <div class="space-y-3">
                         <!-- Header -->
                         <div class="flex items-start justify-between">
                             <div class="flex-1">
                                 <div class="flex items-center gap-2 mb-1">
-                                    <h5 class="text-lg font-bold text-gray-900">${profileName}</h5>
-                                    ${i === 1 ? '<span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-semibold">Required</span>' : ''}
+                                    <h5 class="text-sm font-bold text-gray-900">${profileName}</h5>
+                                    ${i === 1 ? '<span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full font-semibold">Required</span>' : ''}
                                 </div>
-                                <p class="text-sm text-gray-600">${profileTitle}</p>
+                                <p class="text-xs text-gray-600">${profileTitle}</p>
                             </div>
-                            <button type="button" onclick="editProfile(${i})" 
-                                class="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                </svg>
-                                Edit
-                            </button>
                         </div>
 
                         <!-- Access Policy -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-gray-50 p-3 rounded-lg">
-                                <div class="flex items-center gap-2 mb-1">
-                                    ${accessPolicy === 'open' 
-                                        ? '<svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>'
-                                        : accessPolicy === 'account'
-                                        ? '<svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>'
-                                        : '<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>'
-                                    }
-                                    <span class="text-xs font-semibold text-gray-600 uppercase">Access Policy</span>
-                                </div>
-                                <p class="text-sm font-medium ${accessPolicy === 'open' ? 'text-green-700' : accessPolicy === 'account' ? 'text-purple-700' : 'text-gray-700'}">
-                                    ${accessPolicy === 'open' ? 'Open Access' : accessPolicy === 'account' ? 'Controlled Access' : 'Not Selected'}
-                                </p>
-                                ${policySettings ? `<p class="text-xs text-gray-600 mt-1">${policySettings}</p>` : ''}
+                        <div class="bg-white p-2 rounded border border-gray-200">
+                            <div class="flex items-center gap-2 mb-1">
+                                ${accessPolicy === 'open' 
+                                    ? '<svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>'
+                                    : accessPolicy === 'account'
+                                    ? '<svg class="w-3 h-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>'
+                                    : '<svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>'
+                                }
+                                <span class="text-xs font-semibold text-gray-600">Access Policy</span>
                             </div>
-
-                            <div class="bg-gray-50 p-3 rounded-lg">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    <span class="text-xs font-semibold text-gray-600 uppercase">Login Fields</span>
-                                </div>
-                                <p class="text-sm text-gray-700">
-                                    ${enabledFields.length > 0 ? enabledFields.join(', ') : 'None selected'}
-                                </p>
-                            </div>
+                            <p class="text-xs ${accessPolicy === 'open' ? 'text-green-700' : accessPolicy === 'account' ? 'text-purple-700' : 'text-gray-700'}">
+                                ${accessPolicy === 'open' ? 'Open Access' : accessPolicy === 'account' ? 'Controlled Access' : 'Not Selected'}
+                            </p>
+                            ${policySettings ? `<p class="text-xs text-gray-500 mt-1">${policySettings}</p>` : ''}
                         </div>
+
+                        <!-- Login Fields -->
+                        ${enabledFields.length > 0 ? `
+                        <div class="bg-blue-50 p-2 rounded border border-blue-200">
+                            <p class="text-xs font-semibold text-blue-800 mb-1">Login Fields</p>
+                            <p class="text-xs text-blue-700">${enabledFields.join(', ')}</p>
+                        </div>
+                        ` : ''}
 
                         <!-- Verifications -->
                         ${verifications.length > 0 ? `
-                                                        <div class="bg-amber-50 border border-amber-200 p-3 rounded-lg">
-                                                            <div class="flex items-center gap-2 mb-1">
-                                                                <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                                                </svg>
-                                                                <span class="text-xs font-semibold text-amber-800 uppercase">Verification Enabled</span>
-                                                            </div>
-                                                            <p class="text-sm text-amber-700">${verifications.join(', ')}</p>
-                                                        </div>
-                                                        ` : ''}
+                        <div class="bg-amber-50 p-2 rounded border border-amber-200">
+                            <p class="text-xs font-semibold text-amber-800 mb-1">Verification</p>
+                            <p class="text-xs text-amber-700">${verifications.join(', ')}</p>
+                        </div>
+                        ` : ''}
 
                         <!-- Checkboxes -->
                         ${enabledCheckboxes.length > 0 ? `
-                                                        <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg">
-                                                            <div class="flex items-center gap-2 mb-2">
-                                                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                                                                </svg>
-                                                                <span class="text-xs font-semibold text-blue-800 uppercase">Checkboxes Configured</span>
-                                                            </div>
-                                                            <ul class="space-y-1">
-                                                                ${enabledCheckboxes.map(cb => `
-                                    <li class="text-sm text-blue-700 flex items-center gap-2">
-                                        <span class="w-2 h-2 rounded-full ${cb.required ? 'bg-red-500' : 'bg-blue-400'}"></span>
-                                        ${cb.label} ${cb.required ? '<span class="text-xs text-red-600 font-semibold">(Required)</span>' : '<span class="text-xs text-gray-600">(Optional)</span>'}
+                        <div class="bg-green-50 p-2 rounded border border-green-200">
+                            <p class="text-xs font-semibold text-green-800 mb-1">Checkboxes</p>
+                            <ul class="space-y-1">
+                                ${enabledCheckboxes.map(cb => `
+                                    <li class="text-xs text-green-700 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full ${cb.required ? 'bg-red-500' : 'bg-green-400'}"></span>
+                                        ${cb.label} ${cb.required ? '<span class="text-red-600">(Req)</span>' : ''}
                                     </li>
                                 `).join('')}
-                                                            </ul>
-                                                        </div>
-                                                        ` : ''}
+                            </ul>
+                        </div>
+                        ` : ''}
                     </div>
                 `;
                     reviewList.appendChild(reviewItem);
@@ -1110,14 +1332,14 @@
                             ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                         </h4>
                         ${!isFirst ? `
-                                                            <button type="button" onclick="removeProfile(${profileCount})" 
-                                                                class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                                </svg>
-                                                            </button>
-                                                        ` : ''}
+                        <button type="button" onclick="removeProfile(${profileCount})" 
+                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                        ` : ''}
                     </div>
 
                     <!-- Profile Name -->
@@ -1317,34 +1539,6 @@
                                     <p class="text-xs text-gray-600">Requires voucher or password</p>
                                 </label>
                             </div>
-                        <div class="access-type-option border-2 border-gray-200 rounded-lg p-4 bg-gray-50 opacity-60 cursor-not-allowed">
-                                    <input type="radio" name="profiles[${profileCount}][access_policy]"
-                                    value="external_authentication" id="profile-${profileCount}-external_authentication" required class="hidden" disabled>
-                                    <label for="profile-${profileCount}-external_authentication" class="cursor-not-allowed flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                                    </svg>
-                                    </div>
-                                    <h5 class="font-semibold text-gray-400 mb-1">External authentication</h5>
-                                    <p class="text-xs text-gray-400">External authentication</p>
-                                    </label>
-                                </div>
-                                <div class="access-type-option border-2 border-gray-200 rounded-lg p-4 bg-gray-50 opacity-60 cursor-not-allowed">
-                                    <input type="radio" name="profiles[${profileCount}][access_policy]"
-                                    value="external_authentication" id="profile-${profileCount}-external_authentication" required class="hidden" disabled>
-                                    <label for="profile-${profileCount}-external_authentication" class="cursor-not-allowed flex flex-col items-center text-center">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
-                                    </svg>
-                                    </div>
-                                    <h5 class="font-semibold text-gray-400 mb-1">Api</h5>
-                                    <p class="text-xs text-gray-400">Custom Api</p>
-                                    </label>
-                                </div>
                         </div>
 
                         <!-- Open Access Settings -->
@@ -1457,6 +1651,7 @@
 
                 // Update review immediately after adding profile
                 updateProfileReview();
+                updatePreviewFields();
             }
 
             function generateCheckboxFields(profileId) {
@@ -1613,6 +1808,7 @@
                     if (confirm('Are you sure you want to remove this profile?')) {
                         profile.remove();
                         updateProfileReview();
+                        updatePreviewFields();
                     }
                 }
             }

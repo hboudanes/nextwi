@@ -43,6 +43,11 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
         Route::post('/permissions/bulk-update', [RolePermissionController::class, 'bulkUpdatePermissions'])->name('permissions.bulk-update');
     });
 });
+// Test Routes
+Route::get('/test/form-components', function () {
+    return view('test.form-components');
+})->name('test.form-components');
+
 // Settings Route
 Route::get('/dashboard', function () {
     return view('dashboard');
