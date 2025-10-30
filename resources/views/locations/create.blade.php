@@ -137,6 +137,17 @@
                 position: sticky;
             }
 
+            /* Keep Live Preview in light mode, unaffected by dark theme */
+            html.dark #live-preview-panel,
+            .dark #live-preview-panel {
+                color-scheme: light;
+                background-color: #ffffff;
+            }
+            html.dark #live-preview-panel *,
+            .dark #live-preview-panel * {
+                color-scheme: light;
+            }
+
             #phone-screen::-webkit-scrollbar {
                 width: 4px;
             }
@@ -895,7 +906,7 @@
                                             <!-- Background layer for image/color with effects -->
                                             <div id="background-layer" class="absolute inset-0 pointer-events-none"
                                                 style="background-color: #ffffff;"></div>
-                                            <div id="preview-content" class="relative z-10 p-6 space-y-4">
+                                            <div id="preview-content" class="relative z-10 p-6 space-y-4 text-black">
                                                 <!-- Dynamic Preview Content -->
                                                 <div class="text-center mb-6">
                                                     <img id="preview-logo" src="" alt="Logo"
