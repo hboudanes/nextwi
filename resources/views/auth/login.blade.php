@@ -12,10 +12,11 @@
     </button>
 
     <div class="w-full max-w-md px-4">
+        <img src="{{ asset('logo.webp') }}" alt="Nextwi Logo" class="h-16 w-auto mx-auto mb-6">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div class="px-6 py-5 border-b border-gray-200 bg-white">
-                <h1 class="text-lg font-semibold text-gray-900">Sign in</h1>
-                <p class="text-sm text-gray-500">Access your account using your credentials</p>
+            <div class="px-6 py-5 border-b border-gray-200 bg-white ">
+                <h1 class="text-lg font-bold text-gray-900">Sign in</h1>
+                                <h4 class="  text-gray-900">Start Managing Your Wi‑Fi</h4>
             </div>
 
             <div class="px-6 py-5">
@@ -60,6 +61,14 @@
                             class="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
                         {{ __('Log in') }}
                     </button>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-600">Don't have an account? 
+                            <a href="https://nextwi.co/" class="text-blue-600 hover:text-blue-700 font-medium">
+                                Register
+                            </a>
+                        </p>
+                    </div>
                 </form>
             </div>
         </div>
