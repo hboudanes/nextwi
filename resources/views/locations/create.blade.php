@@ -155,8 +155,8 @@
                 background: #555;
             }
 
-            #preview-fields > div,
-            #preview-checkboxes > div {
+            #preview-fields>div,
+            #preview-checkboxes>div {
                 animation: slideIn 0.3s ease-in-out;
             }
 
@@ -165,6 +165,7 @@
                     opacity: 0;
                     transform: translateX(-10px);
                 }
+
                 to {
                     opacity: 1;
                     transform: translateX(0);
@@ -223,17 +224,19 @@
             </div>
 
             <!-- Two Column Layout: Form + Preview/Review -->
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                
+            <div id="two-col-grid" class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
                 <!-- Left Column: Form (2/3 width) -->
-                <div class="xl:col-span-2">
-                    <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <div id="left-form-column" class="xl:col-span-3">
+                    <form action="{{ route('locations.store') }}" method="POST" enctype="multipart/form-data"
+                        class="space-y-6">
                         @csrf
-                        
+
                         <!-- Tab Navigation -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                             <div class="flex border-b border-gray-200 overflow-x-auto">
-                                <div class="tab-item active flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="basic-info">
+                                <div class="tab-item active flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap"
+                                    data-tab="basic-info">
                                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -241,7 +244,8 @@
                                     </svg>
                                     Basic Info
                                 </div>
-                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="brand">
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap"
+                                    data-tab="brand">
                                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -250,7 +254,8 @@
                                     </svg>
                                     Brand
                                 </div>
-                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="auth-profiles">
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap"
+                                    data-tab="auth-profiles">
                                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -259,7 +264,8 @@
                                     </svg>
                                     Auth Profiles
                                 </div>
-                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="translation">
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap"
+                                    data-tab="translation">
                                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -268,7 +274,8 @@
                                     </svg>
                                     Translation
                                 </div>
-                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap" data-tab="gateway">
+                                <div class="tab-item flex-1 px-6 py-4 text-center font-semibold whitespace-nowrap"
+                                    data-tab="gateway">
                                     <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -288,7 +295,8 @@
                                     <div class="space-y-4">
                                         <!-- Name -->
                                         <div>
-                                            <label for="location-name" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="location-name"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Location Name <span class="text-red-500">*</span>
                                             </label>
                                             <input type="text" id="location-name" name="name" required
@@ -298,19 +306,22 @@
 
                                         <!-- Position (Google Maps) -->
                                         <div>
-                                            <label for="position" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="position"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Position (Google Maps) <span class="text-red-500">*</span>
                                             </label>
                                             <input type="text" id="position" name="position" required
                                                 placeholder="Search or paste coordinates/address"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
-                                            <p class="text-xs text-gray-500 mt-1">Example: 40.7128, -74.0060 or "Times Square,
+                                            <p class="text-xs text-gray-500 mt-1">Example: 40.7128, -74.0060 or "Times
+                                                Square,
                                                 New York"</p>
                                         </div>
 
                                         <!-- Timezone -->
                                         <div>
-                                            <label for="timezone" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="timezone"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Timezone <span class="text-red-500">*</span>
                                             </label>
                                             <select id="timezone" name="timezone" required
@@ -321,7 +332,8 @@
                                                     <option value="America/New_York">Eastern Time (New York)</option>
                                                     <option value="America/Chicago">Central Time (Chicago)</option>
                                                     <option value="America/Denver">Mountain Time (Denver)</option>
-                                                    <option value="America/Los_Angeles">Pacific Time (Los Angeles)</option>
+                                                    <option value="America/Los_Angeles">Pacific Time (Los Angeles)
+                                                    </option>
                                                 </optgroup>
                                                 <optgroup label="Europe">
                                                     <option value="Europe/London">GMT/BST (London)</option>
@@ -338,7 +350,8 @@
 
                                         <!-- Note -->
                                         <div>
-                                            <label for="note" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="note"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Note
                                             </label>
                                             <textarea id="note" name="note" rows="3" placeholder="Add notes..."
@@ -353,16 +366,24 @@
                                     <div class="space-y-4">
                                         <!-- Logo -->
                                         <div>
-                                            <label for="logo" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="logo"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Logo
                                             </label>
                                             <input type="file" id="logo" name="logo" accept="image/*"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <div class="mt-2 flex justify-end">
+                                                <button type="button" id="clear-logo"
+                                                    class="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200">
+                                                    Clear image
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <!-- Headline -->
                                         <div>
-                                            <label for="headline" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="headline"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Headline
                                             </label>
                                             <input type="text" id="headline" name="headline"
@@ -372,7 +393,8 @@
 
                                         <!-- Subheading -->
                                         <div>
-                                            <label for="subheading" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="subheading"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Subheading
                                             </label>
                                             <input type="text" id="subheading" name="subheading"
@@ -382,7 +404,8 @@
 
                                         <!-- Primary Color -->
                                         <div>
-                                            <label for="primary-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="primary-color"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Primary Color
                                             </label>
                                             <input type="color" id="primary-color" name="primary_color"
@@ -392,7 +415,8 @@
 
                                         <!-- Secondary Color -->
                                         <div>
-                                            <label for="secondary-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="secondary-color"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Secondary Color
                                             </label>
                                             <input type="color" id="secondary-color" name="secondary_color"
@@ -402,7 +426,8 @@
 
                                         <!-- Background Color -->
                                         <div>
-                                            <label for="background-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="background-color"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Background Color
                                             </label>
                                             <input type="color" id="background-color" name="background_color"
@@ -412,7 +437,8 @@
 
                                         <!-- Text Color -->
                                         <div>
-                                            <label for="text-color" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="text-color"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Text Color
                                             </label>
                                             <input type="color" id="text-color" name="text_color" value="#111827"
@@ -421,27 +447,42 @@
 
                                         <!-- Background Image -->
                                         <div>
-                                            <label for="background-image" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="background-image"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Background Image
                                             </label>
                                             <input type="file" id="background-image" name="background_image"
                                                 accept="image/*"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <div class="mt-2 flex justify-end">
+                                                <button type="button" id="clear-background-image"
+                                                    class="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200">
+                                                    Clear image
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <!-- Favicon -->
                                         <div>
-                                            <label for="favicon" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="favicon"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Favicon
                                             </label>
                                             <input type="file" id="favicon" name="favicon"
                                                 accept="image/x-icon,image/png"
                                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                            <div class="mt-2 flex justify-end">
+                                                <button type="button" id="clear-favicon"
+                                                    class="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-200">
+                                                    Clear image
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <!-- Background Blur -->
                                         <div>
-                                            <label for="background-blur" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="background-blur"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Background Blur (0–100%)
                                             </label>
                                             <div class="flex items-center gap-3">
@@ -455,12 +496,14 @@
 
                                         <!-- Background Opacity -->
                                         <div>
-                                            <label for="background-opacity" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="background-opacity"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Background Opacity (0–100%)
                                             </label>
                                             <div class="flex items-center gap-3">
-                                                <input type="range" id="background-opacity" name="background_opacity"
-                                                    min="0" max="100" value="100" class="flex-1">
+                                                <input type="range" id="background-opacity"
+                                                    name="background_opacity" min="0" max="100"
+                                                    value="100" class="flex-1">
                                                 <input type="number" id="background-opacity-value" min="0"
                                                     max="100" value="100"
                                                     class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
@@ -469,12 +512,14 @@
 
                                         <!-- Background Contrast -->
                                         <div>
-                                            <label for="background-contrast" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="background-contrast"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Background Contrast (0–100%)
                                             </label>
                                             <div class="flex items-center gap-3">
-                                                <input type="range" id="background-contrast" name="background_contrast"
-                                                    min="0" max="100" value="100" class="flex-1">
+                                                <input type="range" id="background-contrast"
+                                                    name="background_contrast" min="0" max="100"
+                                                    value="100" class="flex-1">
                                                 <input type="number" id="background-contrast-value" min="0"
                                                     max="100" value="100"
                                                     class="w-20 px-3 py-2 border border-gray-300 rounded-lg text-sm">
@@ -483,7 +528,8 @@
 
                                         <!-- Redirection URL -->
                                         <div>
-                                            <label for="redirection-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="redirection-url"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Redirection URL
                                             </label>
                                             <input type="url" id="redirection-url" name="redirection_url"
@@ -493,7 +539,8 @@
 
                                         <!-- Font Family -->
                                         <div>
-                                            <label for="font-family" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="font-family"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Font Family
                                             </label>
                                             <select id="font-family" name="font_family"
@@ -503,6 +550,11 @@
                                                 <option value="Open Sans">Open Sans</option>
                                                 <option value="Lato">Lato</option>
                                                 <option value="Poppins">Poppins</option>
+                                                <option value="Montserrat">Montserrat</option>
+                                                <option value="Nunito">Nunito</option>
+                                                <option value="Source Sans Pro">Source Sans Pro</option>
+                                                <option value="Ubuntu">Ubuntu</option>
+                                                <option value="Merriweather">Merriweather</option>
                                             </select>
                                         </div>
                                     </div>
@@ -514,12 +566,14 @@
 
                                     <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                                         <p class="text-sm text-blue-800 flex items-start gap-2">
-                                            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                </path>
                                             </svg>
-                                            <span><strong>At least one profile is required.</strong> Each profile can use either
+                                            <span><strong>At least one profile is required.</strong> Each profile can
+                                                use either
                                                 Open Access or Account-based authentication.</span>
                                         </p>
                                     </div>
@@ -528,7 +582,8 @@
                                     <div class="mb-4 flex justify-end">
                                         <button type="button" onclick="addProfile()"
                                             class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-semibold">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                             </svg>
@@ -543,7 +598,8 @@
                                 <!-- TAB 4: Translation -->
                                 <div class="tab-content" id="translation">
                                     <h3 class="text-lg font-bold text-gray-900 mb-4">Text & Translation</h3>
-                                    <p class="text-sm text-gray-500 mb-4">Configure default text labels and translations for
+                                    <p class="text-sm text-gray-500 mb-4">Configure default text labels and
+                                        translations for
                                         all forms at this location</p>
 
                                     <!-- Language Selection -->
@@ -568,8 +624,8 @@
                                                     class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2 text-sm font-semibold">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                                     </svg>
                                                     Add Language
                                                 </button>
@@ -678,8 +734,8 @@
                                                         class="block text-sm font-medium text-gray-700 mb-2">
                                                         Connect Button
                                                     </label>
-                                                    <input type="text" id="text-connect-button" name="text_connect_button"
-                                                        placeholder="e.g., Connect"
+                                                    <input type="text" id="text-connect-button"
+                                                        name="text_connect_button" placeholder="e.g., Connect"
                                                         class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                                 </div>
                                             </div>
@@ -700,7 +756,8 @@
                                     <h3 class="text-lg font-bold text-gray-900 mb-4">Gateway Settings</h3>
                                     <div class="space-y-4">
                                         <div>
-                                            <label for="post-url" class="block text-sm font-medium text-gray-700 mb-2">
+                                            <label for="post-url"
+                                                class="block text-sm font-medium text-gray-700 mb-2">
                                                 Post URL
                                             </label>
                                             <input type="url" id="post-url" name="post_url"
@@ -710,7 +767,8 @@
 
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             <div>
-                                                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                                                <label for="username"
+                                                    class="block text-sm font-medium text-gray-700 mb-2">
                                                     Username
                                                 </label>
                                                 <input type="text" id="username" name="username"
@@ -719,7 +777,8 @@
                                             </div>
 
                                             <div>
-                                                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                                <label for="password"
+                                                    class="block text-sm font-medium text-gray-700 mb-2">
                                                     Password
                                                 </label>
                                                 <input type="password" id="password" name="password"
@@ -728,7 +787,8 @@
                                             </div>
 
                                             <div>
-                                                <label for="type" class="block text-sm font-medium text-gray-700 mb-2">
+                                                <label for="type"
+                                                    class="block text-sm font-medium text-gray-700 mb-2">
                                                     Type <span class="text-red-500">*</span>
                                                 </label>
                                                 <select id="type" name="type" required
@@ -789,61 +849,85 @@
                         </div>
                     </form>
                 </div>
-                
+
                 <!-- Right Column: Dynamic Panel (Live Preview OR Profile Review) -->
-                <div class="xl:col-span-1">
+                <div id="right-panel-column" class="xl:col-span-1 hidden">
                     <div class="sticky top-6">
-                        
+
                         <!-- Live Preview Panel (Show when on Brand tab) -->
                         <div id="live-preview-panel" class="right-panel-content">
                             <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
                                 <h3 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                        </path>
                                     </svg>
                                     Live Preview
                                 </h3>
-                                
+
                                 <!-- Mobile Phone Frame -->
                                 <div class="mx-auto" style="width: 320px;">
-                                    <div class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] shadow-xl">
+                                    <div
+                                        class="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] shadow-xl">
                                         <!-- Phone notch -->
-                                        <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+                                        <div
+                                            class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute">
+                                        </div>
                                         <!-- Phone buttons -->
-                                        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-                                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-                                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-                                        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-                                        
+                                        <div
+                                            class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg">
+                                        </div>
+                                        <div
+                                            class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg">
+                                        </div>
+                                        <div
+                                            class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg">
+                                        </div>
+                                        <div
+                                            class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg">
+                                        </div>
+
                                         <!-- Phone screen -->
-                                        <div id="phone-screen" class="rounded-[2rem] overflow-y-auto h-full w-full bg-white">
-                                            <div id="preview-content" class="p-6 space-y-4">
+                                        <div id="phone-screen"
+                                            class="relative rounded-[2rem] overflow-y-auto overflow-x-hidden h-full w-full">
+                                            <!-- Background layer for image/color with effects -->
+                                            <div id="background-layer" class="absolute inset-0 pointer-events-none"
+                                                style="background-color: #ffffff;"></div>
+                                            <div id="preview-content" class="relative z-10 p-6 space-y-4">
                                                 <!-- Dynamic Preview Content -->
                                                 <div class="text-center mb-6">
-                                                    <img id="preview-logo" src="" alt="Logo" class="mx-auto mb-4 h-16 w-auto hidden">
-                                                    <h1 id="preview-headline" class="text-2xl font-bold text-gray-900 mb-2">Welcome!</h1>
-                                                    <p id="preview-subheading" class="text-sm text-gray-600">Connect to WiFi</p>
+                                                    <img id="preview-logo" src="" alt="Logo"
+                                                        class="mx-auto mb-4 h-16 w-auto hidden">
+                                                    <h1 id="preview-headline"
+                                                        class="text-2xl font-bold mb-2 whitespace-normal break-words">
+                                                        Welcome!</h1>
+                                                    <p id="preview-subheading"
+                                                        class="text-sm whitespace-normal break-words">Connect to WiFi
+                                                    </p>
                                                 </div>
-                                                
+
                                                 <!-- Preview Form Fields -->
                                                 <div id="preview-fields" class="space-y-3">
                                                     <!-- Fields will be dynamically added here -->
                                                 </div>
-                                                
+
                                                 <!-- Preview Checkboxes -->
                                                 <div id="preview-checkboxes" class="space-y-2">
                                                     <!-- Checkboxes will be dynamically added here -->
                                                 </div>
-                                                
+
                                                 <!-- Connect Button -->
-                                                <button type="button" id="preview-button" class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-semibold text-sm">
+                                                <button type="button" id="preview-button"
+                                                    class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-semibold text-sm">
                                                     Connect
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <p class="text-xs text-gray-500 text-center mt-4">Preview updates as you type</p>
                             </div>
                         </div>
@@ -852,21 +936,24 @@
                         <div id="profile-review-panel" class="right-panel-content">
                             <div class="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
                                 <h3 class="text-sm font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
                                     </svg>
                                     Review All Profiles
                                 </h3>
-                                
+
                                 <div id="profile-review-list" class="space-y-3 max-h-[700px] overflow-y-auto">
                                     <!-- Profile review cards will be added here dynamically -->
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </main>
@@ -888,6 +975,22 @@
                 bindSliderToNumber('background-blur', 'background-blur-value', 0);
                 bindSliderToNumber('background-opacity', 'background-opacity-value', 100);
                 bindSliderToNumber('background-contrast', 'background-contrast-value', 100);
+
+                // Apply initial background effects
+                applyBackgroundEffects();
+
+                // Apply initial background color
+                const initBgColor = document.getElementById('background-color')?.value;
+                if (initBgColor) {
+                    const layer = document.getElementById('background-layer');
+                    if (layer) layer.style.backgroundColor = initBgColor;
+                }
+
+                // Apply initial font family
+                const initFont = document.getElementById('font-family')?.value;
+                if (initFont) {
+                    applyFontFamily(initFont);
+                }
 
                 // Tab click event
                 document.querySelectorAll('.tab-item').forEach((item, index) => {
@@ -915,19 +1018,41 @@
 
             // Update right panel based on current tab
             function updateRightPanel() {
+                const rightCol = document.getElementById('right-panel-column');
+                const leftCol = document.getElementById('left-form-column');
                 const livePreview = document.getElementById('live-preview-panel');
                 const profileReview = document.getElementById('profile-review-panel');
-                
-                // Hide all panels first
-                livePreview.classList.remove('active');
-                profileReview.classList.remove('active');
-                
-                // Show appropriate panel based on current tab
-                if (currentTab === 1) { // Brand tab
-                    livePreview.classList.add('active');
-                } else if (currentTab === 2) { // Auth Profiles tab
-                    profileReview.classList.add('active');
-                    updateProfileReview();
+
+                const showLive = currentTab === 1; // Brand tab
+                const showReview = currentTab === 2; // Auth Profiles tab
+
+                // Reset inner panels to default (CSS uses .active to show)
+                livePreview && livePreview.classList.remove('active');
+                profileReview && profileReview.classList.remove('active');
+
+                if (showLive || showReview) {
+                    // Show right column and shrink left to 2/3 width
+                    rightCol && rightCol.classList.remove('hidden');
+                    if (leftCol) {
+                        leftCol.classList.remove('xl:col-span-3');
+                        leftCol.classList.add('xl:col-span-2');
+                    }
+
+                    if (showLive && livePreview) {
+                        livePreview.classList.add('active');
+                    }
+                    if (showReview && profileReview) {
+                        profileReview.classList.add('active');
+                        updateProfileReview();
+                        updatePreviewFields();
+                    }
+                } else {
+                    // Hide right column and expand left to full width
+                    rightCol && rightCol.classList.add('hidden');
+                    if (leftCol) {
+                        leftCol.classList.remove('xl:col-span-2');
+                        leftCol.classList.add('xl:col-span-3');
+                    }
                 }
             }
 
@@ -937,11 +1062,11 @@
                 document.getElementById('headline')?.addEventListener('input', function() {
                     document.getElementById('preview-headline').textContent = this.value || 'Welcome!';
                 });
-                
+
                 document.getElementById('subheading')?.addEventListener('input', function() {
                     document.getElementById('preview-subheading').textContent = this.value || 'Connect to WiFi';
                 });
-                
+
                 document.getElementById('logo')?.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
@@ -954,55 +1079,152 @@
                         reader.readAsDataURL(file);
                     }
                 });
-                
+
+                // Clear Logo
+                document.getElementById('clear-logo')?.addEventListener('click', function() {
+                    const input = document.getElementById('logo');
+                    if (input) input.value = '';
+                    const logo = document.getElementById('preview-logo');
+                    if (logo) {
+                        logo.src = '';
+                        logo.classList.add('hidden');
+                    }
+                });
+
                 // Color Updates
                 document.getElementById('primary-color')?.addEventListener('input', function() {
                     document.getElementById('preview-button').style.backgroundColor = this.value;
                 });
-                
+
                 document.getElementById('background-color')?.addEventListener('input', function() {
-                    document.getElementById('phone-screen').style.backgroundColor = this.value;
+                    document.getElementById('background-layer').style.backgroundColor = this.value;
                 });
-                
+
                 document.getElementById('text-color')?.addEventListener('input', function() {
-                    document.getElementById('preview-content').style.color = this.value;
+                    const color = this.value;
+                    document.getElementById('preview-content').style.color = color;
+                    document.getElementById('preview-headline').style.color = color;
+                    document.getElementById('preview-subheading').style.color = color;
                 });
-                
+
                 // Background Image
                 document.getElementById('background-image')?.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
                         reader.onload = function(e) {
-                            document.getElementById('phone-screen').style.backgroundImage = `url(${e.target.result})`;
-                            document.getElementById('phone-screen').style.backgroundSize = 'cover';
-                            document.getElementById('phone-screen').style.backgroundPosition = 'center';
+                            const layer = document.getElementById('background-layer');
+                            layer.style.backgroundImage = `url(${e.target.result})`;
+                            layer.style.backgroundSize = 'cover';
+                            layer.style.backgroundPosition = 'center';
                         };
                         reader.readAsDataURL(file);
                     }
                 });
-                
+
+                // Clear Background Image
+                document.getElementById('clear-background-image')?.addEventListener('click', function() {
+                    const input = document.getElementById('background-image');
+                    if (input) input.value = '';
+                    const layer = document.getElementById('background-layer');
+                    if (layer) {
+                        layer.style.backgroundImage = '';
+                        layer.style.backgroundSize = '';
+                        layer.style.backgroundPosition = '';
+                    }
+                });
+
                 // Translation Updates
                 document.getElementById('text-connect-button')?.addEventListener('input', function() {
                     document.getElementById('preview-button').textContent = this.value || 'Connect';
                 });
+
+                // Font Family change
+                document.getElementById('font-family')?.addEventListener('change', function() {
+                    applyFontFamily(this.value);
+                });
+
+                // Clear Favicon
+                document.getElementById('clear-favicon')?.addEventListener('click', function() {
+                    const input = document.getElementById('favicon');
+                    if (input) input.value = '';
+                });
+            }
+
+            // Apply blur, contrast, and opacity to background layer only
+            function applyBackgroundEffects() {
+                const layer = document.getElementById('background-layer');
+                if (!layer) return;
+                const blur = parseInt(document.getElementById('background-blur')?.value || '0', 10);
+                const contrast = parseInt(document.getElementById('background-contrast')?.value || '100', 10);
+                const opacity = parseInt(document.getElementById('background-opacity')?.value || '100', 10);
+                layer.style.filter = `blur(${blur}px) contrast(${contrast}%)`;
+                layer.style.opacity = String(opacity / 100);
+            }
+
+            // Apply selected font family to preview and load font if needed
+            function applyFontFamily(font) {
+                const fontMap = {
+                    'Inter': "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+                    'Roboto': "Roboto, Arial, Helvetica, sans-serif",
+                    'Open Sans': "'Open Sans', Arial, Helvetica, sans-serif",
+                    'Lato': "Lato, Arial, Helvetica, sans-serif",
+                    'Poppins': "Poppins, 'Helvetica Neue', Arial, sans-serif",
+                    'Montserrat': "Montserrat, 'Helvetica Neue', Arial, sans-serif",
+                    'Nunito': "Nunito, Arial, Helvetica, sans-serif",
+                    'Source Sans Pro': "'Source Sans Pro', Arial, Helvetica, sans-serif",
+                    'Ubuntu': "Ubuntu, Arial, Helvetica, sans-serif",
+                    'Merriweather': "Merriweather, Georgia, 'Times New Roman', serif"
+                };
+                const family = fontMap[font] || font;
+                const content = document.getElementById('preview-content');
+                const headline = document.getElementById('preview-headline');
+                const subheading = document.getElementById('preview-subheading');
+                if (content) content.style.fontFamily = family;
+                if (headline) headline.style.fontFamily = family;
+                if (subheading) subheading.style.fontFamily = family;
+                loadFont(font);
+            }
+
+            function loadFont(font) {
+                const fontUrlMap = {
+                    'Inter': 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap',
+                    'Roboto': 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+                    'Open Sans': 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap',
+                    'Lato': 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap',
+                    'Poppins': 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap',
+                    'Montserrat': 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap',
+                    'Nunito': 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap',
+                    'Source Sans Pro': 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap',
+                    'Ubuntu': 'https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap',
+                    'Merriweather': 'https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap'
+                };
+                const url = fontUrlMap[font];
+                if (!url) return;
+                const id = `font-link-${font.replace(/\s+/g, '-').toLowerCase()}`;
+                if (document.getElementById(id)) return; // already loaded
+                const link = document.createElement('link');
+                link.id = id;
+                link.rel = 'stylesheet';
+                link.href = url;
+                document.head.appendChild(link);
             }
 
             function updatePreviewFields() {
                 const previewFields = document.getElementById('preview-fields');
                 const previewCheckboxes = document.getElementById('preview-checkboxes');
-                
+
                 if (!previewFields || !previewCheckboxes) return;
-                
+
                 // Clear existing preview fields
                 previewFields.innerHTML = '';
                 previewCheckboxes.innerHTML = '';
-                
+
                 // Get the first active profile
                 for (let i = 1; i <= profileCount; i++) {
                     const profile = document.getElementById(`profile-${i}`);
                     if (!profile) continue;
-                    
+
                     // Get enabled fields
                     const fields = ['firstname', 'lastname', 'gender', 'birthday', 'email', 'mobile'];
                     const fieldLabels = {
@@ -1013,7 +1235,7 @@
                         'email': 'Email',
                         'mobile': 'Mobile'
                     };
-                    
+
                     fields.forEach(field => {
                         const checkbox = profile.querySelector(`input[name="profiles[${i}][${field}][enabled]"]`);
                         if (checkbox && checkbox.checked) {
@@ -1026,14 +1248,15 @@
                             previewFields.appendChild(fieldDiv);
                         }
                     });
-                    
+
                     // Get enabled checkboxes
                     for (let j = 1; j <= 3; j++) {
                         const checkboxEnabled = profile.querySelector(`input[name="profiles[${i}][checkbox${j}][enabled]"]`);
                         if (checkboxEnabled && checkboxEnabled.checked) {
-                            const checkboxLabel = profile.querySelector(`input[name="profiles[${i}][checkbox${j}][label]"]`)?.value;
+                            const checkboxLabel = profile.querySelector(`input[name="profiles[${i}][checkbox${j}][label]"]`)
+                                ?.value;
                             const checkboxNames = ['Terms & Conditions', 'Data Privacy', 'Marketing Consent'];
-                            
+
                             const checkboxDiv = document.createElement('div');
                             checkboxDiv.className = 'flex items-start gap-2';
                             checkboxDiv.innerHTML = `
@@ -1043,7 +1266,7 @@
                             previewCheckboxes.appendChild(checkboxDiv);
                         }
                     }
-                    
+
                     break; // Only show first profile in preview
                 }
             }
@@ -1056,7 +1279,6 @@
                 document.querySelectorAll('.tab-content').forEach(content => {
                     content.classList.remove('active');
                 });
-
                 // Show current tab content
                 document.getElementById(tabs[n]).classList.add('active');
 
@@ -1125,7 +1347,8 @@
                 }
 
                 if (activeProfileCount === 0) {
-                    reviewList.innerHTML = '<p class="text-sm text-gray-500 text-center py-8">No profiles added yet. Add a profile to see the review.</p>';
+                    reviewList.innerHTML =
+                        '<p class="text-sm text-gray-500 text-center py-8">No profiles added yet. Add a profile to see the review.</p>';
                     return;
                 }
 
@@ -1209,7 +1432,8 @@
 
                     // Create review card
                     const reviewItem = document.createElement('div');
-                    reviewItem.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all';
+                    reviewItem.className =
+                        'bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all';
                     reviewItem.innerHTML = `
                     <div class="space-y-3">
                         <!-- Header -->
@@ -1242,34 +1466,34 @@
 
                         <!-- Login Fields -->
                         ${enabledFields.length > 0 ? `
-                        <div class="bg-blue-50 p-2 rounded border border-blue-200">
-                            <p class="text-xs font-semibold text-blue-800 mb-1">Login Fields</p>
-                            <p class="text-xs text-blue-700">${enabledFields.join(', ')}</p>
-                        </div>
-                        ` : ''}
+                                <div class="bg-blue-50 p-2 rounded border border-blue-200">
+                                    <p class="text-xs font-semibold text-blue-800 mb-1">Login Fields</p>
+                                    <p class="text-xs text-blue-700">${enabledFields.join(', ')}</p>
+                                </div>
+                                ` : ''}
 
                         <!-- Verifications -->
                         ${verifications.length > 0 ? `
-                        <div class="bg-amber-50 p-2 rounded border border-amber-200">
-                            <p class="text-xs font-semibold text-amber-800 mb-1">Verification</p>
-                            <p class="text-xs text-amber-700">${verifications.join(', ')}</p>
-                        </div>
-                        ` : ''}
+                                <div class="bg-amber-50 p-2 rounded border border-amber-200">
+                                    <p class="text-xs font-semibold text-amber-800 mb-1">Verification</p>
+                                    <p class="text-xs text-amber-700">${verifications.join(', ')}</p>
+                                </div>
+                                ` : ''}
 
                         <!-- Checkboxes -->
                         ${enabledCheckboxes.length > 0 ? `
-                        <div class="bg-green-50 p-2 rounded border border-green-200">
-                            <p class="text-xs font-semibold text-green-800 mb-1">Checkboxes</p>
-                            <ul class="space-y-1">
-                                ${enabledCheckboxes.map(cb => `
+                                <div class="bg-green-50 p-2 rounded border border-green-200">
+                                    <p class="text-xs font-semibold text-green-800 mb-1">Checkboxes</p>
+                                    <ul class="space-y-1">
+                                        ${enabledCheckboxes.map(cb => `
                                     <li class="text-xs text-green-700 flex items-center gap-1">
                                         <span class="w-1.5 h-1.5 rounded-full ${cb.required ? 'bg-red-500' : 'bg-green-400'}"></span>
                                         ${cb.label} ${cb.required ? '<span class="text-red-600">(Req)</span>' : ''}
                                     </li>
                                 `).join('')}
-                            </ul>
-                        </div>
-                        ` : ''}
+                                    </ul>
+                                </div>
+                                ` : ''}
                     </div>
                 `;
                     reviewList.appendChild(reviewItem);
@@ -1332,14 +1556,14 @@
                             ${isFirst ? '<span class="ml-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">Required</span>' : ''}
                         </h4>
                         ${!isFirst ? `
-                        <button type="button" onclick="removeProfile(${profileCount})" 
-                            class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        </button>
-                        ` : ''}
+                                <button type="button" onclick="removeProfile(${profileCount})" 
+                                    class="text-red-600 hover:text-red-800 p-2 hover:bg-red-50 rounded-lg transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                                ` : ''}
                     </div>
 
                     <!-- Profile Name -->
@@ -1906,11 +2130,15 @@
                 const number = document.getElementById(numberId);
                 if (!slider || !number) return;
                 if (defaultValue !== undefined && !number.value) number.value = defaultValue;
-                slider.addEventListener('input', () => number.value = slider.value);
+                slider.addEventListener('input', () => {
+                    number.value = slider.value;
+                    applyBackgroundEffects();
+                });
                 number.addEventListener('input', () => {
                     let v = Math.max(0, Math.min(100, parseInt(number.value || 0)));
                     number.value = v;
                     slider.value = v;
+                    applyBackgroundEffects();
                 });
             }
         </script>
