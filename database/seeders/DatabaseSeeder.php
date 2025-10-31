@@ -20,8 +20,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'phone' => '123-456-7890',
             'email' => 'test@example.com',
         ]);
+        User::factory(20)->create();
         $this->call(RolePermissionSeeder::class);
 
         // Assign Super Admin role to the seeded test user

@@ -7,7 +7,7 @@
 
     <!-- Main Content -->
     <main class="lg:ml-64 min-h-screen">
-        <x-top-bar title="Create New User" subtitle="Add a new user to the system" routeName="users"
+        <x-top-bar title="Create New User" subtitle="Add a new user to the system" routeName="users.index"
             class="bg-gray-600 text-white" buttonName="Back to List">
             <x-slot name="buttonSvg">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,9 +21,29 @@
 
         <!-- Form Content -->
         <div class="p-6">
-            <form action="" method="POST"
+            <form action="{{ route('users.store') }}" method="POST"
                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 @csrf
+                <!-- Display general error messages -->
+                @if ($errors->any())
+                    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div class="p-6 space-y-6">
                     <!-- Personal Information -->
                     <div>
@@ -93,6 +113,9 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
+                            
+
+                            
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
@@ -135,17 +158,9 @@
                                 <select id="role" name="role" required
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('role') border-red-500 @enderror">
                                     <option value="">Select a role</option>
-                                    <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>
-                                        Super Admin</option>
-                                    <option value="support_agent"
-                                        {{ old('role') == 'support_agent' ? 'selected' : '' }}>Support Agent
-                                    </option>
-                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin
-                                    </option>
-                                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>
-                                        Manager</option>
-                                    <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>
-                                        Operator</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>{{ $role }}</option>
+                                    @endforeach
                                 </select>
                                 @error('role')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -156,7 +171,7 @@
                     </div>
 
                     <!-- Config Section -->
-                    <div id="config-section" class="{{ old('role') === 'admin' ? '' : 'hidden' }}">
+                    <div id="config-section" class="{{ old('role') === 'Admin' ? '' : 'hidden' }}">
                         <h4 class="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
                             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -170,20 +185,12 @@
                         </h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="number-of-businesses"
-                                    class="block text-sm font-medium text-gray-700 mb-2">
-                                    Number of Businesses <span class="text-red-500">*</span>
+                                <label for="max_businesses" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Maximum Businesses <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="number-of-businesses" name="number_of_businesses"
-                                    value="{{ old('number_of_businesses', 0) }}" min="0" step="1"
-                                    required placeholder="0"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors appearance-none @error('number_of_businesses') border-red-500 @enderror">
-                                <p class="mt-1 text-xs text-gray-500">Enter the number of businesses assigned to
-                                    this
-                                    user</p>
-                                @error('number_of_businesses')
-                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                @enderror
+                                <input type="number" id="max_businesses" name="max_businesses" value="{{ old('max_businesses', 1) }}" min="1"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
+                                <p class="mt-1 text-xs text-gray-500">Maximum number of businesses this admin can create</p>
                             </div>
                         </div>
                     </div>
@@ -235,13 +242,17 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const roleSelect = document.getElementById('role');
                 const configSection = document.getElementById('config-section');
-                const toggleConfigVisibility = () => {
+                
+                const toggleVisibility = () => {
                     if (!roleSelect || !configSection) return;
-                    const isAdmin = roleSelect.value === 'admin';
+                    
+                    // Show config section only if Admin role is selected
+                    const isAdmin = roleSelect.value === 'Admin';
                     configSection.classList.toggle('hidden', !isAdmin);
                 };
-                toggleConfigVisibility();
-                roleSelect?.addEventListener('change', toggleConfigVisibility);
+                
+                toggleVisibility();
+                roleSelect?.addEventListener('change', toggleVisibility);
             });
         </script>
     </x-slot>

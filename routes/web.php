@@ -9,13 +9,15 @@ use App\Http\Controllers\VoucherController;
 use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'admin/users');
 Route::redirect('/dashboard', 'admin/users');
-Route::middleware(['auth', 'permissions'])->prefix('admin')->group(
+Route::middleware(['auth'])->prefix('admin')->group(
     function () {
         // Roles & Permissions Management
     
-
+        Route::get('users/data', [UserController::class, 'getData'])->name('users.data');
         // User Routes
         Route::resource('users', UserController::class);
+        // Route for DataTables AJAX data
+    
 
         // Business Routes
         Route::resource('businesses', BusinessController::class);
