@@ -27,8 +27,8 @@ class UserRepository
             // Assign role
             $user->assignRole($role);
 
-            // Create user config if role is admin
-            if ($role === 'Admin' && !empty($configData)) {
+            // Create user config if role is admin (case-insensitive)
+            if (strtolower($role) === 'admin' && !empty($configData)) {
                 $user->config()->create($configData);
             }
 
@@ -49,5 +49,41 @@ class UserRepository
     {
         return User::with(['roles', 'config'])
             ->select('users.*');
+    }
+
+    /**
+     * Update an existing user with role and configuration
+     *
+     * @param \App\Models\User $user
+     * @param array $data
+     * @param string|null $role
+     * @param array $configData
+     * @return bool
+     */
+    public function update(User $user, array $data, ?string $role = null, array $configData = []): bool
+    {
+        return DB::transaction(function () use ($user, $data, $role, $configData) {
+            if (isset($data['password']) && $data['password']) {
+                $data['password'] = Hash::make($data['password']);
+            } else {
+                unset($data['password']);
+            }
+
+            $saved = $user->update($data);
+
+            if ($role) {
+                $user->syncRoles([$role]);
+            }
+
+            if (strtolower($role) === 'admin' && !empty($configData)) {
+                if ($user->config) {
+                    $user->config->update($configData);
+                } else {
+                    $user->config()->create($configData);
+                }
+            }
+
+            return $saved;
+        });
     }
 }

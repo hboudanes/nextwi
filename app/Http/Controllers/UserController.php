@@ -186,9 +186,10 @@ class UserController extends Controller
                 'phone' => ['nullable', 'string', 'max:20'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
                 'role' => ['required', 'string', 'exists:roles,name'],
+                'status' => ['required', 'string', 'in:active,inactive'],
             ]);
 
-            $userData = $request->only(['first_name', 'last_name', 'email', 'phone', 'password']);
+            $userData = $request->only(['first_name', 'last_name', 'email', 'phone', 'password', 'status']);
             // Set name as combination of first_name and last_name
             $userData['name'] = $request->first_name . ' ' . $request->last_name;
 
@@ -231,7 +232,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit', ['id' => $id]);
+        $user = User::with(['roles', 'config'])->findOrFail($id);
+        $roles = $this->userService->getAllRoles();
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -239,9 +242,49 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Update logic would go here
-        // For now, just redirect to index
-        return redirect()->route('users.index');
+        try {
+            $user = User::with(['roles', 'config'])->findOrFail($id);
+
+            $validated = $request->validate([
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class . ',email,' . $user->id],
+                'phone' => ['nullable', 'string', 'max:20'],
+                'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+                'role' => ['required', 'string', 'exists:roles,name'],
+                'status' => ['required', 'string', 'in:active,inactive'],
+                'max_businesses' => ['nullable', 'integer', 'min:1'],
+            ]);
+
+            $data = $request->only(['first_name', 'last_name', 'email', 'phone', 'status']);
+            $data['name'] = $request->first_name . ' ' . $request->last_name;
+
+            if ($request->filled('password')) {
+                $data['password'] = $request->input('password');
+            }
+
+            $role = $request->input('role');
+            $configData = [];
+            if ($role === 'Admin' && $request->has('max_businesses')) {
+                $configData['max_businesses'] = (int) $request->input('max_businesses', 1);
+            }
+
+            $updated = $this->userService->updateUser($user, $data, $role, $configData);
+
+            if (!$updated) {
+                return redirect()->route('users.edit', $user->id)
+                    ->withInput()
+                    ->with('error', 'Failed to update user. Please try again.');
+            }
+
+            return redirect()->route('users.index')->with('success', 'User updated successfully');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->route('users.edit', $id)->withErrors($e->validator)->withInput();
+        } catch (\Exception $e) {
+            return redirect()->route('users.edit', $id)
+                ->withInput()
+                ->with('error', 'Failed to update user: ' . $e->getMessage());
+        }
     }
 
     /**

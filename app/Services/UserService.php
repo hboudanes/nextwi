@@ -40,4 +40,18 @@ class UserService
     {
         return $this->userRepository->getUsersQuery();
     }
+
+    /**
+     * Update an existing user with role and configuration
+     *
+     * @param \App\Models\User $user
+     * @param array $data
+     * @param string|null $role
+     * @param array $configData
+     * @return bool
+     */
+    public function updateUser(User $user, array $data, ?string $role = null, array $configData = []): bool
+    {
+        return $this->userRepository->update($user, $data, $role, $configData);
+    }
 }

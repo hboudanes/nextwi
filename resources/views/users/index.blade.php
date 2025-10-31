@@ -32,6 +32,14 @@
             table.dataTable tbody tr:hover {
                 background-color: rgba(249, 250, 251, 1) !important;
             }
+            
+            /* Dark mode hover fix */
+            @media (prefers-color-scheme: dark) {
+                table.dataTable tbody tr:hover {
+                    background-color: rgba(55, 65, 81, 1) !important; /* gray-700 */
+                    color: rgba(255, 255, 255, 1) !important;
+                }
+            }
 
             .filter-dropdown {
                 max-height: 300px;

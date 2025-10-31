@@ -11,8 +11,8 @@
         <div class="bg-white border-b border-gray-200 px-6 py-4 mt-16 lg:mt-0">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Create New User</h1>
-                    <p class="text-sm text-gray-500 mt-1">Add a new user to the system</p>
+                    <h1 class="text-2xl font-bold text-gray-900">Edit User</h1>
+                    <p class="text-sm text-gray-500 mt-1">Update user information</p>
                 </div>
                 <a href="{{ route('users.index') }}"
                     class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
@@ -27,9 +27,10 @@
 
         <!-- Form Content -->
         <div class="p-6">
-            <form action="{{ route('users.store') }}" method="POST"
+            <form action="{{ route('users.update', $user->id) }}" method="POST"
                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 @csrf
+                @method('PUT')
                 <div class="p-6 space-y-6">
                     <!-- Personal Information -->
                     <div>
@@ -45,7 +46,7 @@
                                 <label for="first-name" class="block text-sm font-medium text-gray-700 mb-2">
                                     First Name <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="first-name" name="first_name" value="{{ old('first_name') }}"
+                                <input type="text" id="first-name" name="first_name" value="{{ old('first_name', $user->first_name) }}"
                                     required placeholder="Enter first name"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('first_name') border-red-500 @enderror">
                                 @error('first_name')
@@ -56,7 +57,7 @@
                                 <label for="last-name" class="block text-sm font-medium text-gray-700 mb-2">
                                     Last Name <span class="text-red-500">*</span>
                                 </label>
-                                <input type="text" id="last-name" name="last_name" value="{{ old('last_name') }}"
+                                <input type="text" id="last-name" name="last_name" value="{{ old('last_name', $user->last_name) }}"
                                     required placeholder="Enter last name"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('last_name') border-red-500 @enderror">
                                 @error('last_name')
@@ -81,7 +82,7 @@
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                     Email Address <span class="text-red-500">*</span>
                                 </label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required
                                     placeholder="user@example.com"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('email') border-red-500 @enderror">
                                 @error('email')
@@ -92,7 +93,7 @@
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
                                     Phone Number
                                 </label>
-                                <input type="tel" id="phone" name="phone" value="{{ old('phone') }}"
+                                <input type="tel" id="phone" name="phone" value="{{ old('phone', $user->phone) }}"
                                     placeholder="+1 234 567 8900"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('phone') border-red-500 @enderror">
                                 @error('phone')
@@ -102,9 +103,9 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Password <span class="text-red-500">*</span>
+                                        Password
                                     </label>
-                                    <input type="password" id="password" name="password" required
+                                    <input type="password" id="password" name="password"
                                         placeholder="••••••••"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('password') border-red-500 @enderror">
                                     @error('password')
@@ -113,9 +114,9 @@
                                 </div>
                                 <div>
                                     <label for="password-confirm" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Confirm Password <span class="text-red-500">*</span>
+                                        Confirm Password
                                     </label>
-                                    <input type="password" id="password-confirm" name="password_confirmation" required
+                                    <input type="password" id="password-confirm" name="password_confirmation"
                                         placeholder="••••••••"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
                                 </div>
@@ -137,17 +138,16 @@
                         </h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="number-of-businesses"
+                                <label for="max-businesses"
                                     class="block text-sm font-medium text-gray-700 mb-2">
-                                    Number of Businesses <span class="text-red-500">*</span>
+                                    Maximum Businesses
                                 </label>
-                                <input type="number" id="number-of-businesses" name="number_of_businesses"
-                                    value="{{ old('number_of_businesses', 0) }}" min="0" step="1"
-                                    required placeholder="0"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors appearance-none @error('number_of_businesses') border-red-500 @enderror">
-                                <p class="mt-1 text-xs text-gray-500">Enter the number of businesses assigned to this
-                                    user</p>
-                                @error('number_of_businesses')
+                                <input type="number" id="max-businesses" name="max_businesses"
+                                    value="{{ old('max_businesses', optional($user->config)->max_businesses) }}" min="1" step="1"
+                                    placeholder="1"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors appearance-none @error('max_businesses') border-red-500 @enderror">
+                                <p class="mt-1 text-xs text-gray-500">Only applies to Admin users.</p>
+                                @error('max_businesses')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -173,11 +173,9 @@
                                 <select id="role" name="role" required
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors @error('role') border-red-500 @enderror">
                                     <option value="">Select a role</option>
-                                    <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin</option>
-                                    <option value="support_agent" {{ old('role') == 'support_agent' ? 'selected' : '' }}>Support Agent</option>
-                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
-                                    <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role }}" {{ strtolower(old('role', $user->roles->first()->name ?? '')) == strtolower($role) ? 'selected' : '' }}>{{ $role }}</option>
+                                    @endforeach
                                 </select>
                                 @error('role')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -190,13 +188,13 @@
                                 <div class="flex items-center gap-4 mt-2">
                                     <label class="flex items-center gap-2 cursor-pointer">
                                         <input type="radio" name="status" value="active"
-                                            {{ old('status', 'active') == 'active' ? 'checked' : '' }}
+                                            {{ old('status', $user->status) == 'active' ? 'checked' : '' }}
                                             class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                         <span class="text-sm text-gray-700">Active</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
                                         <input type="radio" name="status" value="inactive"
-                                            {{ old('status') == 'inactive' ? 'checked' : '' }}
+                                            {{ old('status', $user->status) == 'inactive' ? 'checked' : '' }}
                                             class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
                                         <span class="text-sm text-gray-700">Inactive</span>
                                     </label>
@@ -221,7 +219,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
-                        <span>Create User</span>
+                        <span>Update User</span>
                     </button>
                 </div>
             </form>
@@ -230,7 +228,7 @@
 
     <x-slot name="script">
         <script>
-            // Add any JavaScript for the create form here
+            // Add any JavaScript for the edit form here
         </script>
     </x-slot>
 </x-main-layout>
