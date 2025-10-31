@@ -112,16 +112,16 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900">Confirm Permission Change</h3>
+                        <h3 class="text-lg font-semibold text-gray-900" id="confirmation-title">Confirm Permission Change</h3>
                         <p class="text-sm text-gray-600 mt-1" id="confirmation-message"></p>
                     </div>
                 </div>
                 <div class="flex justify-end gap-3">
-                    <button onclick="cancelPermissionChange()"
+                    <button id="cancel-confirmation-btn" onclick="cancelConfirmation()"
                         class="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
                         Cancel
                     </button>
-                    <button onclick="confirmPermissionChange()"
+                    <button id="confirm-action-btn" onclick="confirmAction()"
                         class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
                         Confirm
                     </button>
@@ -158,7 +158,17 @@
                     </div>
                     @foreach ($roles as $role)
                         <div class="px-6 py-3 text-left">
-                            <div class="text-sm font-medium text-gray-600">Role</div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm font-medium text-gray-600">Role</div>
+                                <button type="button" onclick="confirmDeleteRole('{{ $role->id }}', '{{ $role->name }}')" 
+                                    class="text-red-600 hover:text-red-900" title="Delete Role">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
                             <div class="text-sm font-semibold text-gray-900 mt-1">{{ $role->name }}</div>
                         </div>
                     @endforeach
@@ -201,7 +211,7 @@
                                                 data-permission-id="{{ $permission['id'] }}"
                                                 data-permission-name="{{ $permission['name'] }}"
                                                 {{ $role->permissions->contains('id', $permission['id']) ? 'checked' : '' }}
-                                                onchange="handlePermissionChange(event)">
+                                                onchange="handlePermissionChange(this, {{ $role->id }}, {{ $permission['id'] }})">
                                         </div>
                                     @endforeach
                                 </div>
@@ -215,8 +225,6 @@
 
     <x-slot name="script">
         <script>
-            let currentCheckbox = null;
-
             function getCsrfToken() {
                 const metaTag = document.querySelector('meta[name="csrf-token"]');
                 if (metaTag) return metaTag.content;
@@ -240,54 +248,7 @@
                 }
             }
 
-            function handlePermissionChange(event) {
-                const checkbox = event.target;
-                currentCheckbox = checkbox;
-
-                const roleName = checkbox.dataset.roleName;
-                const permissionName = checkbox.dataset.permissionName;
-
-                const message = checkbox.checked ?
-                    `Grant "${permissionName}" permission to "${roleName}" role?` :
-                    `Revoke "${permissionName}" permission from "${roleName}" role?`;
-
-                document.getElementById('confirmation-message').textContent = message;
-                showConfirmationDialog();
-            }
-
-            function showConfirmationDialog() {
-                const dialog = document.getElementById('confirmation-dialog');
-                const content = document.getElementById('confirmation-content');
-                dialog.classList.remove('hidden');
-                setTimeout(() => {
-                    content.classList.remove('scale-95', 'opacity-0');
-                    content.classList.add('scale-100', 'opacity-100');
-                }, 10);
-            }
-
-            function hideConfirmationDialog() {
-                const dialog = document.getElementById('confirmation-dialog');
-                const content = document.getElementById('confirmation-content');
-                content.classList.remove('scale-100', 'opacity-100');
-                content.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => dialog.classList.add('hidden'), 300);
-            }
-
-            function cancelPermissionChange() {
-                if (currentCheckbox) {
-                    currentCheckbox.checked = !currentCheckbox.checked;
-                    currentCheckbox = null;
-                }
-                hideConfirmationDialog();
-            }
-
-            async function confirmPermissionChange() {
-                if (!currentCheckbox) return;
-
-                const roleId = currentCheckbox.dataset.roleId;
-                const permissionId = currentCheckbox.dataset.permissionId;
-                const action = currentCheckbox.checked ? 'grant' : 'revoke';
-
+            async function updatePermission(roleId, permissionId, action) {
                 try {
                     const response = await fetch('{{ route('roles-permissions.permissions.bulk-update') }}', {
                         method: 'POST',
@@ -310,15 +271,22 @@
                     if (result.success) {
                         showNotification('Permission updated successfully!', 'success');
                     } else {
-                        currentCheckbox.checked = !currentCheckbox.checked;
+                        // Revert checkbox state if there was an error
+                        if (currentCheckbox) {
+                            currentCheckbox.checked = !currentCheckbox.checked;
+                        }
                         showNotification('Error: ' + result.message, 'error');
                     }
                 } catch (error) {
                     console.error('Error:', error);
-                    currentCheckbox.checked = !currentCheckbox.checked;
+                    // Revert checkbox state if there was an error
+                    if (currentCheckbox) {
+                        currentCheckbox.checked = !currentCheckbox.checked;
+                    }
                     showNotification('An error occurred while updating permission.', 'error');
                 }
 
+                // Reset variables
                 currentCheckbox = null;
                 hideConfirmationDialog();
             }
@@ -411,10 +379,136 @@
                         closeModal();
                     }
                     if (!document.getElementById('confirmation-dialog').classList.contains('hidden')) {
-                        cancelPermissionChange();
+                        cancelConfirmation();
                     }
                 }
             });
+
+            // Variables to store current action context
+            let currentAction = '';
+            let currentRoleId = null;
+            let currentRoleName = '';
+            let currentCheckbox = null;
+            let currentPermissionId = null;
+            let currentPermissionAction = '';
+
+            // Function to show confirmation dialog
+            function showConfirmationDialog(title, message) {
+                document.getElementById('confirmation-title').textContent = title;
+                document.getElementById('confirmation-message').textContent = message;
+                
+                const dialog = document.getElementById('confirmation-dialog');
+                const content = document.getElementById('confirmation-content');
+                
+                dialog.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    content.classList.remove('scale-95', 'opacity-0');
+                    content.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+
+            // Function to hide confirmation dialog
+            function hideConfirmationDialog() {
+                const dialog = document.getElementById('confirmation-dialog');
+                const content = document.getElementById('confirmation-content');
+                
+                content.classList.remove('scale-100', 'opacity-100');
+                content.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    dialog.classList.add('hidden');
+                }, 300);
+            }
+
+            // Function to cancel any confirmation
+            function cancelConfirmation() {
+                if (currentAction === 'permission' && currentCheckbox) {
+                    currentCheckbox.checked = !currentCheckbox.checked;
+                }
+                
+                // Reset all variables
+                currentAction = '';
+                currentRoleId = null;
+                currentRoleName = '';
+                currentCheckbox = null;
+                currentPermissionId = null;
+                currentPermissionAction = '';
+                
+                hideConfirmationDialog();
+            }
+
+            // Function to confirm the current action
+            function confirmAction() {
+                if (currentAction === 'permission') {
+                    confirmPermissionChange();
+                } else if (currentAction === 'delete_role') {
+                    deleteRole();
+                }
+            }
+
+            // Function to confirm permission change
+            function confirmPermissionChange() {
+                updatePermission(currentRoleId, currentPermissionId, currentPermissionAction);
+            }
+
+            // Function to confirm role deletion
+            function confirmDeleteRole(roleId, roleName) {
+                currentAction = 'delete_role';
+                currentRoleId = roleId;
+                currentRoleName = roleName;
+                
+                showConfirmationDialog(
+                    'Delete Role',
+                    `Are you sure you want to delete the role "${roleName}"? This action cannot be undone.`
+                );
+            }
+
+            // Function to delete a role
+            async function deleteRole() {
+                try {
+                    const response = await fetch(`{{ url('admin/roles-permissions/roles') }}/${currentRoleId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': getCsrfToken(),
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        showNotification('Role deleted successfully!', 'success');
+                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        showNotification('Error: ' + result.message, 'error');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showNotification('An error occurred while deleting the role.', 'error');
+                }
+
+                hideConfirmationDialog();
+            }
+
+            // Function to handle permission checkbox change
+            function handlePermissionChange(checkbox, roleId, permissionId) {
+                currentAction = 'permission';
+                currentCheckbox = checkbox;
+                currentRoleId = roleId;
+                currentPermissionId = permissionId;
+                currentPermissionAction = checkbox.checked ? 'grant' : 'revoke';
+                
+                const permissionName = checkbox.dataset.permissionName;
+                const roleName = checkbox.dataset.roleName;
+                const action = checkbox.checked ? 'grant' : 'revoke';
+                
+                showConfirmationDialog(
+                    'Confirm Permission Change',
+                    `Are you sure you want to ${action} the "${permissionName}" permission for the "${roleName}" role?`
+                );
+            }
         </script>
     </x-slot>
 </x-main-layout>
