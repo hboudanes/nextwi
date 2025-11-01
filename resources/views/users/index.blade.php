@@ -9,20 +9,20 @@
                 display: none;
             }
 
-            /* Remove DataTables styling */
+            /* Regular table styling - no scroll containers */
             table.dataTable {
+                width: 100% !important;
                 border-collapse: collapse !important;
             }
 
             table.dataTable thead th {
                 border-bottom: none !important;
+                padding: 0.75rem 1.5rem !important;
             }
 
-            /* Match locations table styling */
             table.dataTable tbody td {
-                padding: 1.5rem 1.5rem !important;
+                padding: 1rem 1.5rem !important;
                 vertical-align: top !important;
-                white-space: nowrap !important;
             }
 
             table.dataTable tbody tr {
@@ -32,11 +32,10 @@
             table.dataTable tbody tr:hover {
                 background-color: rgba(249, 250, 251, 1) !important;
             }
-            
-            /* Dark mode hover fix */
+
             @media (prefers-color-scheme: dark) {
                 table.dataTable tbody tr:hover {
-                    background-color: rgba(55, 65, 81, 1) !important; /* gray-700 */
+                    background-color: rgba(55, 65, 81, 1) !important;
                     color: rgba(255, 255, 255, 1) !important;
                 }
             }
@@ -44,6 +43,12 @@
             .filter-dropdown {
                 max-height: 300px;
                 overflow-y: auto;
+            }
+
+            /* Responsive container for horizontal scroll on small screens */
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
         </style>
     </x-slot>
@@ -67,8 +72,7 @@
                 <!-- Search Bar -->
                 <div class="flex-1 min-w-[300px]">
                     <div class="relative">
-                        <input type="text" id="search-input"
-                            placeholder="Search by name, email, or ID..."
+                        <input type="text" id="search-input" placeholder="Search by name, email, or ID..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
@@ -84,7 +88,8 @@
                         class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2 bg-white">
                         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
                         </svg>
                         <span class="text-sm font-medium text-gray-700">Filter by Role</span>
                         <span id="role-filter-badge"
@@ -101,26 +106,22 @@
                             <h6 class="text-sm font-semibold text-gray-900 mb-2">Select Role</h6>
                             <div class="space-y-2">
                                 <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input type="checkbox" value="all" checked
-                                        onchange="filterByRole('all', this)"
+                                    <input type="checkbox" value="all" checked onchange="filterByRole('all', this)"
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                                     <span class="ml-2 text-sm text-gray-700">All Roles</span>
                                 </label>
                                 <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input type="checkbox" value="Admin"
-                                        onchange="filterByRole('Admin', this)"
+                                    <input type="checkbox" value="Admin" onchange="filterByRole('Admin', this)"
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                                     <span class="ml-2 text-sm text-gray-700">Admin</span>
                                 </label>
                                 <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input type="checkbox" value="Manager"
-                                        onchange="filterByRole('Manager', this)"
+                                    <input type="checkbox" value="Manager" onchange="filterByRole('Manager', this)"
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                                     <span class="ml-2 text-sm text-gray-700">Manager</span>
                                 </label>
                                 <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input type="checkbox" value="Operateur"
-                                        onchange="filterByRole('Operateur', this)"
+                                    <input type="checkbox" value="Operateur" onchange="filterByRole('Operateur', this)"
                                         class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                                     <span class="ml-2 text-sm text-gray-700">Operateur</span>
                                 </label>
@@ -198,6 +199,7 @@
         <!-- Content Area -->
         <div class="p-6">
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <!-- Single responsive container - just like locations table -->
                 <div class="overflow-x-auto">
                     <table id="users-table" class="w-full">
                         <thead class="bg-gray-50 border-b border-gray-200">
@@ -226,7 +228,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- DataTables will populate this with user-row class and data attributes for filtering -->
+                            <!-- DataTables will populate this -->
                         </tbody>
                     </table>
                 </div>
@@ -250,7 +252,7 @@
                             class="font-medium">0</span> users
                     </div>
                     <div class="flex gap-2" id="table-pagination">
-                        <!-- Pagination buttons will be added by JavaScript -->
+                        <!-- Pagination buttons -->
                     </div>
                 </div>
             </div>
@@ -261,21 +263,23 @@
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
         <script>
-            // Global variables
             let usersTable;
             let selectedRoles = ['all'];
             let selectedStatuses = ['all'];
             let sortAscending = true;
 
             $(document).ready(function() {
-                // Initialize DataTable
+                // Initialize DataTable WITHOUT scrollX - keeps header and body in same table
                 usersTable = $('#users-table').DataTable({
                     processing: true,
                     serverSide: true,
+                    // REMOVED: scrollX: true - this was splitting the table
+                    autoWidth: false,
+                    responsive: false,
+
                     ajax: {
                         url: "{{ route('users.data') }}",
                         data: function(d) {
-                            // Add custom filter parameters
                             d.selectedRoles = selectedRoles;
                             d.selectedStatuses = selectedStatuses;
                         }
@@ -324,23 +328,19 @@
                         var api = this.api();
                         var info = api.page.info();
 
-                        // Update info text
                         $('#table-info').html(
                             'Showing <span class="font-medium">' + (info.start + 1) + '</span> to ' +
                             '<span class="font-medium">' + info.end + '</span> of ' +
                             '<span class="font-medium">' + info.recordsTotal + '</span> users'
                         );
 
-                        // Update pagination
                         var paginationHtml = '';
 
-                        // Previous button
                         paginationHtml +=
                             '<button onclick="tablePrevious()" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 ' +
                             (info.page === 0 ? 'disabled:opacity-50 cursor-not-allowed' : '') + '" ' +
                             (info.page === 0 ? 'disabled' : '') + '>Previous</button>';
 
-                        // Page numbers
                         for (var i = 0; i < info.pages; i++) {
                             if (i === info.page) {
                                 paginationHtml +=
@@ -353,7 +353,6 @@
                             }
                         }
 
-                        // Next button
                         paginationHtml +=
                             '<button onclick="tableNext()" class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 ' +
                             (info.page === info.pages - 1 ? 'disabled:opacity-50 cursor-not-allowed' : '') +
@@ -362,7 +361,6 @@
 
                         $('#table-pagination').html(paginationHtml);
 
-                        // Check if there are any results
                         if (info.recordsDisplay === 0) {
                             $('#no-results').removeClass('hidden');
                             $('#users-table').addClass('hidden');
@@ -373,7 +371,7 @@
                     }
                 });
 
-                // Setup search input
+                // Search input
                 $('#search-input').on('keyup', function() {
                     usersTable.search(this.value).draw();
                 });
@@ -382,22 +380,22 @@
                 document.addEventListener('click', function(event) {
                     const dropdowns = document.querySelectorAll('.filter-dropdown');
                     const buttons = document.querySelectorAll('[id$="-filter-button"]');
-                    
+
                     let clickedOnDropdown = false;
                     let clickedOnButton = false;
-                    
+
                     dropdowns.forEach(dropdown => {
                         if (dropdown.contains(event.target)) {
                             clickedOnDropdown = true;
                         }
                     });
-                    
+
                     buttons.forEach(button => {
                         if (button.contains(event.target)) {
                             clickedOnButton = true;
                         }
                     });
-                    
+
                     if (!clickedOnDropdown && !clickedOnButton) {
                         dropdowns.forEach(dropdown => {
                             dropdown.classList.add('hidden');
@@ -406,26 +404,21 @@
                 });
             });
 
-            // Toggle dropdown visibility
             function toggleDropdown(id) {
                 const dropdown = document.getElementById(id);
                 const allDropdowns = document.querySelectorAll('.filter-dropdown');
-                
-                // Close all other dropdowns
+
                 allDropdowns.forEach(d => {
                     if (d.id !== id && !d.classList.contains('hidden')) {
                         d.classList.add('hidden');
                     }
                 });
-                
-                // Toggle current dropdown
+
                 dropdown.classList.toggle('hidden');
             }
 
-            // Filter by role
             function filterByRole(role, checkbox) {
                 if (role === 'all') {
-                    // If "All Roles" is checked, uncheck all other options
                     if (checkbox.checked) {
                         selectedRoles = ['all'];
                         document.querySelectorAll('#role-filter input[type="checkbox"]').forEach(cb => {
@@ -434,7 +427,6 @@
                             }
                         });
                     } else {
-                        // If "All Roles" is unchecked, check the first non-all option
                         const firstOption = document.querySelector('#role-filter input[type="checkbox"]:not([value="all"])');
                         if (firstOption) {
                             firstOption.checked = true;
@@ -442,23 +434,18 @@
                         }
                     }
                 } else {
-                    // If a specific role is checked
                     if (checkbox.checked) {
-                        // Uncheck "All Roles"
                         const allCheckbox = document.querySelector('#role-filter input[value="all"]');
                         allCheckbox.checked = false;
-                        
-                        // Add to selected roles
+
                         if (selectedRoles.includes('all')) {
                             selectedRoles = [role];
                         } else {
                             selectedRoles.push(role);
                         }
                     } else {
-                        // Remove from selected roles
                         selectedRoles = selectedRoles.filter(r => r !== role);
-                        
-                        // If no roles are selected, check "All Roles"
+
                         if (selectedRoles.length === 0) {
                             const allCheckbox = document.querySelector('#role-filter input[value="all"]');
                             allCheckbox.checked = true;
@@ -466,15 +453,13 @@
                         }
                     }
                 }
-                
+
                 updateRoleBadge();
                 usersTable.ajax.reload();
             }
 
-            // Filter by status
             function filterByStatus(status, checkbox) {
                 if (status === 'all') {
-                    // If "All Status" is checked, uncheck all other options
                     if (checkbox.checked) {
                         selectedStatuses = ['all'];
                         document.querySelectorAll('#status-filter input[type="checkbox"]').forEach(cb => {
@@ -483,7 +468,6 @@
                             }
                         });
                     } else {
-                        // If "All Status" is unchecked, check the first non-all option
                         const firstOption = document.querySelector('#status-filter input[type="checkbox"]:not([value="all"])');
                         if (firstOption) {
                             firstOption.checked = true;
@@ -491,23 +475,18 @@
                         }
                     }
                 } else {
-                    // If a specific status is checked
                     if (checkbox.checked) {
-                        // Uncheck "All Status"
                         const allCheckbox = document.querySelector('#status-filter input[value="all"]');
                         allCheckbox.checked = false;
-                        
-                        // Add to selected statuses
+
                         if (selectedStatuses.includes('all')) {
                             selectedStatuses = [status];
                         } else {
                             selectedStatuses.push(status);
                         }
                     } else {
-                        // Remove from selected statuses
                         selectedStatuses = selectedStatuses.filter(s => s !== status);
-                        
-                        // If no statuses are selected, check "All Status"
+
                         if (selectedStatuses.length === 0) {
                             const allCheckbox = document.querySelector('#status-filter input[value="all"]');
                             allCheckbox.checked = true;
@@ -515,12 +494,11 @@
                         }
                     }
                 }
-                
+
                 updateStatusBadge();
                 usersTable.ajax.reload();
             }
 
-            // Update role filter badge
             function updateRoleBadge() {
                 const badge = document.getElementById('role-filter-badge');
                 if (selectedRoles.includes('all') || selectedRoles.length === 0) {
@@ -531,7 +509,6 @@
                 }
             }
 
-            // Update status filter badge
             function updateStatusBadge() {
                 const badge = document.getElementById('status-filter-badge');
                 if (selectedStatuses.includes('all') || selectedStatuses.length === 0) {
@@ -542,42 +519,34 @@
                 }
             }
 
-            // Sort table
             function sortTable() {
-                const column = usersTable.column(1); // Email column
+                const column = usersTable.column(1);
                 column.order(sortAscending ? 'asc' : 'desc').draw();
-                
+
                 sortAscending = !sortAscending;
-                document.getElementById('sort-button').querySelector('span').textContent = 
+                document.getElementById('sort-button').querySelector('span').textContent =
                     sortAscending ? 'Sort A-Z' : 'Sort Z-A';
             }
 
-            // Clear all filters
             function clearAllFilters() {
-                // Clear search
                 document.getElementById('search-input').value = '';
-                
                 usersTable.search('').draw();
-                
-                // Reset role filters
+
                 selectedRoles = ['all'];
                 document.querySelectorAll('#role-filter input[type="checkbox"]').forEach(cb => {
                     cb.checked = cb.value === 'all';
                 });
                 updateRoleBadge();
-                
-                // Reset status filters
+
                 selectedStatuses = ['all'];
                 document.querySelectorAll('#status-filter input[type="checkbox"]').forEach(cb => {
                     cb.checked = cb.value === 'all';
                 });
                 updateStatusBadge();
-                
-                // Reset sort
+
                 sortAscending = true;
                 document.getElementById('sort-button').querySelector('span').textContent = 'Sort A-Z';
-                
-                // Reload table with default filters
+
                 usersTable.ajax.reload();
             }
 

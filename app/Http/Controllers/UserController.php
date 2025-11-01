@@ -20,13 +20,16 @@ class UserController extends Controller
         return view('users.index');
     }
 
+    /**
+     * Get data for DataTables AJAX request.
+     */
     public function getData(Request $request)
     {
         $users = $this->userService->getUsersForDataTable();
 
         // Apply role filter
         if ($request->has('selectedRoles') && is_array($request->selectedRoles) && !in_array('all', $request->selectedRoles)) {
-            $users->whereHas('roles', function($query) use ($request) {
+            $users->whereHas('roles', function ($query) use ($request) {
                 $query->whereIn('name', $request->selectedRoles);
             });
         }
@@ -43,10 +46,10 @@ class UserController extends Controller
                 if (!empty($search)) {
                     $query->where(function ($q) use ($search) {
                         $q->where('users.first_name', 'like', "%{$search}%")
-                          ->orWhere('users.last_name', 'like', "%{$search}%")
-                          ->orWhere('users.name', 'like', "%{$search}%")
-                          ->orWhere('users.email', 'like', "%{$search}%")
-                          ->orWhere('users.phone', 'like', "%{$search}%");
+                            ->orWhere('users.last_name', 'like', "%{$search}%")
+                            ->orWhere('users.name', 'like', "%{$search}%")
+                            ->orWhere('users.email', 'like', "%{$search}%")
+                            ->orWhere('users.phone', 'like', "%{$search}%");
                     });
                 }
             })
@@ -152,7 +155,7 @@ class UserController extends Controller
                 return $btn;
             })
             ->rawColumns(['user', 'email', 'phone', 'role', 'business', 'status', 'action'])
-            ->setRowClass('hover:bg-gray-50 transition-colors user-row')
+            ->setRowClass('hover:bg-gray-50 transition-colors')
             ->make(true);
     }
 

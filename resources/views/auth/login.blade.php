@@ -75,6 +75,10 @@
             </div>
         </div>
     </div>
+    <!-- Footer: Powered by NextWi -->
+    <div class="fixed bottom-4 left-0 right-0 text-center text-xs text-gray-500 dark:text-gray-400">
+        Powered by NextWi
+    </div>
     <x-slot name="script">
         <script>
             document.addEventListener('DOMContentLoaded', function() {
