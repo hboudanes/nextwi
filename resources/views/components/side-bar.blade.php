@@ -124,17 +124,44 @@
                 <span class="font-medium">Roles & Permissions</span>
             </a>
 
-            <!-- Configuration (like SMTP, ……) - routes to / for now -->
-            <a href="{{ url('#') }}"
-                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11.049 2.927c.3-1.14 1.603-1.14 1.902 0a1.5 1.5 0 002.265.929c.989-.603 2.123.53 1.52 1.52a1.5 1.5 0 00.93 2.265c1.14.3 1.14 1.603 0 1.902a1.5 1.5 0 00-.929 2.265c.603.989-.531 2.123-1.52 1.52a1.5 1.5 0 00-2.265.93c-.3 1.14-1.603 1.14-1.902 0a1.5 1.5 0 00-2.265-.929c-.989.603-2.123-.531-1.52-1.52a1.5 1.5 0 00-.93-2.265c-1.14-.3-1.14-1.603 0-1.902a1.5 1.5 0 00.929-2.265c-.603-.989.531-2.123 1.52-1.52.662.404 1.523.046 1.735-.93z">
-                    </path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"></path>
+            <!-- Configuration dropdown -->
+            <button type="button" onclick="toggleConfigDropdown()"
+                class="w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11.049 2.927c.3-1.14 1.603-1.14 1.902 0a1.5 1.5 0 002.265.929c.989-.603 2.123.53 1.52 1.52a1.5 1.5 0 00.93 2.265c1.14.3 1.14 1.603 0 1.902a1.5 1.5 0 00-.929 2.265c.603.989-.531 2.123-1.52 1.52a1.5 1.5 0 00-2.265.93c-.3 1.14-1.603 1.14-1.902 0a1.5 1.5 0 00-2.265-.929c-.989.603-2.123-.531-1.52-1.52a1.5 1.5 0 00-.93-2.265c-1.14-.3-1.14-1.603 0-1.902a1.5 1.5 0 00.929-2.265c-.603-.989.531-2.123 1.52-1.52.662.404 1.523.046 1.735-.93z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"></path>
+                    </svg>
+                    <span class="font-medium">Configuration</span>
+                </div>
+                <svg id="config-dropdown-chevron" class="w-4 h-4 text-gray-500 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
-                <span class="font-medium">Configuration</span>
-            </a>
+            </button>
+            <div id="config-dropdown" class="ml-8 mt-1 space-y-1 hidden">
+                <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 2v2m6.364 1.636l-1.414 1.414M20 12h-2M17.364 18.364l-1.414-1.414M12 20v-2M6.364 18.364l1.414-1.414M4 12h2M6.364 5.636l1.414 1.414" />
+                    </svg>
+                    <span>Email (AWS SES)</span>
+                </a>
+                <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 7l9-4 9 4-9 4-9-4z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 10l-9 4-9-4" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 14l9 4 9-4" />
+                    </svg>
+                    <span>Storage (Amazon S3)</span>
+                </a>
+            </div>
         </div>
 
         <!-- Support Section -->

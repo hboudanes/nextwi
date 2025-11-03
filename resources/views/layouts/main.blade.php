@@ -142,5 +142,14 @@
             sidebarThemeToggleBtn?.addEventListener('click', toggleTheme);
             sidebarThemeCheckbox?.addEventListener('change', toggleTheme);
         });
+
+        // Configuration dropdown toggle
+        window.toggleConfigDropdown = function() {
+            const dropdown = document.getElementById('config-dropdown');
+            const chevron = document.getElementById('config-dropdown-chevron');
+            if (!dropdown) return;
+            dropdown.classList.toggle('hidden');
+            chevron?.classList.toggle('rotate-180');
+        };
     </script>
 </x-clean-layout>
