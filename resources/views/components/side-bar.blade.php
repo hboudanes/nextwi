@@ -141,7 +141,7 @@
                 </svg>
             </button>
             <div id="config-dropdown" class="ml-8 mt-1 space-y-1 hidden">
-                <a href="#" class="flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                <a href="{{ route('settings.email') }}" class="flex items-center gap-2 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 12a4 4 0 10-8 0 4 4 0 008 0z" />

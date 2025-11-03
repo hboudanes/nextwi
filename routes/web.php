@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\Settings\EmailSettingsController;
 use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'admin/users');
 Route::redirect('/dashboard', 'admin/users');
@@ -29,6 +30,11 @@ Route::middleware(['auth'])->prefix('admin')->group(
         Route::get('/vouchers', [VoucherController::class, 'index'])->name('vouchers.index');
         Route::get('/vouchers/create', [VoucherController::class, 'createStandalone'])->name('vouchers.create');
         Route::get('/locations/{location}/profile/{profile}/vouchers/create', [VoucherController::class, 'create'])->name('locations.profile.vouchers.create');
+
+        // Settings: Email (AWS SES)
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/email', [EmailSettingsController::class, 'index'])->name('email');
+        });
     }
 );
 Route::middleware(['auth'])->prefix('admin')->group(function () {
