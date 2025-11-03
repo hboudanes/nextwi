@@ -12,18 +12,36 @@
             </div>
             <span class="text-xl font-bold text-gray-900">Dashboard</span>
         </div>
-        <button onclick="toggleMobileSidebar()" class="lg:hidden p-1 rounded-md text-gray-600 hover:bg-gray-100">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                </path>
-            </svg>
-        </button>
+        <div class="flex items-center gap-2">
+            <!-- Sun/Moon toggle switch -->
+            <label id="sidebar-theme-toggle" class="relative inline-flex items-center cursor-pointer" title="Toggle theme">
+                <input type="checkbox" class="sr-only peer">
+                <!-- Track -->
+                <div class="w-10 h-5 bg-gray-200 rounded-full peer-checked:bg-gray-700 transition-colors"></div>
+                <!-- Knob with icons -->
+                <span class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow transform peer-checked:translate-x-5 transition-transform flex items-center justify-center">
+                    <svg id="sidebar-theme-toggle-dark-icon" class="hidden w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                    <svg id="sidebar-theme-toggle-light-icon" class="hidden w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                </span>
+            </label>
+            <button onclick="toggleMobileSidebar()" class="lg:hidden p-1 rounded-md text-gray-600 hover:bg-gray-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <!-- Navigation -->
     <nav class="flex-1 overflow-y-auto p-4 space-y-1">
         <!-- Dashboard -->
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ url('#') }}"
             class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute('dashboard') }} rounded-lg hover:bg-gray-100 transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,32 +50,10 @@
             </svg>
             <span class="font-medium">Dashboard</span>
         </a>
-        <!-- Dark Mode Toggle (adapted UI near Dashboard) -->
-        <button id="sidebar-theme-toggle"
-            class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
-            <div class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                    </path>
-                </svg>
-                <span class="font-medium">Dark Mode</span>
-            </div>
-            <div class="p-1.5 rounded-md text-gray-600">
-                <svg id="sidebar-theme-toggle-dark-icon" class="hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-                <svg id="sidebar-theme-toggle-light-icon" class="hidden w-4 h-4" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                        fill-rule="evenodd" clip-rule="evenodd"></path>
-                </svg>
-            </div>
-        </button>
-        <!-- Business Management Section -->
+        
+        <!-- Management Section -->
         <div class="pt-4">
-            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Business Management</h3>
+            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Management</h3>
 
 
 
@@ -92,11 +88,21 @@
                 </svg>
                 <span class="font-medium">Vouchers</span>
             </a>
+
+            <!-- Integrations (Disabled) -->
+            <div class="flex items-center gap-3 px-3 py-2.5 rounded-lg opacity-50 cursor-not-allowed"
+                title="Integrations are disabled right now">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 7h8m0 0v8m0-8l-8 8M11 17H3m0 0V9m0 8l8-8"></path>
+                </svg>
+                <span class="font-medium">Integrations </span>
+            </div>
         </div>
 
-        <!-- User Management Section -->
+        <!-- Settings Section -->
         <div class="pt-4">
-            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">User Management</h3>
+            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Settings</h3>
 
             <a href="{{ route('users.index') }}"
                 class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute(['users', 'users.*']) }} rounded-lg hover:bg-gray-100 transition-colors">
@@ -117,22 +123,44 @@
                 </svg>
                 <span class="font-medium">Roles & Permissions</span>
             </a>
-        </div>
 
-        <!-- Settings Section -->
-        <div class="pt-4">
-            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">System</h3>
-
-            <a href=""
-                class="flex items-center gap-3 px-3 py-2.5 {{ isActiveRoute('settings') }} rounded-lg hover:bg-gray-100 transition-colors">
+            <!-- Configuration (like SMTP, ……) - routes to / for now -->
+            <a href="{{ url('#') }}"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                        d="M11.049 2.927c.3-1.14 1.603-1.14 1.902 0a1.5 1.5 0 002.265.929c.989-.603 2.123.53 1.52 1.52a1.5 1.5 0 00.93 2.265c1.14.3 1.14 1.603 0 1.902a1.5 1.5 0 00-.929 2.265c.603.989-.531 2.123-1.52 1.52a1.5 1.5 0 00-2.265.93c-.3 1.14-1.603 1.14-1.902 0a1.5 1.5 0 00-2.265-.929c-.989.603-2.123-.531-1.52-1.52a1.5 1.5 0 00-.93-2.265c-1.14-.3-1.14-1.603 0-1.902a1.5 1.5 0 00.929-2.265c-.603-.989.531-2.123 1.52-1.52.662.404 1.523.046 1.735-.93z">
                     </path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m-4-4h8"></path>
                 </svg>
-                <span class="font-medium">Settings</span>
+                <span class="font-medium">Configuration</span>
+            </a>
+        </div>
+
+        <!-- Support Section -->
+        <div class="pt-4">
+            <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Support</h3>
+
+            <a href="#"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18.364 5.636A9 9 0 105.636 18.364 9 9 0 0018.364 5.636z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9.879 9.879h.01M12 14a3 3 0 100-6 3 3 0 000 6z"></path>
+                </svg>
+                <span class="font-medium">Submit a ticket</span>
+            </a>
+
+            <a href="#"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 transition-colors text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 20l9-5-9-5-9 5 9 5z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 12l9-5-9-5-9 5 9 5z"></path>
+                </svg>
+                <span class="font-medium">Knowledge base</span>
             </a>
         </div>
     </nav>

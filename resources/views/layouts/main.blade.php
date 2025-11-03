@@ -95,6 +95,7 @@
             const sidebarThemeToggleBtn = document.getElementById('sidebar-theme-toggle');
             const sidebarThemeToggleDarkIcon = document.getElementById('sidebar-theme-toggle-dark-icon');
             const sidebarThemeToggleLightIcon = document.getElementById('sidebar-theme-toggle-light-icon');
+            const sidebarThemeCheckbox = document.querySelector('#sidebar-theme-toggle input[type="checkbox"]');
 
             // Function to update all toggle icons based on theme
             function updateThemeIcons(isDark) {
@@ -105,6 +106,7 @@
                     sidebarThemeToggleLightIcon?.classList.remove('hidden');
                     sidebarThemeToggleDarkIcon?.classList.add('hidden');
                     document.documentElement.classList.add('dark');
+                    if (sidebarThemeCheckbox) sidebarThemeCheckbox.checked = true;
                 } else {
                     // Show dark icons (moon)
                     themeToggleDarkIcon?.classList.remove('hidden');
@@ -112,6 +114,7 @@
                     sidebarThemeToggleDarkIcon?.classList.remove('hidden');
                     sidebarThemeToggleLightIcon?.classList.add('hidden');
                     document.documentElement.classList.remove('dark');
+                    if (sidebarThemeCheckbox) sidebarThemeCheckbox.checked = false;
                 }
             }
 
@@ -137,6 +140,7 @@
             // Add event listeners to both toggle buttons
             themeToggleBtn?.addEventListener('click', toggleTheme);
             sidebarThemeToggleBtn?.addEventListener('click', toggleTheme);
+            sidebarThemeCheckbox?.addEventListener('change', toggleTheme);
         });
     </script>
 </x-clean-layout>
